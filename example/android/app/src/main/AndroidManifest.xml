@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lynical.lynical_flutter_example">
+    package="com.lynical.skadi_example">
    <application
-        android:label="lynical_flutter_example"
+        android:label="skadi_example"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

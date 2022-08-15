@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../utilities/lynical_utils.dart';
+import '../utilities/skadi_utils.dart';
 
-extension LynicalWidgetExtension on Widget {
+extension SkadiWidgetExtension on Widget {
   Widget padding([EdgeInsets padding = const EdgeInsets.all(8)]) {
     return Padding(
       padding: padding,
@@ -73,7 +73,7 @@ extension LynicalWidgetExtension on Widget {
   ///Rotate a widget in Degreee
   Widget rotate([double degree = 0]) {
     return Transform.rotate(
-      angle: LynicalUtils.degreeToRadian(degree),
+      angle: SkadiUtils.degreeToRadian(degree),
       child: this,
     );
   }

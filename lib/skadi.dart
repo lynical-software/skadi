@@ -1,4 +1,4 @@
-library lynical_flutter;
+library skadi;
 
 //mixin
 export 'src/extension/index.dart';
@@ -6,7 +6,7 @@ export 'src/extension/index.dart';
 export 'src/mixin/after_build_mixin.dart';
 export 'src/mixin/bool_notifier_mixin.dart';
 //
-export 'src/provider/lynical_provider.dart';
+export 'src/provider/skadi_provider.dart';
 //utilities
 export 'src/utilities/debouncer.dart';
 //widget

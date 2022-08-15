@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension LynicalListenableExtension on Listenable {
+extension SkadiListenableExtension on Listenable {
   Widget builder({required TransitionBuilder builder, Widget? child}) {
     return AnimatedBuilder(
       animation: this,

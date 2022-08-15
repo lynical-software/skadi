@@ -5,7 +5,7 @@ import 'dart:ui';
 
 import 'package:flutter/services.dart';
 
-class LynicalUtils {
+class SkadiUtils {
   ///Convert degree to radian because most of Flutter's Widget depends on Radian
   static double degreeToRadian(double degree) {
     return degree * (-pi / 180);

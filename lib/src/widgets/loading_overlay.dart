@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../lynical_flutter.dart';
+import '../../skadi.dart';
 
 class LoadingOverlayProvider {
   final ValueNotifier<bool> _loadingNotifier = ValueNotifier(false);

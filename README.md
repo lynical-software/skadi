@@ -1,6 +1,6 @@
-# lynical_flutter
+# skadi
 
-[![pub package](https://img.shields.io/badge/pub-0.0.1-blueviolet.svg)](https://pub.dev/packages/lynical_flutter) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/lynical_flutter)
+[![pub package](https://img.shields.io/badge/pub-0.0.1-blueviolet.svg)](https://pub.dev/packages/skadi) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/skadi)
 
 A flutter package for custom widgets and utility function.
 
@@ -10,21 +10,21 @@ Add this to pubspec.yaml
 
 ```dart
 dependencies:
-  lynical_flutter: ^0.0.1
+  skadi: ^0.0.1
 ```
 
 # Widgets
 
-| Widget | Description |
-| --- | --- |
-| [ConditionalWidget][other] | Build a widget base on a boolean condition |
-| [Divider0][other] | Divider with 0 height |
-| [EllipsisText][other] | Nullable Text with Ellipsis as default overflow |
-| [KeyboardDismiss][other] | Dismiss keyboard on tap |
-| [LoadingOverlay][other] | Create an overlay loading that cover entire screen and disable input |
-| [LoadingOverlayPopScope][other] | prevent or allow user from pop the screen when LoadingOverlay is displaying|
-| [ValueNotifierWrapper][other] | Wrapper with ValueNotifier when using StatelessWidget |
-| [WidgetDisposer][other] | Provide a dispose callback when using StatelessWidget |
+| Widget                          | Description                                                                 |
+| ------------------------------- | --------------------------------------------------------------------------- |
+| [ConditionalWidget][other]      | Build a widget base on a boolean condition                                  |
+| [Divider0][other]               | Divider with 0 height                                                       |
+| [EllipsisText][other]           | Nullable Text with Ellipsis as default overflow                             |
+| [KeyboardDismiss][other]        | Dismiss keyboard on tap                                                     |
+| [LoadingOverlay][other]         | Create an overlay loading that cover entire screen and disable input        |
+| [LoadingOverlayPopScope][other] | prevent or allow user from pop the screen when LoadingOverlay is displaying |
+| [ValueNotifierWrapper][other]   | Wrapper with ValueNotifier when using StatelessWidget                       |
+| [WidgetDisposer][other]         | Provide a dispose callback when using StatelessWidget                       |
 
 # Mixin
 
@@ -212,28 +212,28 @@ This input border solve a problem that TextField doesn't have a default elevatio
   )
 ```
 
-### LynicalUtils
+### SkadiUtils
 
 ```dart
 
 //Ping to google to check for internet connection
-bool isConnected = await LynicalUtils.checkConnection();
+bool isConnected = await SkadiUtils.checkConnection();
 
 //Convert degree to radian value
-double radian = LynicalUtils.degreeToRadian(90);
+double radian = SkadiUtils.degreeToRadian(90);
 
 //Future.delayed base on millisecond value
-await LynicalUtils.wait(200);
+await SkadiUtils.wait(200);
 
 //Get random image from unsplash
-String carUrlImage =  LynicalUtils.unsplashImage(width: 200, height: 200, category: "car");
+String carUrlImage =  SkadiUtils.unsplashImage(width: 200, height: 200, category: "car");
 
 //Get byte from asset bundle
-Future<Uint8List> imageByte = await LynicalUtils.getBytesFromAsset("image asset path", 200); //200 is an image width
+Future<Uint8List> imageByte = await SkadiUtils.getBytesFromAsset("image asset path", 200); //200 is an image width
 
 //Get random image from unsplash
-String carUrlImage =  LynicalUtils.unsplashImage(width: 200, height: 200, category: "car");
+String carUrlImage =  SkadiUtils.unsplashImage(width: 200, height: 200, category: "car");
 
 //Get random from picsum with provided: width and height
-String randomUrlImage = LynicalUtils.picsumImage(200,300);
+String randomUrlImage = SkadiUtils.picsumImage(200,300);
 ```

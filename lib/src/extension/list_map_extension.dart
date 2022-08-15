@@ -1,4 +1,4 @@
-extension LynicalListExtension<T> on List<T> {
+extension SkadiListExtension<T> on List<T> {
   ///Filter list that return empty if no item found.
   List<T> filter(bool Function(T) test) {
     List<T> filtered = [];
@@ -22,7 +22,7 @@ extension LynicalListExtension<T> on List<T> {
   }
 }
 
-extension LynicalMapExtension<T, V> on Map<T, V> {
+extension SkadiMapExtension<T, V> on Map<T, V> {
   void addIfNotNull(T key, V value) {
     if (value != null) putIfAbsent(key, () => value);
   }

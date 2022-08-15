@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lynical_flutter/lynical_flutter.dart';
+import 'package:skadi/skadi.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);

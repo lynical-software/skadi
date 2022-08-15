@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension LynicalContextX on BuildContext {
+extension SkadiContextX on BuildContext {
   Size get screenSize => MediaQuery.of(this).size;
 
   Color get primaryColor => Theme.of(this).primaryColor;

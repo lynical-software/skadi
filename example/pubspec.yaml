@@ -1,4 +1,4 @@
-name: lynical_flutter_example
+name: skadi_example
 description: A new Flutter project.
 
 publish_to: "none"
@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  lynical_flutter:
+  skadi:
     path: ../
 
 dev_dependencies:

@@ -1,4 +1,4 @@
-extension LynicalStringExtension on String {
+extension SkadiStringExtension on String {
   String get capitalize {
     return this[0].toUpperCase() + substring(1, length);
   }
@@ -8,7 +8,7 @@ extension LynicalStringExtension on String {
   }
 }
 
-extension LynicalNullableStringExtension on String? {
+extension SkadiNullableStringExtension on String? {
   bool get isNullOrEmpty => this == null || (this?.isEmpty ?? true);
   bool get isNotNullOrEmpty => !isNullOrEmpty;
 }

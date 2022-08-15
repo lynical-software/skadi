@@ -1,6 +1,6 @@
 {
-    "name": "lynical_flutter_example",
-    "short_name": "lynical_flutter_example",
+    "name": "skadi_example",
+    "short_name": "skadi_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

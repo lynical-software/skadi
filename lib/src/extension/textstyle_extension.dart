@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension LynicalTextStyleExtension on TextStyle {
+extension SkadiTextStyleExtension on TextStyle {
   //method
   TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
 

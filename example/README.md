@@ -1,4 +1,4 @@
-# lynical_flutter_example
+# skadi_example
 
 A new Flutter project.
 

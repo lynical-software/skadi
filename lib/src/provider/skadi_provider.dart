@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../utilities/types.dart';
 
-class LynicalProvider extends InheritedWidget {
-  const LynicalProvider({
+class SkadiProvider extends InheritedWidget {
+  const SkadiProvider({
     Key? key,
     required Widget child,
     this.loadingWidget,
@@ -24,10 +24,10 @@ class LynicalProvider extends InheritedWidget {
   ///A text to replace when EllipsisText's string is null
   final String ellipsisText;
 
-  static LynicalProvider? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<LynicalProvider>();
+  static SkadiProvider? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<SkadiProvider>();
   }
 
   @override
-  bool updateShouldNotify(LynicalProvider oldWidget) => true;
+  bool updateShouldNotify(SkadiProvider oldWidget) => true;
 }

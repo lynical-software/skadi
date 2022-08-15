@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.lynical" "\0"
-            VALUE "FileDescription", "lynical_flutter_example" "\0"
+            VALUE "FileDescription", "skadi_example" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "lynical_flutter_example" "\0"
+            VALUE "InternalName", "skadi_example" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.lynical. All rights reserved." "\0"
-            VALUE "OriginalFilename", "lynical_flutter_example.exe" "\0"
-            VALUE "ProductName", "lynical_flutter_example" "\0"
+            VALUE "OriginalFilename", "skadi_example.exe" "\0"
+            VALUE "ProductName", "skadi_example" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

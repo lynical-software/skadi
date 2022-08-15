@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../provider/lynical_provider.dart';
+import '../provider/skadi_provider.dart';
 
 class EllipsisText extends StatelessWidget {
   final dynamic text;
@@ -31,8 +31,8 @@ class EllipsisText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LynicalProvider? lynicalProvider = LynicalProvider.of(context);
-    String replacement = emptyText ?? lynicalProvider?.ellipsisText ?? "";
+    SkadiProvider? skadiProvider = SkadiProvider.of(context);
+    String replacement = emptyText ?? skadiProvider?.ellipsisText ?? "";
     return Text(
       text == null ? replacement : text.toString(),
       style: style.copyWith(height: 1.2),
