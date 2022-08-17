@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skadi/skadi.dart';
 
 import 'src/home.dart';
 
@@ -12,6 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      navigatorObservers: [
+        SkadiRouteObserver(log: true),
+      ],
       title: 'Skadi Flutter Example',
       theme: ThemeData(
         primarySwatch: Colors.cyan,

@@ -9,6 +9,7 @@ class SkadiProvider extends InheritedWidget {
     this.loadingWidget,
     this.errorWidget,
     this.buttonLoadingWidget,
+    this.noDataWidget,
     this.ellipsisText = "",
   }) : super(child: child, key: key);
 
@@ -17,6 +18,9 @@ class SkadiProvider extends InheritedWidget {
 
   ///Loading widget use in [FutureHandler,StreamHandler] class
   final Widget? loadingWidget;
+
+  ///A widget use in [ListView] when there is no data
+  final Widget? noDataWidget;
 
   ///Error widget use in [FutureHandler,StreamHandler] class
   final CustomErrorWidget? errorWidget;
