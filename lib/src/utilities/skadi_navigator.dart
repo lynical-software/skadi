@@ -95,15 +95,27 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   });
   static final List<String> _history = [];
 
-  void _addHistory(String? route) {
+  void _addHistory(Route? route) {
     if (route != null) {
-      _history.add(route);
+      String? routeName = route.settings.name;
+      if (routeName != null) {
+        _history.add(routeName);
+      }
     }
   }
 
-  void _removeHistory(String? route) {
+  void _removeHistory(Route? route) {
     if (route != null) {
-      _history.remove(route);
+      String? routeName = route.settings.name;
+      if (routeName != null) {
+        ///Reverse history to remove last occurence
+        var reverseList = _history.reversed.toList();
+        reverseList.remove(routeName);
+        _history.clear();
+
+        ///Reverse back
+        _history.addAll(reverseList.reversed);
+      }
     }
   }
 
@@ -128,6 +140,7 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
 
   @override
   void didRemove(Route route, Route? previousRoute) {
+    _removeHistory(route);
     if (log) {
       infoLog(
         "Skadi Route Observer: DidRemove",
@@ -135,12 +148,12 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         true,
       );
     }
-    _removeHistory(route.settings.name);
     super.didRemove(route, previousRoute);
   }
 
   @override
   void didPop(Route route, Route? previousRoute) {
+    _removeHistory(route);
     if (log) {
       infoLog(
         "Skadi Route Observer: DidPop",
@@ -148,12 +161,13 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         true,
       );
     }
-    _removeHistory(route.settings.name);
     super.didPop(route, previousRoute);
   }
 
   @override
   void didReplace({Route? newRoute, Route? oldRoute}) {
+    _addHistory(newRoute);
+    _removeHistory(oldRoute);
     if (log) {
       infoLog(
         "Skadi Route Observer: DidReplace",
@@ -161,13 +175,12 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         true,
       );
     }
-    _addHistory(newRoute?.settings.name);
-    _removeHistory(oldRoute?.settings.name);
     super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
   }
 
   @override
   void didPush(Route route, Route? previousRoute) {
+    _addHistory(route);
     if (log) {
       infoLog(
         "Skadi Route Observer: DidPush",
@@ -175,7 +188,6 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         true,
       );
     }
-    _addHistory(route.settings.name);
     super.didPush(route, previousRoute);
   }
 }

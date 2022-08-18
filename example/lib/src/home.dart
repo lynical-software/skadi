@@ -57,7 +57,21 @@ class _RootPageState extends State<RootPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                SkadiRouteObserver.showRoutes();
+                showDialog(
+                    context: context,
+                    builder: (c) {
+                      return AlertDialog(
+                        content: DropdownButton<String>(
+                          items: const [
+                            DropdownMenuItem(value: "me", child: Text("Me")),
+                            DropdownMenuItem(value: "me2", child: Text("Me2")),
+                          ],
+                          onChanged: (value) {
+                            SkadiRouteObserver.showRoutes();
+                          },
+                        ),
+                      );
+                    });
               },
               child: const Text("Show history"),
             ),
