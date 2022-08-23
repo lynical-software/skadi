@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SkadiColor {
   ///Get color from String hex code
   ///use defaultColor if there's an error
-  static Color fromCode(String code, {Color defaultColor = Colors.white}) {
+  static Color fromHexString(String code, {Color defaultColor = Colors.white}) {
     try {
       String hexAlphaPrefix = '0xFF';
       String colorCode;
@@ -13,7 +13,6 @@ class SkadiColor {
       } else {
         colorCode = '0xFF${code.replaceAll("#", "")}';
       }
-
       return Color(int.parse(colorCode));
     } catch (e) {
       debugPrint("SkadiColor: => Invalid color format");
@@ -21,37 +20,19 @@ class SkadiColor {
     }
   }
 
-  ///Get color from 6 int hex code
-  ///use defaultColor if there's an error
-  static Color fromHexCode(int code, {Color defaultColor = Colors.white}) {
-    try {
-      String colorCode = '0xFF$code';
-      return Color(int.parse(colorCode));
-    } catch (e) {
-      debugPrint("SkadiColor: => Invalid color format");
-      return defaultColor;
-    }
-  }
-
-  ///Get Color from RGB
+  ///Get Color from RGB with optional opacity
   static Color fromRGB(int r, int g, int b, [double opacity = 1]) {
-    try {
-      final color = Color.fromRGBO(r, g, b, opacity);
-      return color;
-    } catch (e) {
-      throw "Invalid color format";
-    }
+    return Color.fromRGBO(r, g, b, opacity);
   }
 
   ///Convert your color to MaterialColor
-  static MaterialColor toMaterial(int hexColor) {
-    final color = Color(hexColor);
+  static MaterialColor toMaterial(Color color) {
     final r = color.red;
     final g = color.green;
     final b = color.blue;
 
     return MaterialColor(
-      hexColor,
+      color.value,
       <int, Color>{
         50: Color.fromRGBO(r, g, b, .1),
         100: Color.fromRGBO(r, g, b, .2),
