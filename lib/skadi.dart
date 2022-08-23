@@ -33,9 +33,11 @@ export 'src/widgets/skadi_async_icon_button.dart';
 export 'src/widgets/skadi_confirmation_dialog.dart';
 export 'src/widgets/skadi_future_handler.dart';
 export 'src/widgets/skadi_icon_button.dart';
+export 'src/widgets/skadi_loading_button.dart';
 export 'src/widgets/skadi_paginated_listview.dart';
 export 'src/widgets/skadi_platform_checker.dart';
 export 'src/widgets/skadi_simple_dialog.dart';
+export 'src/widgets/skadi_stream_handler.dart';
 //
 export 'src/widgets/spacing.dart';
 export 'src/widgets/value_notifier_wrapper.dart';
