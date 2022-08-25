@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Skadi Flutter Example',
       theme: ThemeData(
         primarySwatch: Colors.cyan,
+        visualDensity: VisualDensity.comfortable,
       ),
       home: const RootPage(),
     );
