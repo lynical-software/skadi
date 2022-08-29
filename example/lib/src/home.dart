@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
+import 'package:skadi_example/src/mixin.dart';
 import 'package:skadi_example/src/navigator_pages.dart';
 
 class RootPage extends StatefulWidget {
@@ -54,6 +55,12 @@ class _RootPageState extends State<RootPage> {
                 SkadiNavigator.push(context, const Detail1());
               },
               child: const Text("Detail"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                SkadiNavigator.push(context, const SkadiMixinExample());
+              },
+              child: const Text("Mixin Example"),
             ),
             ElevatedButton(
               onPressed: () {

@@ -5,6 +5,7 @@ export 'src/extension/index.dart';
 //mixin
 export 'src/mixin/after_build_mixin.dart';
 export 'src/mixin/bool_notifier_mixin.dart';
+export 'src/mixin/defer_dispose.dart';
 export 'src/mixin/skadi_form_mixin.dart';
 //provider
 export 'src/provider/skadi_provider.dart';
