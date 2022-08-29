@@ -84,7 +84,8 @@ class SkadiLoadingButton extends StatelessWidget {
     if (fullWidth == false && width == null) {
       WidgetsBinding.instance.addPostFrameCallback((d) {
         if (_globalKey.currentContext != null) {
-          RenderBox box = _globalKey.currentContext!.findRenderObject() as RenderBox;
+          RenderBox box =
+              _globalKey.currentContext!.findRenderObject() as RenderBox;
           width = box.size.width;
         }
       });
@@ -128,7 +129,10 @@ class SkadiLoadingButton extends StatelessWidget {
                   child,
                 ],
               ),
-              onTrue: () => loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget ?? _buildLoadingWidget(),
+              onTrue: () =>
+                  loadingWidget ??
+                  SkadiProvider.of(context)?.buttonLoadingWidget ??
+                  _buildLoadingWidget(),
             ),
           );
         },

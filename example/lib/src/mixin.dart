@@ -8,7 +8,8 @@ class SkadiMixinExample extends StatefulWidget {
   State<SkadiMixinExample> createState() => _SkadiMixinExampleState();
 }
 
-class _SkadiMixinExampleState extends State<SkadiMixinExample> with DeferDispose {
+class _SkadiMixinExampleState extends State<SkadiMixinExample>
+    with DeferDispose {
   late TextEditingController controller;
 
   @override

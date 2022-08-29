@@ -21,11 +21,15 @@ class SkadiFormValidator {
 
   static String? isNumber(String? value, {String? field}) {
     if (value == null || value.isEmpty) {
-      return field != null ? "Please input your $field" : "Please input required field";
+      return field != null
+          ? "Please input your $field"
+          : "Please input required field";
     }
     num? asNumber = num.tryParse(value);
     if (asNumber is! num) {
-      return field != null ? "$field must be a number" : "This field must be a number";
+      return field != null
+          ? "$field must be a number"
+          : "This field must be a number";
     }
     return null;
   }

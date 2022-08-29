@@ -12,7 +12,9 @@ extension DateTimeExtensionX on DateTime {
   }
 
   bool isTheSameDay(DateTime dateTime) {
-    if (dateTime.day == day && dateTime.month == month && dateTime.year == year) {
+    if (dateTime.day == day &&
+        dateTime.month == month &&
+        dateTime.year == year) {
       return true;
     }
     return false;

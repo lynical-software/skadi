@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 extension SkadiTextStyleExtension on TextStyle {
-  //method
+  // FontWeight
   TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
 
   TextStyle get semibold => copyWith(fontWeight: FontWeight.w600);
@@ -10,6 +10,7 @@ extension SkadiTextStyleExtension on TextStyle {
 
   TextStyle get normal => copyWith(fontWeight: FontWeight.normal);
 
+  // Color
   TextStyle get white => copyWith(color: Colors.white);
 
   TextStyle get black => copyWith(color: Colors.black);
@@ -20,6 +21,7 @@ extension SkadiTextStyleExtension on TextStyle {
 
   TextStyle get grey => copyWith(color: Colors.grey);
 
+  // Decoration
   TextStyle get underline => copyWith(decoration: TextDecoration.underline);
 
   TextStyle setColor(Color color) {
@@ -30,7 +32,8 @@ extension SkadiTextStyleExtension on TextStyle {
     return copyWith(fontSize: size);
   }
 
-  TextStyle get responsiveFontSize => copyWith(fontSize: _responsiveFontSize(fontSize ?? 14));
+  TextStyle get responsiveFontSize =>
+      copyWith(fontSize: _responsiveFontSize(fontSize ?? 14));
 }
 
 double _responsiveFontSize(double size) {

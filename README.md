@@ -1,6 +1,6 @@
 # skadi
 
-[![pub package](https://img.shields.io/badge/pub-0.0.1-blueviolet.svg)](https://pub.dev/packages/skadi) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/skadi)
+[![pub package](https://img.shields.io/badge/pub-0.0.2-blueviolet.svg)](https://pub.dev/packages/skadi) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/skadi)
 
 A flutter package for custom widgets and utility function.
 
@@ -10,7 +10,7 @@ Add this to pubspec.yaml
 
 ```dart
 dependencies:
-  skadi: ^0.0.1
+  skadi: ^0.0.2
 ```
 
 # Widgets
@@ -51,7 +51,7 @@ class _HomePageState extends State<NewPage> with AfterBuildMixin {
 
 ### BoolNotifierMixin
 
-Provider a ValueNotifier<bool> and a value toggle function
+Provide a ValueNotifier<bool> and a value toggle function
 
 - **boolNotifier**: a bool ValueNotifier
 
@@ -115,6 +115,9 @@ DateTime.now().formatToLocalDate(format: "dd mmm yyyy", locale: context.locale)
 ///Filter list
 List<int> adult = [2,24,12,18].filter((age)=> age >= 18);
 
+///First where
+int? eighteen = adult.findOne((age)=> age == 18);
+
 ///Add age to Map if age isn't null
 Map<String, int> data = {};
 int? age = 20;
@@ -154,7 +157,8 @@ Text("Hello Flutter").opacity(0.5)
 ### String extension
 
 ```dart
-String name = "chunlee".capitalize() // => Chunlee
+String? name = "chunlee".capitalize; // => Chunlee
+bool empty = name.isNotOrEmpty;
 ```
 
 # Utility and Style
