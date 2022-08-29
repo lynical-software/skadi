@@ -28,6 +28,7 @@ export 'src/widgets/ellipsis_text.dart';
 export 'src/widgets/keyboard_dismiss.dart';
 export 'src/widgets/loading_overlay.dart';
 //
+export 'src/widgets/skadi_action_sheet.dart';
 export 'src/widgets/skadi_async_button.dart';
 export 'src/widgets/skadi_async_icon_button.dart';
 export 'src/widgets/skadi_confirmation_dialog.dart';
