@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../provider/skadi_provider.dart';
 
-class SkadiFutureHandler<T extends Object> extends StatefulWidget {
+class SkadiFutureHandler<T> extends StatefulWidget {
   ///Future to check on
   final Future<T>? future;
   final Future<T> Function()? futureFunction;
@@ -40,7 +40,7 @@ class SkadiFutureHandler<T extends Object> extends StatefulWidget {
   _SkadiFutureHandlerState<T> createState() => _SkadiFutureHandlerState<T>();
 }
 
-class _SkadiFutureHandlerState<T extends Object> extends State<SkadiFutureHandler<T>> {
+class _SkadiFutureHandlerState<T> extends State<SkadiFutureHandler<T>> {
   Future<T>? future;
 
   @override
@@ -58,7 +58,7 @@ class _SkadiFutureHandlerState<T extends Object> extends State<SkadiFutureHandle
       initialData: widget.initialData,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return widget.ready(snapshot.data!);
+          return widget.ready(snapshot.data as T);
         } else if (snapshot.hasError) {
           if (widget.error != null) {
             return widget.error!(snapshot.error);
