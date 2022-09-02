@@ -18,7 +18,6 @@ dependencies:
 | Widget                          | Description                                                                 |
 | ------------------------------- | --------------------------------------------------------------------------- |
 | [ConditionalWidget][other]      | Build a widget base on a boolean condition                                  |
-| [Divider0][other]               | Divider with 0 height                                                       |
 | [EllipsisText][other]           | Nullable Text with Ellipsis as default overflow                             |
 | [KeyboardDismiss][other]        | Dismiss keyboard on tap                                                     |
 | [LoadingOverlay][other]         | Create an overlay loading that cover entire screen and disable input        |

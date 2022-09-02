@@ -6,7 +6,7 @@ import '../provider/skadi_provider.dart';
 import 'conditional_widget.dart';
 import 'spacing.dart';
 
-class SkadiLoadingButton extends StatelessWidget {
+class SkadiLoadingButton extends StatefulWidget {
   ///receive a ValueNotifier to indicate a loading widget
   final ValueNotifier<bool>? loadingNotifier;
 
@@ -56,11 +56,8 @@ class SkadiLoadingButton extends StatelessWidget {
   ///
   final BorderSide? borderSide;
 
-  ///
-  final GlobalKey _globalKey = GlobalKey();
-
   ///Create a button with loading notifier
-  SkadiLoadingButton({
+  const SkadiLoadingButton({
     Key? key,
     required this.onPressed,
     required this.child,
@@ -80,8 +77,17 @@ class SkadiLoadingButton extends StatelessWidget {
     this.borderSide,
   }) : super(key: key);
 
+  @override
+  State<SkadiLoadingButton> createState() => _SkadiLoadingButtonState();
+}
+
+class _SkadiLoadingButtonState extends State<SkadiLoadingButton> {
+  ///
+  final GlobalKey _globalKey = GlobalKey();
+  double? width;
+
   void maintainWidthOnLoading() {
-    if (fullWidth == false && width == null) {
+    if (widget.fullWidth == false && width == null) {
       WidgetsBinding.instance.addPostFrameCallback((d) {
         if (_globalKey.currentContext != null) {
           RenderBox box = _globalKey.currentContext!.findRenderObject() as RenderBox;
@@ -91,44 +97,43 @@ class SkadiLoadingButton extends StatelessWidget {
     }
   }
 
-  double? width;
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: fullWidth ? double.infinity : null,
+      width: widget.fullWidth ? double.infinity : null,
       color: Colors.transparent,
-      margin: margin,
+      margin: widget.margin,
       child: ValueListenableBuilder<bool>(
-        valueListenable: loadingNotifier ?? ValueNotifier(false),
+        valueListenable: widget.loadingNotifier ?? ValueNotifier(false),
         builder: (context, loading, _) {
           maintainWidthOnLoading();
           return ElevatedButton(
-            onPressed: loading ? () {} : onPressed,
+            onPressed: loading ? () {} : widget.onPressed,
             style: ElevatedButton.styleFrom(
-              shape: shape,
-              primary: color,
-              onPrimary: textColor,
-              padding: padding,
-              elevation: elevation,
-              side: borderSide,
+              shape: widget.shape,
+              primary: widget.color,
+              onPrimary: widget.textColor,
+              padding: widget.padding,
+              elevation: widget.elevation,
+              side: widget.borderSide,
             ),
-            onLongPress: loading ? () {} : () => onLongPressed?.call(),
+            onLongPress: loading ? () {} : () => widget.onLongPressed?.call(),
             child: ConditionalWidget(
               condition: loading,
               onFalse: () => Row(
                 key: _globalKey,
-                mainAxisAlignment: alignment ?? MainAxisAlignment.center,
+                mainAxisAlignment: widget.alignment ?? MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  if (icon != null) ...[
-                    icon ?? emptySizedBox,
+                  if (widget.icon != null) ...[
+                    widget.icon ?? emptySizedBox,
                     const SpaceX(8),
                   ],
-                  child,
+                  widget.child,
                 ],
               ),
-              onTrue: () => loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget ?? _buildLoadingWidget(),
+              onTrue: () =>
+                  widget.loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget ?? _buildLoadingWidget(),
             ),
           );
         },
@@ -141,10 +146,10 @@ class SkadiLoadingButton extends StatelessWidget {
       width: width,
       child: Center(
         child: SizedBox(
-          width: icon != null ? 24 : 20,
-          height: icon != null ? 24 : 20,
+          width: widget.icon != null ? 24 : 20,
+          height: widget.icon != null ? 24 : 20,
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(loadingColor),
+            valueColor: AlwaysStoppedAnimation<Color>(widget.loadingColor),
           ),
         ),
       ),

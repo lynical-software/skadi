@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../utilities/types.dart';
 
 class SkadiProvider extends InheritedWidget {
+  ///Provide a setting for Skadi related widgets
   const SkadiProvider({
     Key? key,
     required Widget child,
@@ -13,16 +14,16 @@ class SkadiProvider extends InheritedWidget {
     this.ellipsisText = "",
   }) : super(child: child, key: key);
 
-  ///Loading widget use in [AsyncButton,AsyncIconButton and RaisedButton]
+  ///Loading widget use in [SkadiAsyncButton,SkadiAsyncIconButton and SkadiLoadingButton]
   final Widget? buttonLoadingWidget;
 
-  ///Loading widget use in [FutureHandler,StreamHandler] class
+  ///Loading widget use in [SkadiFutureHandler,SkadiStreamHandler] class
   final Widget? loadingWidget;
 
-  ///A widget use in [ListView] when there is no data
+  ///A widget use in [PaginatedListView] when there is no data
   final Widget? noDataWidget;
 
-  ///Error widget use in [FutureHandler,StreamHandler] class
+  ///Error widget use in [SkadiFutureHandler,SkadiStreamHandler] class
   final CustomErrorWidget? errorWidget;
 
   ///A text to replace when EllipsisText's string is null
