@@ -1,6 +1,11 @@
 name: skadi
+<<<<<<< HEAD
 description: Flutter utilities packages for custom widgets and utilities function.
 version: 0.0.1
+=======
+description: Flutter utilities packages
+version: 0.0.2
+>>>>>>> 609a3a01087619ed9ebf9f8b2e5c6a3fea9db35b
 
 homepage: https://www.lynical.com
 repository: https://github.com/lynical-software/skadi

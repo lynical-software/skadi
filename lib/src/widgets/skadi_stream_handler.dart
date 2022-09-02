@@ -72,7 +72,8 @@ class _SkadiStreamHandlerState<T> extends State<SkadiStreamHandler<T>> {
           if (widget.loading != null) {
             return widget.loading!;
           }
-          return skadiProvider?.loadingWidget ?? const Center(child: CircularProgressIndicator());
+          return skadiProvider?.loadingWidget ??
+              const Center(child: CircularProgressIndicator());
         }
       },
     );
