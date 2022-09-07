@@ -53,9 +53,11 @@ class _RootPageState extends State<RootPage> {
     ExampleButton(name: "Buttons", child: const ButtonsExample()),
     ExampleButton(name: "Dialogs", child: const DialogsExample()),
     ExampleButton(name: "Mixin Example", child: const MixinExample()),
-    ExampleButton(name: "Style and Decoration", child: const StyleAndDecorationExample()),
+    ExampleButton(
+        name: "Style and Decoration", child: const StyleAndDecorationExample()),
     ExampleButton(name: "Other widgets", child: const OtherWidgetExample()),
-    ExampleButton(name: "Utilities Method Usage", child: const UtilitiesMethodUsage()),
+    ExampleButton(
+        name: "Utilities Method Usage", child: const UtilitiesMethodUsage()),
   ];
 
   @override

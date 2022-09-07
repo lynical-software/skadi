@@ -39,7 +39,8 @@ class _UtilitiesMethodUsageState extends State<UtilitiesMethodUsage> {
           children: [
             ElevatedButton(
               onPressed: () async {
-                infoLog("Has internet connection?", await SkadiUtils.checkConnection());
+                infoLog("Has internet connection?",
+                    await SkadiUtils.checkConnection());
               },
               child: const Text("Check connection"),
             ),

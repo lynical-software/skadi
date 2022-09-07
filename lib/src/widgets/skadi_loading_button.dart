@@ -88,7 +88,8 @@ class _SkadiLoadingButtonState extends State<SkadiLoadingButton> {
     if (widget.fullWidth == false && width == null) {
       WidgetsBinding.instance.addPostFrameCallback((d) {
         if (_globalKey.currentContext != null) {
-          RenderBox box = _globalKey.currentContext!.findRenderObject() as RenderBox;
+          RenderBox box =
+              _globalKey.currentContext!.findRenderObject() as RenderBox;
           width = box.size.width;
         }
       });
@@ -131,7 +132,9 @@ class _SkadiLoadingButtonState extends State<SkadiLoadingButton> {
                 ],
               ),
               onTrue: () =>
-                  widget.loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget ?? _buildLoadingWidget(),
+                  widget.loadingWidget ??
+                  SkadiProvider.of(context)?.buttonLoadingWidget ??
+                  _buildLoadingWidget(),
             ),
           );
         },

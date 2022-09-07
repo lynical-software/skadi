@@ -7,7 +7,8 @@ class StyleAndDecorationExample extends StatefulWidget {
   const StyleAndDecorationExample({Key? key}) : super(key: key);
 
   @override
-  State<StyleAndDecorationExample> createState() => _StyleAndDecorationExampleState();
+  State<StyleAndDecorationExample> createState() =>
+      _StyleAndDecorationExampleState();
 }
 
 class _StyleAndDecorationExampleState extends State<StyleAndDecorationExample> {
@@ -23,7 +24,8 @@ class _StyleAndDecorationExampleState extends State<StyleAndDecorationExample> {
             TextField(
               decoration: InputDecoration(
                 hintText: "Username",
-                errorText: "use this instead of other method to show error text correctly",
+                errorText:
+                    "use this instead of other method to show error text correctly",
                 errorStyle: TextStyle(fontSize: 10),
                 border: ShadowInputBorder(
                   elevation: 2.0,
