@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 
 class SkadiPaginatedListView extends StatefulWidget {
-  ///Normal Listview itemCount
+  ///Normal List view itemCount
   final int itemCount;
 
-  ///Normal Listview physics
+  ///Normal ListView physics
   final ScrollPhysics? physics;
 
-  ///Normal Listview scrollDirection
+  ///Normal ListView scrollDirection
   final Axis scrollDirection;
 
-  ///Normal Listview shrinkWrap
+  ///Normal ListView shrinkWrap
   final bool shrinkWrap;
 
-  ///Normal Listview reverse
+  ///Normal ListView reverse
   final bool reverse;
 
-  ///Normal Listview itemBuilder
+  ///Normal ListView itemBuilder
   final IndexedWidgetBuilder itemBuilder;
 
   ///[SkadiPaginatedListView] use ListView.separated, so you can provide divider widget
@@ -27,7 +27,7 @@ class SkadiPaginatedListView extends StatefulWidget {
   ///[SkadiPaginatedListView] use ListView.separated, so you can provide divider widget
   final IndexedWidgetBuilder? separatorBuilder;
 
-  ///Normal Listview padding
+  ///Normal List view padding
   final EdgeInsets padding;
 
   ///Provider a widget if there's no item
@@ -37,7 +37,7 @@ class SkadiPaginatedListView extends StatefulWidget {
   ///you must provide a [scrollController] that also use in your parent [scrollController] scroll view
   final ScrollController? scrollController;
 
-  ///callback for getting more data when ScrollController reach max scrolExtends
+  ///callback for getting more data when ScrollController reach max scrollExtends
   final Future<void> Function() dataLoader;
 
   ///condition to check if we still have more data to fetch
@@ -47,17 +47,17 @@ class SkadiPaginatedListView extends StatefulWidget {
   ///widget to show when we're fetching more data
   final Widget? loadingWidget;
 
-  ///Add provided scrollController to our PaginatedListview
-  ///Use case: Provided scroll controller usually happen when this ListView is inside another Listview,
+  ///Add provided scrollController to our PaginatedListView
+  ///Use case: Provided scroll controller usually happen when this ListView is inside another ListView,
   ///So we use provided scrollController to check for paginated trigger only but not attach to PaginatedList
-  ///But sometime, provided ScrollController isn't attach to any parent Listview yet. So in that case it must be attach
+  ///But sometime, provided ScrollController isn't attach to any parent ListView yet. So in that case it must be attach
   ///to our PaginatedList
-  final bool attachProvidedScrollControllerToListview;
+  final bool attachProvidedScrollControllerToListView;
 
   ///Indicate if there is an error when getting more data
   final bool hasError;
 
-  ///A widget that show at the bottom of listview when there is an error
+  ///A widget that show at the bottom of ListView when there is an error
   final Widget? errorWidget;
 
   const SkadiPaginatedListView({
@@ -71,7 +71,7 @@ class SkadiPaginatedListView extends StatefulWidget {
     this.loadingWidget = const CircularProgressIndicator(),
     this.padding = const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
     this.scrollDirection = Axis.vertical,
-    this.attachProvidedScrollControllerToListview = false,
+    this.attachProvidedScrollControllerToListView = false,
     this.hasError = false,
     this.reverse = false,
     this.separator,
@@ -151,7 +151,7 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
       itemCount: widget.itemCount + 1,
       controller: _isPrimaryScrollView
           ? scrollController
-          : widget.attachProvidedScrollControllerToListview
+          : widget.attachProvidedScrollControllerToListView
               ? widget.scrollController
               : null,
       padding: widget.padding,

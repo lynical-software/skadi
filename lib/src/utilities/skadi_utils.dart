@@ -46,7 +46,9 @@ class SkadiUtils {
     );
 
     FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ImageByteFormat.png))!.buffer.asUint8List();
+    return (await fi.image.toByteData(format: ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
 
   ///Get a random image from Picsum with given dimension

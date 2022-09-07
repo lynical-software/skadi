@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 import 'package:skadi_example/examples/buttons.dart';
-import 'package:skadi_example/examples/style_decoraction.dart';
+import 'package:skadi_example/examples/style_decoration.dart';
 
 import 'examples/dialogs.dart';
 import 'examples/mixin.dart';
@@ -29,6 +29,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.cyan,
           visualDensity: VisualDensity.standard,
+          appBarTheme: const AppBarTheme(
+            foregroundColor: Colors.white,
+          ),
         ),
         home: const RootPage(),
         builder: (context, child) {
@@ -53,9 +56,11 @@ class _RootPageState extends State<RootPage> {
     ExampleButton(name: "Buttons", child: const ButtonsExample()),
     ExampleButton(name: "Dialogs", child: const DialogsExample()),
     ExampleButton(name: "Mixin Example", child: const MixinExample()),
-    ExampleButton(name: "Style and Decoration", child: const StyleAndDecorationExample()),
+    ExampleButton(
+        name: "Style and Decoration", child: const StyleAndDecorationExample()),
     ExampleButton(name: "Other widgets", child: const OtherWidgetExample()),
-    ExampleButton(name: "Utilities Method Usage", child: const UtilitiesMethodUsage()),
+    ExampleButton(
+        name: "Utilities Method Usage", child: const UtilitiesMethodUsage()),
   ];
 
   @override

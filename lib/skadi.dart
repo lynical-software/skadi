@@ -25,10 +25,11 @@ export 'src/utilities/skadi_navigator.dart';
 export 'src/utilities/skadi_utils.dart';
 //widget
 export 'src/widgets/conditional_widget.dart';
+export 'src/widgets/dot.dart';
 export 'src/widgets/ellipsis_text.dart';
 export 'src/widgets/keyboard_dismiss.dart';
 export 'src/widgets/loading_overlay.dart';
-//
+export 'src/widgets/skadi_accordion.dart';
 export 'src/widgets/skadi_action_sheet.dart';
 export 'src/widgets/skadi_async_button.dart';
 export 'src/widgets/skadi_async_icon_button.dart';
@@ -36,7 +37,8 @@ export 'src/widgets/skadi_confirmation_dialog.dart';
 export 'src/widgets/skadi_future_handler.dart';
 export 'src/widgets/skadi_icon_button.dart';
 export 'src/widgets/skadi_loading_button.dart';
-export 'src/widgets/skadi_paginated_listview.dart';
+export 'src/widgets/skadi_paginated_grid_view.dart';
+export 'src/widgets/skadi_paginated_list_view.dart';
 export 'src/widgets/skadi_platform_checker.dart';
 export 'src/widgets/skadi_simple_dialog.dart';
 export 'src/widgets/skadi_stream_handler.dart';

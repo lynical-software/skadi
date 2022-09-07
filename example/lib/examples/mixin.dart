@@ -49,7 +49,8 @@ class _MixinExampleState extends State<MixinExample>
               validator: (value) => SkadiFormValidator.validateEmail(value),
               decoration: const InputDecoration(
                 hintText: "email",
-                border: ShadowInputBorder(elevation: 2.0, fillColor: Colors.white),
+                border:
+                    ShadowInputBorder(elevation: 2.0, fillColor: Colors.white),
               ),
             ),
             cat.builder(builder: ((context, child) => emptySizedBox)),

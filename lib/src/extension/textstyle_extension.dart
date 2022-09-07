@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../skadi.dart';
+
 extension SkadiTextStyleExtension on TextStyle {
   // FontWeight
   TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
@@ -37,6 +39,5 @@ extension SkadiTextStyleExtension on TextStyle {
 }
 
 double _responsiveFontSize(double size) {
-  return size;
-  // return LynicalResponsive.value(size, size + 4, size + 6, size - 2);
+  return SkadiResponsive.value(size, size + 4, size + 6, size - 2);
 }

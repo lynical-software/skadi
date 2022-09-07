@@ -1,3 +1,7 @@
+## [0.1.0] - 7 September 2022
+
+- Fix `SkadiResponsive` value being negative
+
 ## [0.0.3] - 7 September 2022
 
 - adjust default `SkadiResponsive` value breakpoint

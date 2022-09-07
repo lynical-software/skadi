@@ -36,7 +36,8 @@ class _OtherWidgetExampleState extends State<OtherWidgetExample> {
             children: [
               SkadiPlatformChecker(
                 androidWidget: TextField(
-                  decoration: InputDecoration(hintText: "Android Material textfield"),
+                  decoration:
+                      InputDecoration(hintText: "Android Material textfield"),
                 ),
                 iosWidget: CupertinoTextField(
                   placeholder: "iOS cupertino textfield",
@@ -58,6 +59,14 @@ class _OtherWidgetExampleState extends State<OtherWidgetExample> {
             isRow: false,
             children: [
               _MyOtherStatelessWidget(),
+            ],
+          ),
+          const Section(
+            title: "Dot",
+            subtitle: "dot",
+            isRow: false,
+            children: [
+              Dot(),
             ],
           ),
           Section(

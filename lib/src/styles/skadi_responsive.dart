@@ -38,7 +38,8 @@ class SkadiResponsive {
   static Size? _size;
   static BuildContext? context;
 
-  static SkadiResponsiveBreakpoint _breakPoint = SkadiResponsiveBreakpoint.defaultValue();
+  static SkadiResponsiveBreakpoint _breakPoint =
+      SkadiResponsiveBreakpoint.defaultValue();
 
   static double get screenWidth => _size?.width ?? _breakPoint.mobile;
 
@@ -53,7 +54,8 @@ class SkadiResponsive {
     _breakPoint = breakPoint;
   }
 
-  static SkadiResponsiveBreakpointName _getBreakpointName([BuildContext? context]) {
+  static SkadiResponsiveBreakpointName _getBreakpointName(
+      [BuildContext? context]) {
     double modifiedWidth = 0.0;
     if (context != null) {
       modifiedWidth = MediaQuery.of(context).size.width;
@@ -72,7 +74,8 @@ class SkadiResponsive {
 
   static bool get isDesktop => screenWidth >= _breakPoint.desktop;
   static bool get isTablet => !isDesktop && screenWidth >= _breakPoint.tablet;
-  static bool get isMobile => screenWidth > _breakPoint.mobileSmall && screenWidth < _breakPoint.tablet;
+  static bool get isMobile =>
+      screenWidth > _breakPoint.mobileSmall && screenWidth < _breakPoint.tablet;
   static bool get isMobileSmall => screenWidth <= _breakPoint.mobileSmall;
 
   ///Build a widget base on device screen size
