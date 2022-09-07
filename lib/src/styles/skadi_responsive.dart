@@ -26,7 +26,7 @@ class SkadiResponsiveBreakpoint {
   });
 
   SkadiResponsiveBreakpoint.defaultValue()
-      : mobileSmall = 320,
+      : mobileSmall = 360,
         mobile = 480,
         tablet = 768,
         desktop = 1024;
@@ -36,8 +36,7 @@ class SkadiResponsive {
   static Size? _size;
   static BuildContext? context;
 
-  static SkadiResponsiveBreakpoint _breakPoint =
-      SkadiResponsiveBreakpoint.defaultValue();
+  static SkadiResponsiveBreakpoint _breakPoint = SkadiResponsiveBreakpoint.defaultValue();
 
   static double get screenWidth => _size?.width ?? _breakPoint.mobile;
 
@@ -52,19 +51,18 @@ class SkadiResponsive {
     _breakPoint = breakPoint;
   }
 
-  static SkadiResponsiveBreakpointName _getBreakpointName(
-      [BuildContext? context]) {
-    double screenWidth = 0.0;
+  static SkadiResponsiveBreakpointName _getBreakpointName([BuildContext? context]) {
+    double modifiedWidth = 0.0;
     if (context != null) {
-      screenWidth = MediaQuery.of(context).size.width;
+      modifiedWidth = MediaQuery.of(context).size.width;
     } else {
-      screenWidth = screenWidth;
+      modifiedWidth = screenWidth;
     }
-    if (screenWidth >= _breakPoint.desktop) {
+    if (modifiedWidth >= _breakPoint.desktop) {
       return SkadiResponsiveBreakpointName.desktop;
-    } else if (screenWidth >= _breakPoint.tablet) {
+    } else if (modifiedWidth >= _breakPoint.tablet) {
       return SkadiResponsiveBreakpointName.tablet;
-    } else if (screenWidth <= _breakPoint.mobileSmall) {
+    } else if (modifiedWidth <= _breakPoint.mobileSmall) {
       return SkadiResponsiveBreakpointName.mobileSmall;
     }
     return SkadiResponsiveBreakpointName.mobile;
@@ -72,9 +70,8 @@ class SkadiResponsive {
 
   static bool get isDesktop => screenWidth >= _breakPoint.desktop;
   static bool get isTablet => !isDesktop && screenWidth >= _breakPoint.tablet;
-  static bool get isMobile =>
-      !isMobileSmall && screenWidth < _breakPoint.tablet;
-  static bool get isMobileSmall => screenWidth <= _breakPoint.mobile;
+  static bool get isMobile => screenWidth > _breakPoint.mobileSmall && screenWidth < _breakPoint.tablet;
+  static bool get isMobileSmall => screenWidth <= _breakPoint.mobileSmall;
 
   ///Build a widget base on device screen size
   ///[desktop] builder is nullable and will use [tablet]'s value if null
