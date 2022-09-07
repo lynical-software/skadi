@@ -3,6 +3,10 @@ extension SkadiStringExtension on String {
     return this[0].toUpperCase() + substring(1, length);
   }
 
+  String get fileExtension {
+    return split(".").last;
+  }
+
   num? get toNum {
     return num.tryParse(this);
   }

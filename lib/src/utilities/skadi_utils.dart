@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
@@ -12,8 +13,12 @@ class SkadiUtils {
   }
 
   ///Short for [Future.delayed]
-  static Future<void> wait([int millisecond = 1500]) async {
+  static Future<T> wait<T>([
+    int millisecond = 1500,
+    FutureOr<T> Function()? value,
+  ]) async {
     await Future.delayed(Duration(milliseconds: millisecond));
+    return value == null ? null as T : value.call();
   }
 
   ///A Function to check network connection
@@ -41,9 +46,7 @@ class SkadiUtils {
     );
 
     FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ImageByteFormat.png))!
-        .buffer
-        .asUint8List();
+    return (await fi.image.toByteData(format: ImageByteFormat.png))!.buffer.asUint8List();
   }
 
   ///Get a random image from Picsum with given dimension

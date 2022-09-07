@@ -21,6 +21,25 @@ extension SkadiListExtension<T> on List<T> {
     }
     return null;
   }
+
+  bool update(
+    bool Function(T) test,
+    T Function() value, {
+    bool updateAll = true,
+  }) {
+    bool found = false;
+    for (var i = 0; i < length; i++) {
+      bool passed = test(this[i]);
+      if (passed) {
+        found = true;
+        this[i] = value();
+        if (!updateAll) {
+          return found;
+        }
+      }
+    }
+    return found;
+  }
 }
 
 extension SkadiMapExtension<T, V> on Map<T, V> {

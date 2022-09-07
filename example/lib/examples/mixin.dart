@@ -5,6 +5,8 @@ import 'package:skadi_example/widgets/example_scaffold.dart';
 
 class Cat extends ChangeNotifier {}
 
+FutureManager<int>? manager;
+
 class MixinExample extends StatefulWidget {
   const MixinExample({Key? key}) : super(key: key);
 
@@ -16,19 +18,22 @@ class _MixinExampleState extends State<MixinExample>
     with AfterBuildMixin, SkadiFormMixin, BoolNotifierMixin, DeferDispose {
   ///
   ///Create an auto dispose ChangeNotifier
-  late ValueNotifier<bool> notifier = createDefer(() => ValueNotifier(true));
-  late FutureManager<int> manager = createDefer(() => FutureManager());
+  late ValueNotifier<bool> notifier = createDefer(() => ValueNotifier(false));
   late Cat cat = createDefer(() => Cat());
+  @override
+  void initState() {
+    manager = createDefer(
+      () => FutureManager(
+        futureFunction: () async => SkadiUtils.wait(1500, () => 2),
+      ),
+    );
+    super.initState();
+  }
 
   ///
   @override
   void afterBuild(BuildContext context) {
     infoLog("This method call after widget has been built");
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
@@ -48,7 +53,6 @@ class _MixinExampleState extends State<MixinExample>
               ),
             ),
             cat.builder(builder: ((context, child) => emptySizedBox)),
-            manager.builder(builder: ((context, child) => emptySizedBox)),
 
             ///Using BoolNotifier mixin
             boolNotifier.builder(
@@ -68,6 +72,7 @@ class _MixinExampleState extends State<MixinExample>
               },
               child: const Text("Validate"),
             ),
+            manager!.when(ready: (data) => const Text("Done")),
           ],
         ),
       ),

@@ -69,8 +69,11 @@ class _RootPageState extends State<RootPage> {
             Container(
               margin: const EdgeInsets.only(bottom: 16),
               child: ElevatedButton(
-                onPressed: () {
-                  SkadiNavigator.push(context, widget.child);
+                onPressed: () async {
+                  await SkadiNavigator.push(context, widget.child);
+                  SkadiUtils.wait().then((value) {
+                    infoLog(manager);
+                  });
                 },
                 child: Text(widget.name),
               ),
