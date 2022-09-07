@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:future_manager/future_manager.dart';
 import 'package:skadi/skadi.dart';
 import 'package:skadi_example/widgets/example_scaffold.dart';
+
+class Cat extends ChangeNotifier {}
 
 class MixinExample extends StatefulWidget {
   const MixinExample({Key? key}) : super(key: key);
@@ -13,12 +16,19 @@ class _MixinExampleState extends State<MixinExample>
     with AfterBuildMixin, SkadiFormMixin, BoolNotifierMixin, DeferDispose {
   ///
   ///Create an auto dispose ChangeNotifier
-  late ValueNotifier<bool> notifier = createDefer(() => ValueNotifier(false));
+  late ValueNotifier<bool> notifier = createDefer(() => ValueNotifier(true));
+  late FutureManager<int> manager = createDefer(() => FutureManager());
+  late Cat cat = createDefer(() => Cat());
 
   ///
   @override
   void afterBuild(BuildContext context) {
     infoLog("This method call after widget has been built");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -34,10 +44,11 @@ class _MixinExampleState extends State<MixinExample>
               validator: (value) => SkadiFormValidator.validateEmail(value),
               decoration: const InputDecoration(
                 hintText: "email",
-                border:
-                    ShadowInputBorder(elevation: 2.0, fillColor: Colors.white),
+                border: ShadowInputBorder(elevation: 2.0, fillColor: Colors.white),
               ),
             ),
+            cat.builder(builder: ((context, child) => emptySizedBox)),
+            manager.builder(builder: ((context, child) => emptySizedBox)),
 
             ///Using BoolNotifier mixin
             boolNotifier.builder(

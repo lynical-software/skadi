@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 ///CREDIT: Thanks to https://www.reddit.com/user/jmatth for this
@@ -10,7 +13,7 @@ import 'package:flutter/material.dart';
 /// Mixin to [State] to provide methods for registering [ChangeNotifier.dispose]
 /// methods or arbitrary functions to be called during [State.dispose].
 mixin DeferDispose<T extends StatefulWidget> on State<T> {
-  final List<void Function()> _deferred = [];
+  final List<ChangeNotifier?> _deferred = [];
 
   /// Build a [ChangeNotifier] using the provided builder function and defer its
   /// dispose method to be automatically called during [State.dispose].
@@ -29,7 +32,7 @@ mixin DeferDispose<T extends StatefulWidget> on State<T> {
   /// Defer the dispose method on the provided [ChangeNotifier] to be called
   /// during [State.dispose].
   void _addDeferDispose(ChangeNotifier notifier) {
-    _deferred.add(notifier.dispose);
+    _deferred.add(notifier);
   }
 
   @override
@@ -37,7 +40,12 @@ mixin DeferDispose<T extends StatefulWidget> on State<T> {
     // Run the deferred methods in reverse order just in case there is some
     // poorly implemented dependency between the objects we're disposing.
     for (var i = _deferred.length - 1; i >= 0; i--) {
-      _deferred[i].call();
+      var n = _deferred[i];
+      if (kDebugMode) {
+        log("DeferDispose: ${n.runtimeType} disposed");
+      }
+      n?.dispose();
+      n = null;
     }
     super.dispose();
   }

@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         title: 'Skadi Flutter Example',
         theme: ThemeData(
           primarySwatch: Colors.cyan,
-          visualDensity: VisualDensity.comfortable,
+          visualDensity: VisualDensity.standard,
         ),
         home: const RootPage(),
         builder: (context, child) {
@@ -53,11 +53,9 @@ class _RootPageState extends State<RootPage> {
     ExampleButton(name: "Buttons", child: const ButtonsExample()),
     ExampleButton(name: "Dialogs", child: const DialogsExample()),
     ExampleButton(name: "Mixin Example", child: const MixinExample()),
-    ExampleButton(
-        name: "Style and Decoration", child: const StyleAndDecorationExample()),
+    ExampleButton(name: "Style and Decoration", child: const StyleAndDecorationExample()),
     ExampleButton(name: "Other widgets", child: const OtherWidgetExample()),
-    ExampleButton(
-        name: "Utilities Method Usage", child: const UtilitiesMethodUsage()),
+    ExampleButton(name: "Utilities Method Usage", child: const UtilitiesMethodUsage()),
   ];
 
   @override
@@ -68,11 +66,14 @@ class _RootPageState extends State<RootPage> {
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
         children: [
           for (var widget in examples)
-            ElevatedButton(
-              onPressed: () {
-                SkadiNavigator.push(context, widget.child);
-              },
-              child: Text(widget.name),
+            Container(
+              margin: const EdgeInsets.only(bottom: 16),
+              child: ElevatedButton(
+                onPressed: () {
+                  SkadiNavigator.push(context, widget.child);
+                },
+                child: Text(widget.name),
+              ),
             ),
         ],
       ),
