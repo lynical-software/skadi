@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 
 import 'logger.dart';
 
+class SkadiRouteException implements Exception {
+  final String message;
+  SkadiRouteException(this.message);
+
+  @override
+  String toString() => message;
+}
+
 class SkadiNavigator {
   ///Less boilerplate MaterialPageRoute Navigatoe
   SkadiNavigator._();
 
   ///short handed push navigator
   ///[routeName] parameter can be use instead of [settings] if you only need to provider routeName
-  static Future push<T>(
+  static Future<T?> push<T>(
     BuildContext context,
     Widget page, {
     bool fullscreenDialog = false,
@@ -74,8 +82,8 @@ class SkadiNavigator {
   }
 
   static void popTime(BuildContext context, int count) {
-    int count = 0;
-    Navigator.of(context).popUntil((_) => count++ >= 2);
+    int total = 0;
+    Navigator.of(context).popUntil((_) => total++ >= count);
   }
 
   static void pop<T>(BuildContext context, [T? result]) {
@@ -134,6 +142,9 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   static void popUntilRoute(BuildContext context, String route) {
     assert(historyContains(route));
     int routePopToIndex = _history.indexOf(route);
+    if (routePopToIndex < 0) {
+      throw SkadiRouteException("Route not found");
+    }
     int popCount = _history.length - (routePopToIndex + 1);
     Navigator.of(context).popUntil((route) => popCount-- <= 0);
   }

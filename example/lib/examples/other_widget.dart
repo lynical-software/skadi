@@ -64,9 +64,14 @@ class _OtherWidgetExampleState extends State<OtherWidgetExample> {
           const Section(
             title: "Dot",
             subtitle: "dot",
-            isRow: false,
+            isRow: true,
             children: [
-              Dot(),
+              Dot(margin: EdgeInsets.only(right: 16)),
+              Dot(color: Colors.red, margin: EdgeInsets.only(right: 16)),
+              Dot(
+                shape: BoxShape.rectangle,
+                size: 24,
+              ),
             ],
           ),
           Section(

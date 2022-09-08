@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 import 'package:skadi_example/examples/buttons.dart';
+import 'package:skadi_example/examples/navigator.dart';
 import 'package:skadi_example/examples/style_decoration.dart';
 
 import 'examples/dialogs.dart';
@@ -57,6 +58,8 @@ class _RootPageState extends State<RootPage> {
     ExampleButton(name: "Dialogs", child: const DialogsExample()),
     ExampleButton(name: "Mixin Example", child: const MixinExample()),
     ExampleButton(
+        name: "Navigator Example", child: const SkadiNavigatorExample()),
+    ExampleButton(
         name: "Style and Decoration", child: const StyleAndDecorationExample()),
     ExampleButton(name: "Other widgets", child: const OtherWidgetExample()),
     ExampleButton(
@@ -77,7 +80,7 @@ class _RootPageState extends State<RootPage> {
                 onPressed: () async {
                   await SkadiNavigator.push(context, widget.child);
                   SkadiUtils.wait().then((value) {
-                    infoLog(manager);
+                    infoLog("Manager", manager);
                   });
                 },
                 child: Text(widget.name),
