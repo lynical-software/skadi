@@ -97,14 +97,19 @@ class SkadiNavigator {
 
 class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   final bool log;
+  final void Function(Route)? analyticCallBack;
 
   SkadiRouteObserver({
     this.log = false,
+    this.analyticCallBack,
   });
+
+  ///
   static final List<String> _history = [];
 
   void _addHistory(Route? route) {
     if (route != null) {
+      analyticCallBack?.call(route);
       String? routeName = route.settings.name;
       if (routeName != null) {
         _history.add(routeName);
@@ -151,6 +156,7 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
 
   @override
   void didRemove(Route route, Route? previousRoute) {
+    super.didRemove(route, previousRoute);
     _removeHistory(route);
     if (log) {
       infoLog(
@@ -159,11 +165,14 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         true,
       );
     }
-    super.didRemove(route, previousRoute);
   }
 
   @override
   void didPop(Route route, Route? previousRoute) {
+    super.didPop(route, previousRoute);
+    if (previousRoute != null) {
+      analyticCallBack?.call(previousRoute);
+    }
     _removeHistory(route);
     if (log) {
       infoLog(
@@ -172,11 +181,11 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         true,
       );
     }
-    super.didPop(route, previousRoute);
   }
 
   @override
   void didReplace({Route? newRoute, Route? oldRoute}) {
+    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
     _addHistory(newRoute);
     _removeHistory(oldRoute);
     if (log) {
@@ -186,11 +195,11 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         true,
       );
     }
-    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
   }
 
   @override
   void didPush(Route route, Route? previousRoute) {
+    super.didPush(route, previousRoute);
     _addHistory(route);
     if (log) {
       infoLog(
@@ -199,6 +208,5 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         true,
       );
     }
-    super.didPush(route, previousRoute);
   }
 }

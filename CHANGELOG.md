@@ -1,3 +1,7 @@
+## [0.1.2] - 13 September 2022
+
+- Add `analyticCallBack` for `SkadiRouteObserver`
+
 ## [0.1.1] - 8 September 2022
 
 - Fix `SkadiNavigator` popTime
