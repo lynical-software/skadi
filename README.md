@@ -106,8 +106,6 @@ class _HomePageState extends State<NewPage> with SkadiFormMixin {
 
 A mixin that can create an auto dispose ChangeNotifier base class
 
-- `boolNotifier`: a bool ValueNotifier
-
 ```dart
 class _HomePageState extends State<NewPage> with DeferDispose {
 
@@ -135,7 +133,7 @@ class _HomePageState extends State<NewPage> with DeferDispose {
   context.hideKeyboard();
 
 ```
-context extension also support method from SkadiNavigator
+context extension also support method from [SkadiNavigator](#skadinavigator)
 
 ### TextStyle Extension
 
@@ -287,6 +285,45 @@ This input border solve a problem that TextField doesn't have a default elevatio
   )
 ```
 
+### SkadiNavigator
+
+More efficient way to use Navigator with less boilerplate.
+Use the same method name as Navigator class
+
+`routeName`: `name` argument for `RouteSetting`. You can still provide `RouteSetting` and this paramter will be ignore.
+
+
+```dart
+  SkadiNavigator.push(context, HomePage(), routeName: "home");
+  SkadiNavigator.pushReplacement(context, HomePage(), routeName: "home");
+
+  ///Push and remove all
+  SkadiNavigator.pushAndRemove(
+    context, 
+    HomePage(),
+    routeName: "home",
+    condition: (route) => false,
+  );
+
+  ///Pop until the first route
+  SkadiNavigator.popAll(context);
+
+  ///Pop X amount of time
+  SkadiNavigator.popTime(context, 2);
+
+  ///Return current routeName
+  String? route = SkadiNavigator.currentRoute(context);
+
+  ///SkadiRouteObserver is a route observer that support logging and analytic callback
+  MaterialApp(
+    debugShowCheckedModeBanner: false,
+    navigatorObservers: [
+      SkadiRouteObserver(log: true, analyticCallBack: (route) {}),
+    ],
+    home: HomePage(),
+  )  
+```
+
 ### SkadiColor
 
 ```dart
@@ -324,4 +361,37 @@ String carUrlImage =  SkadiUtils.unsplashImage(width: 200, height: 200, category
 
 //Get random from picsum with provided: width and height
 String randomUrlImage = SkadiUtils.picsumImage(200,300);
+```
+
+### SkadiResponsive
+
+A responsive tool to help define a value base on screen size
+
+- Wrap your Home widget in MaterialApp with **SkadiResponsiveBuilder**
+
+Example:
+
+```dart
+// Only required first parameter
+//set value 20 for mobile size
+//set value 24 for tablet size
+//set value 28 for desktop size
+//set value 16 for small mobile size
+//buildcontext is optional and if context isn't null, it will react to MediaQuery change
+double width = SkadiResponsive.value(20, 24, 28, 16, context);
+
+
+///Auto value base on provided rule
+///-4 for small phone, +8 for tablet and +16 for Desktop if using add rule
+///-25% for small phone, x2 for tablet and x3 for Desktop if using multiply rule
+double width = SkadiResponsive.auto(20, SkadiResponsiveRule.add);
+
+
+Widget child = SkadiResponsive.builder(
+  mobile: () => MobileWidget(), ///required
+  tablet: () => TabletWidget(), ///required
+  desktop: () => DesktopWidget(), ///Optional, using tablet widget if value is null
+  mobileSmall: () => MobileSmallWidget(), ///Optional, using mobile widget if value is null
+);
+
 ```

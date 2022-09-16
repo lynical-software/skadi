@@ -9,6 +9,7 @@ import 'examples/dialogs.dart';
 import 'examples/mixin.dart';
 import 'examples/other_widget.dart';
 import 'examples/utilities.dart';
+import 'widgets/custom_overlay_loading.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         navigatorObservers: [
-          SkadiRouteObserver(log: true),
+          SkadiRouteObserver(
+            log: true,
+            analyticCallBack: (route) {},
+          ),
         ],
         title: 'Skadi Flutter Example',
         theme: ThemeData(
@@ -39,6 +43,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return LoadingOverlayProvider.builder(
             child: SkadiResponsiveBuilder(builder: (_) => child!),
+            loadingWidget: const CustomLoadingOverlay(),
           );
         },
       ),
@@ -82,7 +87,10 @@ class _RootPageState extends State<RootPage> {
     return Scaffold(
       appBar: AppBar(title: const Text("Skadi Example")),
       body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: SkadiResponsive.auto(16),
+        ),
         children: [
           for (var widget in examples)
             Container(

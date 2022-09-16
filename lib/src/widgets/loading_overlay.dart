@@ -7,8 +7,7 @@ class LoadingOverlayProvider {
   LoadingOverlayProvider._();
   static LoadingOverlayProvider instance = LoadingOverlayProvider._();
 
-  static Widget builder(
-      {Key? key, required Widget child, Widget? loadingWidget}) {
+  static Widget builder({Key? key, required Widget child, Widget? loadingWidget}) {
     return _LoadingOverlayBuilder(
       loadingWidget: loadingWidget,
       child: child,
@@ -43,9 +42,7 @@ class _LoadingOverlayBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).brightness == Brightness.dark
-        ? Colors.grey.withOpacity(0.2)
-        : Colors.black26;
+    final color = Theme.of(context).brightness == Brightness.dark ? Colors.grey.withOpacity(0.2) : Colors.black26;
     return Stack(
       children: [
         child,

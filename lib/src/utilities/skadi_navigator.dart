@@ -77,19 +77,23 @@ class SkadiNavigator {
     );
   }
 
+  ///Pop everything until first route
   static void popAll(BuildContext context) {
     Navigator.of(context).popUntil((route) => route.isFirst);
   }
 
+  ///Pop X amount of time
   static void popTime(BuildContext context, int count) {
     int total = 0;
     Navigator.of(context).popUntil((_) => total++ >= count);
   }
 
+  ///Just a simple pop
   static void pop<T>(BuildContext context, [T? result]) {
     Navigator.of(context).pop(result);
   }
 
+  ///Return current routeName
   static String? currentRoute(BuildContext context) {
     return ModalRoute.of(context)?.settings.name;
   }
@@ -99,6 +103,7 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   final bool log;
   final void Function(Route)? analyticCallBack;
 
+  ///Route observer that support logging and analytic callback
   SkadiRouteObserver({
     this.log = false,
     this.analyticCallBack,
