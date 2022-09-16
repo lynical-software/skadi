@@ -1,3 +1,8 @@
+## [0.1.3] - 16 September 2022
+
+- Improve README
+- Add `SkadiBadge`
+
 ## [0.1.2] - 13 September 2022
 
 - Add `analyticCallBack` for `SkadiRouteObserver`
