@@ -24,7 +24,7 @@ extension SkadiListExtension<T> on List<T> {
 
   bool update(
     bool Function(T) test,
-    T Function() value, {
+    T Function(T) value, {
     bool updateAll = true,
   }) {
     bool found = false;
@@ -32,7 +32,7 @@ extension SkadiListExtension<T> on List<T> {
       bool passed = test(this[i]);
       if (passed) {
         found = true;
-        this[i] = value();
+        this[i] = value(this[i]);
         if (!updateAll) {
           return found;
         }

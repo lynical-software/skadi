@@ -36,8 +36,7 @@ class _OtherWidgetExampleState extends State<OtherWidgetExample> {
             children: [
               SkadiPlatformChecker(
                 androidWidget: TextField(
-                  decoration:
-                      InputDecoration(hintText: "Android Material textfield"),
+                  decoration: InputDecoration(hintText: "Android Material textfield"),
                 ),
                 iosWidget: CupertinoTextField(
                   placeholder: "iOS cupertino textfield",
@@ -71,6 +70,17 @@ class _OtherWidgetExampleState extends State<OtherWidgetExample> {
               Dot(
                 shape: BoxShape.rectangle,
                 size: 24,
+              ),
+            ],
+          ),
+          Section(
+            title: "SkadiBadge",
+            isRow: true,
+            children: [
+              SkadiIconButton(
+                onTap: () {},
+                badge: const SkadiBadge(text: "2"),
+                icon: const Icon(Icons.notifications_active),
               ),
             ],
           ),

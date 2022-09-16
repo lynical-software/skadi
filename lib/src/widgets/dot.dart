@@ -12,6 +12,8 @@ class Dot extends StatelessWidget {
 
   final EdgeInsets? margin;
 
+  final EdgeInsets? padding;
+
   ///Define a horizontal margin which is the most use case for this widget
   final double? horizontal;
 
@@ -28,20 +30,21 @@ class Dot extends StatelessWidget {
     this.width,
     this.height,
     this.child,
+    this.padding,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: horizontal != null
-          ? EdgeInsets.symmetric(horizontal: horizontal ?? 0.0)
-          : margin,
+      margin: horizontal != null ? EdgeInsets.symmetric(horizontal: horizontal ?? 0.0) : margin,
+      padding: padding,
       width: width ?? size,
       height: height ?? size,
       decoration: BoxDecoration(
         color: color ?? Theme.of(context).primaryColor,
         shape: shape,
       ),
+      alignment: Alignment.center,
       child: child,
     );
   }

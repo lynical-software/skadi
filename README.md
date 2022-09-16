@@ -15,15 +15,40 @@ dependencies:
 
 # Widgets
 
-| Widget                          | Description                                                                 |
-| ------------------------------- | --------------------------------------------------------------------------- |
-| [ConditionalWidget][other]      | Build a widget base on a boolean condition                                  |
-| [EllipsisText][other]           | Nullable Text with Ellipsis as default overflow                             |
-| [KeyboardDismiss][other]        | Dismiss keyboard on tap                                                     |
-| [LoadingOverlay][other]         | Create an overlay loading that cover entire screen and disable input        |
-| [LoadingOverlayPopScope][other] | prevent or allow user from pop the screen when LoadingOverlay is displaying |
-| [ValueNotifierWrapper][other]   | Wrapper with ValueNotifier when using StatelessWidget                       |
-| [WidgetDisposer][other]         | Provide a dispose callback when using StatelessWidget                       |
+| Widget                             | Description                                                                 |
+| ---------------------------------- | --------------------------------------------------------------------------- |
+| [ConditionalWidget][other]         | Build a widget based on a boolean condition                                 |
+| [Dot][other]                       | Create a customizable Dot                                                   |
+| [EllipsisText][other]              | Nullable Text with Ellipsis as default overflow                             |
+| [KeyboardDismiss][other]           | Dismiss keyboard on tap                                                     |
+| [LoadingOverlay][controls]         | Create an overlay loading that cover entire screen and disable input        |
+| [LoadingOverlayPopScope][controls] | prevent or allow user from pop the screen when LoadingOverlay is displaying |
+| [SkadiAccordion][controls]         | Custom ExpansionTile                                                        |
+| [SkadiActionSheet][dialog]         | Custom CupertinoActionSheet for option selector                             |
+| [SkadiAsyncButton][buttons]        | Fully customize Material ElevatedButton for asynchronous onPressed callback |
+| [SkadiAsyncIconButton][buttons]    | SkadiIconButton with asynchronous onPressed callback                        |
+| [SkadiBadge][other]                | Small badge like notification                                               |
+| [SkadiConfirmationDialog][dialog]  | Platform adaptive AlertDialog with cancel and confirm action                |
+| [SkadiFutureHandler][other]        | FutureBuilder with less boilerplate code                                    |
+| [SkadiIconButton][buttons]         | Customizable IconButton                                                     |
+| [SkadiLoadingButton][buttons]      | Custom ElevatedButton with loading notifier                                 |
+| [SkadiPaginatedGridView][other]    | GridView with pagination support                                            |
+| [SkadiPaginatedListView][other]    | ListView with pagination support                                            |
+| [SkadiPlatformChecker][other]      | Platform adaptive widget                                                    |
+| [SkadiProvider][main]              | A provider for Skadi global setting                                         |
+| [SkadiSimpleDialog][dialog]        | Simple platform adaptive AlertDialog                                        |
+| [SkadiStreamHandler][other]        | A StreamBuilder with less boilerplate code                                  |
+| [SpaceX][other]                    | SizedBox with only width                                                    |
+| [SpaceY][other]                    | SizedBox with only height                                                   |
+| [ValueNotifierWrapper][other]      | Wrapper with ValueNotifier when using StatelessWidget                       |
+| [WidgetDisposer][other]            | Provide a dispose callback when using StatelessWidget                       |
+
+
+[buttons]: https://github.com/lynical-software/skadi/tree/master/example/lib/examples/buttons.dart
+[controls]: https://github.com/lynical-software/skadi/tree/master/example/lib/examples/controls.dart
+[other]: https://github.com/lynical-software/skadi/tree/master/example/lib/examples/other_widget.dart
+[dialog]: https://github.com/lynical-software/skadi/tree/master/example/lib/examples/dialogs.dart
+[main]: https://github.com/lynical-software/skadi/tree/master/example/lib/main.dart
 
 # Mixin
 
@@ -48,18 +73,46 @@ class _HomePageState extends State<NewPage> with AfterBuildMixin {
 
 ```
 
-### BoolNotifierMixin
+### SkadiFormMixin
 
-Provide a ValueNotifier<bool> and a value toggle function
+Provide some property and method when working with `Form`
 
-- **boolNotifier**: a bool ValueNotifier
+#### field and attribute
+
+- `formKey`: a key for form
+- `loadingNotifier`: a bool ValueNotifier
+- `passwordObscureNotifier`: a bool ValueNotifier for toggling password obscure field
+- `isFormValidated`: a bool return by validate `formKey`
 
 #### method
 
-- **toggleValue**: toggle _loadingNotifier_
+- `toggleLoading`: toggle `loadingNotifier` value
+- `togglePasswordObscure`: toggle `passwordObscureNotifier` value
+- `PasswordTextFieldBuilder`: create a Password TextField
 
 ```dart
-class _HomePageState extends State<NewPage> with BoolNotifierMixin {
+class _HomePageState extends State<NewPage> with SkadiFormMixin {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Form(key: formKey, child: child)
+    );
+  }
+}
+```
+
+
+### DeferDispose
+
+A mixin that can create an auto dispose ChangeNotifier base class
+
+- `boolNotifier`: a bool ValueNotifier
+
+```dart
+class _HomePageState extends State<NewPage> with DeferDispose {
+
+  late ValueNotifier<int> notifier = createDefer(()=> ValueNotifier(2));
+
   @override
   Widget build(BuildContext context) {
     return Container();
@@ -78,10 +131,11 @@ class _HomePageState extends State<NewPage> with BoolNotifierMixin {
   TextThemeData textTheme = context.textTheme;
   Theme theme = context.theme;
   MediaQueryData data = context.mediaQuery;
-  //
+  double keyboardHeight = context.keyboardHeight;
   context.hideKeyboard();
 
 ```
+context extension also support method from SkadiNavigator
 
 ### TextStyle Extension
 
@@ -114,8 +168,11 @@ DateTime.now().formatToLocalDate(format: "dd mmm yyyy", locale: context.locale)
 ///Filter list
 List<int> adult = [2,24,12,18].filter((age)=> age >= 18);
 
-///First where
+///Just find and return
 int? eighteen = adult.findOne((age)=> age == 18);
+
+///Find where age == 2 and update it to +2
+adult.update((age)=> age == 2, (age) => age + 2 );
 
 ///Add age to Map if age isn't null
 Map<String, int> data = {};
@@ -157,7 +214,22 @@ Text("Hello Flutter").opacity(0.5)
 
 ```dart
 String? name = "chunlee".capitalize; // => Chunlee
-bool empty = name.isNotOrEmpty;
+bool empty = name.isNullOrEmpty;
+```
+
+### ValueListenable extension
+
+```dart
+ValueNotifier<int> notifier = ValueNotifier(2);
+
+@override
+Widget build(BuildContext context) {
+  return notifier.listen((value){
+      return Text("${value}");
+    }
+  );
+}
+
 ```
 
 # Utility and Style
@@ -213,6 +285,19 @@ This input border solve a problem that TextField doesn't have a default elevatio
       )
       ...
   )
+```
+
+### SkadiColor
+
+```dart
+  //create color from Hex String
+  Color color = SkadiColor.fromHexString("FAFAFA");
+
+  ///Convert Color to MaterialColor
+  MaterialColor material = SkadiColor.toMaterial(color); 
+
+  //create color from RGB without Opacity
+  Color rgb = SkadiColor.fromRGA(222,222,222); 
 ```
 
 ### SkadiUtils

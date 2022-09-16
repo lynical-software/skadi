@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 import 'package:skadi_example/examples/buttons.dart';
+import 'package:skadi_example/examples/controls.dart';
 import 'package:skadi_example/examples/navigator.dart';
 import 'package:skadi_example/examples/style_decoration.dart';
 
@@ -56,14 +57,24 @@ class _RootPageState extends State<RootPage> {
   final examples = <ExampleButton>[
     ExampleButton(name: "Buttons", child: const ButtonsExample()),
     ExampleButton(name: "Dialogs", child: const DialogsExample()),
-    ExampleButton(name: "Mixin Example", child: const MixinExample()),
+    ExampleButton(name: "Controls", child: const ControlExample()),
     ExampleButton(
-        name: "Navigator Example", child: const SkadiNavigatorExample()),
+      name: "Mixin Example",
+      child: const MixinExample(),
+    ),
     ExampleButton(
-        name: "Style and Decoration", child: const StyleAndDecorationExample()),
+      name: "Navigator Example",
+      child: const SkadiNavigatorExample(),
+    ),
+    ExampleButton(
+      name: "Style and Decoration",
+      child: const StyleAndDecorationExample(),
+    ),
     ExampleButton(name: "Other widgets", child: const OtherWidgetExample()),
     ExampleButton(
-        name: "Utilities Method Usage", child: const UtilitiesMethodUsage()),
+      name: "Utilities Method Usage",
+      child: const UtilitiesMethodUsage(),
+    ),
   ];
 
   @override

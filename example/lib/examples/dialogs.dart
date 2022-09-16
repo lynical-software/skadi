@@ -60,7 +60,7 @@ class _DialogsExampleState extends State<DialogsExample> {
           ],
         ),
         Section(
-          title: "Others",
+          title: "SkadiSimpleDialog",
           isRow: false,
           children: [
             ElevatedButton(
@@ -75,6 +75,12 @@ class _DialogsExampleState extends State<DialogsExample> {
               },
               child: const Text("Show simple dialog"),
             ),
+          ],
+        ),
+        Section(
+          title: "SkadiActionSheet",
+          isRow: false,
+          children: [
             ElevatedButton(
               onPressed: () {
                 showCupertinoModalPopup(

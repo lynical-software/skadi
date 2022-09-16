@@ -33,6 +33,7 @@ export 'src/widgets/skadi_accordion.dart';
 export 'src/widgets/skadi_action_sheet.dart';
 export 'src/widgets/skadi_async_button.dart';
 export 'src/widgets/skadi_async_icon_button.dart';
+export 'src/widgets/skadi_badge.dart';
 export 'src/widgets/skadi_confirmation_dialog.dart';
 export 'src/widgets/skadi_future_handler.dart';
 export 'src/widgets/skadi_icon_button.dart';

@@ -49,18 +49,17 @@ class _MixinExampleState extends State<MixinExample>
               validator: (value) => SkadiFormValidator.validateEmail(value),
               decoration: const InputDecoration(
                 hintText: "email",
-                border:
-                    ShadowInputBorder(elevation: 2.0, fillColor: Colors.white),
+                border: ShadowInputBorder(elevation: 2.0, fillColor: Colors.white),
               ),
             ),
             cat.builder(builder: ((context, child) => emptySizedBox)),
 
             ///Using BoolNotifier mixin
-            boolNotifier.builder(
-              builder: (context, child) {
+            boolNotifier.listen(
+              (value) {
                 return SwitchListTile(
                   title: const Text("Remember me"),
-                  value: boolNotifier.value,
+                  value: value,
                   onChanged: toggleValue,
                 );
               },

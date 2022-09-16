@@ -30,6 +30,8 @@ class Section extends StatelessWidget {
               child: EllipsisText(
                 subtitle,
                 style: const TextStyle(fontSize: 12, color: Colors.grey),
+                maxLines: 3,
+                textAlign: TextAlign.center,
               ),
             ),
           const SpaceY(16),
