@@ -369,6 +369,19 @@ A responsive tool to help define a value base on screen size
 
 - Wrap your Home widget in MaterialApp with **SkadiResponsiveBuilder**
 
+
+Default breakpoint
+
+```dart 
+SkadiResponsiveBreakpoint.defaultValue()
+    : mobileSmall = 360, /// <360 
+      mobile = 480, /// from 361 -> 766
+      tablet = 768, /// 768 -> 1023
+      desktop = 1024; /// >=1024
+```
+There are 2 support method to define a value
+`SkadiResponsive.value` and `SkadiResponsive.auto`
+
 Example:
 
 ```dart

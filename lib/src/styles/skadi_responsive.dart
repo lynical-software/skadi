@@ -169,6 +169,11 @@ class SkadiResponsive {
     }
     return value;
   }
+
+  ///Return a responsive EdgeInsets.all that follow Material Design value
+  static EdgeInsets get marginAll {
+    return EdgeInsets.all(value(16, 24, 32, 12));
+  }
 }
 
 class SkadiResponsiveBuilder extends StatelessWidget {
