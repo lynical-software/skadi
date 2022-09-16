@@ -373,25 +373,25 @@ Example:
 
 ```dart
 // Only required first parameter
-//set value 20 for mobile size
-//set value 24 for tablet size
-//set value 28 for desktop size
-//set value 16 for small mobile size
+//set value 20 for `Mobile` size
+//set value 24 for `Tablet` size
+//set value 28 for `Desktop` size
+//set value 16 for `Small mobile `size
 //buildcontext is optional and if context isn't null, it will react to MediaQuery change
 double width = SkadiResponsive.value(20, 24, 28, 16, context);
 
 
 ///Auto value base on provided rule
-///-4 for small phone, +8 for tablet and +16 for Desktop if using add rule
-///-25% for small phone, x2 for tablet and x3 for Desktop if using multiply rule
+///-4 for `Small mobile`, +8 for `Tablet` and +16 for `Desktop` if using `SkadiResponsiveRule.add`
+///-25% for `Small mobile`, x2 for `Tablet` and x3 for `Desktop` if using `SkadiResponsiveRule.multiply`
 double width = SkadiResponsive.auto(20, SkadiResponsiveRule.add);
 
 
 Widget child = SkadiResponsive.builder(
   mobile: () => MobileWidget(), ///required
   tablet: () => TabletWidget(), ///required
-  desktop: () => DesktopWidget(), ///Optional, using tablet widget if value is null
-  mobileSmall: () => MobileSmallWidget(), ///Optional, using mobile widget if value is null
+  desktop: () => DesktopWidget(), ///Optional, using `Tablet` widget if value is null
+  mobileSmall: () => MobileSmallWidget(), ///Optional, using `Mobile` widget if value is null
 );
 
 ```
