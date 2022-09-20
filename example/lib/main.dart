@@ -23,6 +23,11 @@ class MyApp extends StatelessWidget {
     return SkadiProvider(
       loadingWidget: const Text("loading..."),
       noDataWidget: const Text("No data :("),
+      logSetting: const SkadiLogSetting(
+        http: true,
+        info: true,
+        error: true,
+      ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         navigatorObservers: [
