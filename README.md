@@ -1,6 +1,6 @@
 # skadi
 
-[![pub package](https://img.shields.io/badge/pub-0.1.3-blueviolet.svg)](https://pub.dev/packages/skadi) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/skadi)
+[![pub package](https://img.shields.io/badge/pub-0.2.0-blueviolet.svg)](https://pub.dev/packages/skadi) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/skadi)
 
 Flutter utilities packages for custom widgets and utilities function
 
@@ -10,22 +10,22 @@ Add this to pubspec.yaml
 
 ```dart
 dependencies:
-  skadi: ^0.1.3
+  skadi: ^0.2.0
 ```
 
 # Widgets
 
 | Widget                             | Description                                                                 |
 | ---------------------------------- | --------------------------------------------------------------------------- |
-| [ConditionalWidget][other]         | Build a widget based on a boolean condition                                 |
-| [Dot][other]                       | Create a customizable Dot                                                   |
-| [EllipsisText][other]              | Nullable Text with Ellipsis as default overflow                             |
+| [ConditionalWidget][other]         | Build a widget based on a condition                                         |
+| [Dot][other]                       | Create a customizable Dot or bullet point                                   |
+| [EllipsisText][other]              | Nullable Text with ellipsis as default overflow                             |
 | [KeyboardDismiss][other]           | Dismiss keyboard on tap                                                     |
 | [LoadingOverlay][controls]         | Create an overlay loading that cover entire screen and disable input        |
 | [LoadingOverlayPopScope][controls] | prevent or allow user from pop the screen when LoadingOverlay is displaying |
 | [SkadiAccordion][controls]         | Custom ExpansionTile                                                        |
 | [SkadiActionSheet][dialog]         | Custom CupertinoActionSheet for option selector                             |
-| [SkadiAsyncButton][buttons]        | Fully customize Material ElevatedButton for asynchronous onPressed callback |
+| [SkadiAsyncButton][buttons]        | Custom ElevatedButton for asynchronous onPressed callback                   |
 | [SkadiAsyncIconButton][buttons]    | SkadiIconButton with asynchronous onPressed callback                        |
 | [SkadiBadge][other]                | Small badge like notification                                               |
 | [SkadiConfirmationDialog][dialog]  | Platform adaptive AlertDialog with cancel and confirm action                |
@@ -42,7 +42,6 @@ dependencies:
 | [SpaceY][other]                    | SizedBox with only height                                                   |
 | [ValueNotifierWrapper][other]      | Wrapper with ValueNotifier when using StatelessWidget                       |
 | [WidgetDisposer][other]            | Provide a dispose callback when using StatelessWidget                       |
-
 
 [buttons]: https://github.com/lynical-software/skadi/tree/master/example/lib/examples/buttons.dart
 [controls]: https://github.com/lynical-software/skadi/tree/master/example/lib/examples/controls.dart
@@ -101,7 +100,6 @@ class _HomePageState extends State<NewPage> with SkadiFormMixin {
 }
 ```
 
-
 ### DeferDispose
 
 A mixin that can create an auto dispose ChangeNotifier base class
@@ -133,11 +131,12 @@ class _HomePageState extends State<NewPage> with DeferDispose {
   context.hideKeyboard();
 
 ```
+
 context extension also support method from [SkadiNavigator](#skadinavigator)
 
 ### TextStyle Extension
 
-```dart
+````dart
 Text("Hello Flutter", style: TextStyle().normal)
 Text("Hello Flutter", style: TextStyle().medium)
 Text("Hello Flutter", style: TextStyle().bold)
@@ -158,7 +157,7 @@ Text("Hello Flutter", style: TextStyle().setFontSize(24))
 DateTime.now().format(format: "dd mmm yyyy", locale: context.locale)
 DateTime.now().isTheSameDay(DateTime.now())
 DateTime.now().formatToLocalDate(format: "dd mmm yyyy", locale: context.locale)
-```
+````
 
 ### List and map extension
 
@@ -287,11 +286,9 @@ This input border solve a problem that TextField doesn't have a default elevatio
 
 ### SkadiNavigator
 
-More efficient way to use Navigator with less boilerplate.
-Use the same method name as Navigator class
+More efficient way to use Navigator with less boilerplate. Use the same method name as Navigator class
 
 `routeName`: `name` argument for `RouteSetting`. You can still provide `RouteSetting` and this paramter will be ignore.
-
 
 ```dart
   SkadiNavigator.push(context, HomePage(), routeName: "home");
@@ -299,7 +296,7 @@ Use the same method name as Navigator class
 
   ///Push and remove all
   SkadiNavigator.pushAndRemove(
-    context, 
+    context,
     HomePage(),
     routeName: "home",
     condition: (route) => false,
@@ -321,7 +318,7 @@ Use the same method name as Navigator class
       SkadiRouteObserver(log: true, analyticCallBack: (route) {}),
     ],
     home: HomePage(),
-  )  
+  )
 ```
 
 ### SkadiColor
@@ -331,10 +328,10 @@ Use the same method name as Navigator class
   Color color = SkadiColor.fromHexString("FAFAFA");
 
   ///Convert Color to MaterialColor
-  MaterialColor material = SkadiColor.toMaterial(color); 
+  MaterialColor material = SkadiColor.toMaterial(color);
 
   //create color from RGB without Opacity
-  Color rgb = SkadiColor.fromRGA(222,222,222); 
+  Color rgb = SkadiColor.fromRGA(222,222,222);
 ```
 
 ### SkadiUtils
@@ -369,18 +366,17 @@ A responsive tool to help define a value base on screen size
 
 - Wrap your Home widget in MaterialApp with **SkadiResponsiveBuilder**
 
-
 Default breakpoint
 
-```dart 
+```dart
 SkadiResponsiveBreakpoint.defaultValue()
-    : mobileSmall = 360, /// <360 
+    : mobileSmall = 360, /// <360
       mobile = 480, /// from 361 -> 766
       tablet = 768, /// 768 -> 1023
       desktop = 1024; /// >=1024
 ```
-There are 2 support method to define a value
-`SkadiResponsive.value` and `SkadiResponsive.auto`
+
+There are 2 support method to define a value `SkadiResponsive.value` and `SkadiResponsive.auto`
 
 Example:
 

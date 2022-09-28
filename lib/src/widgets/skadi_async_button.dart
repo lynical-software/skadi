@@ -35,10 +35,10 @@ class SkadiAsyncButton extends StatefulWidget {
   final double? height;
 
   ///Button's background color
-  final Color? color;
+  final Color? primary;
 
   ///Button's text color
-  final Color? textColor;
+  final Color? onPrimary;
 
   ///A color for default [loadingWidget]
   final Color loadingColor;
@@ -80,11 +80,11 @@ class SkadiAsyncButton extends StatefulWidget {
     this.loadingWidget,
     this.width,
     this.height,
-    this.color,
+    this.primary,
     this.shape,
     this.alignment,
     this.borderSide,
-    this.textColor,
+    this.onPrimary,
     this.elevation,
   }) : super(key: key);
   @override
@@ -152,8 +152,8 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
         style: ElevatedButton.styleFrom(
           shape: widget.shape,
           padding: widget.padding,
-          primary: widget.color,
-          onPrimary: widget.textColor,
+          primary: widget.primary,
+          onPrimary: widget.onPrimary,
           side: widget.borderSide,
           elevation: widget.elevation,
         ),

@@ -36,7 +36,9 @@ class Dot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: horizontal != null ? EdgeInsets.symmetric(horizontal: horizontal ?? 0.0) : margin,
+      margin: horizontal != null
+          ? EdgeInsets.symmetric(horizontal: horizontal ?? 0.0)
+          : margin,
       padding: padding,
       width: width ?? size,
       height: height ?? size,
