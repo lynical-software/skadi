@@ -24,10 +24,13 @@ class SkadiLoadingButton extends StatefulWidget {
   final double? elevation;
 
   ///Button's background Color
-  final Color? color;
+  final Color? primary;
 
   ///Text's color for a child that usually a Text
-  final Color? textColor;
+  final Color? onPrimary;
+
+  ///Button's disable layout color
+  final Color? onSurface;
 
   ///Loading indicator's color, default is [white]
   final Color loadingColor;
@@ -67,12 +70,13 @@ class SkadiLoadingButton extends StatefulWidget {
     this.elevation = 2.0,
     this.loadingNotifier,
     this.loadingWidget,
-    this.color,
-    this.textColor,
+    this.primary,
+    this.onPrimary,
     this.icon,
     this.onLongPressed,
     this.alignment,
     this.borderSide,
+    this.onSurface,
   }) : super(key: key);
 
   @override
@@ -88,8 +92,7 @@ class _SkadiLoadingButtonState extends State<SkadiLoadingButton> {
     if (widget.fullWidth == false && width == null) {
       WidgetsBinding.instance.addPostFrameCallback((d) {
         if (_globalKey.currentContext != null) {
-          RenderBox box =
-              _globalKey.currentContext!.findRenderObject() as RenderBox;
+          RenderBox box = _globalKey.currentContext!.findRenderObject() as RenderBox;
           width = box.size.width;
         }
       });
@@ -110,8 +113,9 @@ class _SkadiLoadingButtonState extends State<SkadiLoadingButton> {
             onPressed: loading ? () {} : widget.onPressed,
             style: ElevatedButton.styleFrom(
               shape: widget.shape,
-              primary: widget.color,
-              onPrimary: widget.textColor,
+              primary: widget.primary,
+              onSurface: widget.onSurface,
+              onPrimary: widget.onPrimary,
               padding: widget.padding,
               elevation: widget.elevation,
               side: widget.borderSide,
@@ -132,9 +136,7 @@ class _SkadiLoadingButtonState extends State<SkadiLoadingButton> {
                 ],
               ),
               onTrue: () =>
-                  widget.loadingWidget ??
-                  SkadiProvider.of(context)?.buttonLoadingWidget ??
-                  _buildLoadingWidget(),
+                  widget.loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget ?? _buildLoadingWidget(),
             ),
           );
         },

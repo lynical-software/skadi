@@ -5,10 +5,19 @@ import '../utilities/types.dart';
 import 'conditional_widget.dart';
 
 class SkadiAsyncIconButton extends StatefulWidget {
+  ///
   final FutureOrCallBack? onTap;
+
+  ///
   final Widget icon;
+
+  ///
   final EdgeInsets margin;
+
+  ///
   final EdgeInsets padding;
+
+  ///
   final Color backgroundColor;
 
   ///Button's borderRadius, You can check [borderRadius] documentation on Flutter
@@ -72,9 +81,8 @@ class _SkadiAsyncIconButtonState extends State<SkadiAsyncIconButton> {
       side: widget.borderSide ?? BorderSide.none,
     );
 
-    final Widget loadingWidget = widget.loadingWidget ??
-        SkadiProvider.of(context)?.buttonLoadingWidget ??
-        const CircularProgressIndicator();
+    final Widget loadingWidget =
+        widget.loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget ?? const CircularProgressIndicator();
 
     final Widget buttonContent = Stack(
       children: [

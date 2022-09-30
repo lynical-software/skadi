@@ -19,6 +19,7 @@ export 'src/styles/small_underline_tab_indicator.dart';
 //utilities
 export 'src/utilities/debouncer.dart';
 export 'src/utilities/form_validator.dart';
+export 'src/utilities/global.dart';
 export 'src/utilities/jwt_decoder.dart';
 export 'src/utilities/logger.dart';
 export 'src/utilities/skadi_navigator.dart';

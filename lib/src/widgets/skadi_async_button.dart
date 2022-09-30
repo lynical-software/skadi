@@ -40,6 +40,9 @@ class SkadiAsyncButton extends StatefulWidget {
   ///Button's text color
   final Color? onPrimary;
 
+  ///Button's disable layout color
+  final Color? onSurface;
+
   ///A color for default [loadingWidget]
   final Color loadingColor;
 
@@ -64,6 +67,9 @@ class SkadiAsyncButton extends StatefulWidget {
   ///Alignment of the [icon] and [child]
   final MainAxisAlignment? alignment;
 
+  ///Alignment of the [icon] and [child]
+  final ValueNotifier<bool>? loadingNotifier;
+
   ///Create a Material Elevated Button that can contain a [loadingWiidget] whenever you
   ///execute a Future function in [onPressed] callback
   const SkadiAsyncButton({
@@ -86,6 +92,8 @@ class SkadiAsyncButton extends StatefulWidget {
     this.borderSide,
     this.onPrimary,
     this.elevation,
+    this.loadingNotifier,
+    this.onSurface,
   }) : super(key: key);
   @override
   _SkadiAsyncButtonState createState() => _SkadiAsyncButtonState();
@@ -97,17 +105,47 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
   void onButtonPressed() async {
     if (_isLoading) return;
     try {
-      toggleLoading();
+      _toggleLoading(true);
       await widget.onPressed?.call();
     } catch (exception) {
       rethrow;
     } finally {
-      toggleLoading();
+      _toggleLoading(false);
     }
   }
 
-  void toggleLoading() {
-    if (mounted) setState(() => _isLoading = !_isLoading);
+  void _toggleLoading(bool value) {
+    if (mounted) setState(() => _isLoading = value);
+  }
+
+  void _addListener() {
+    if (widget.loadingNotifier != null) {
+      _isLoading = widget.loadingNotifier!.value;
+      widget.loadingNotifier!.addListener(_listener);
+    }
+  }
+
+  void _removeListener() {
+    if (widget.loadingNotifier != null) {
+      widget.loadingNotifier!.addListener(_listener);
+    }
+  }
+
+  void _listener() {
+    bool value = widget.loadingNotifier!.value;
+    _toggleLoading(value);
+  }
+
+  @override
+  void initState() {
+    _addListener();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _removeListener();
+    super.dispose();
   }
 
   @override
@@ -133,9 +171,8 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
       ],
     );
 
-    final Widget loadingWidget = widget.loadingWidget ??
-        SkadiProvider.of(context)?.buttonLoadingWidget ??
-        _buildLoadingWidget();
+    final Widget loadingWidget =
+        widget.loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget ?? _buildLoadingWidget();
 
     return Container(
       height: widget.height,
@@ -153,15 +190,14 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
           shape: widget.shape,
           padding: widget.padding,
           primary: widget.primary,
+          onSurface: widget.onSurface,
           onPrimary: widget.onPrimary,
           side: widget.borderSide,
           elevation: widget.elevation,
         ),
         child: ConditionalWidget(
           condition: _isLoading,
-          onTrue: () => widget.loadingType == LoadingType.disable
-              ? buttonContent
-              : loadingWidget,
+          onTrue: () => widget.loadingType == LoadingType.disable ? buttonContent : loadingWidget,
           onFalse: () => buttonContent,
         ),
       ),

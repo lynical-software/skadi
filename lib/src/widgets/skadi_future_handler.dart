@@ -5,11 +5,17 @@ import '../provider/skadi_provider.dart';
 class SkadiFutureHandler<T> extends StatefulWidget {
   ///Future to check on
   final Future<T>? future;
+
+  ///
   final Future<T> Function()? futureFunction;
 
   ///A callback when Future's snapshot hasData
   final Widget Function(T) ready;
+
+  ///
   final Widget? loading;
+
+  ///
   final T? initialData;
 
   ///On snapshot error callback
@@ -74,8 +80,7 @@ class _SkadiFutureHandlerState<T> extends State<SkadiFutureHandler<T>> {
           if (widget.loading != null) {
             return widget.loading!;
           }
-          return skadiProvider?.loadingWidget ??
-              const Center(child: CircularProgressIndicator());
+          return skadiProvider?.loadingWidget ?? const Center(child: CircularProgressIndicator());
         }
       },
     );
