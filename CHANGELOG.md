@@ -1,9 +1,19 @@
+## [0.3.0] - 9 October 2022
+
+- Add `catchNothing`
+- Add `loadingNotifier` and `onSurface` to `SkadiAsyncButton`
+- **breaking change**
+    - `SkadiLoadingButton` to follow ElevatedButton parameter name
+    - `SkadiConfirmationDialog` parameter behavior change:
+      - `onConfirm` and `onCancel` no longer pop dialog by default
+
 ## [0.2.0] - 28 September 2022
 
 - Improve README
 - Add setting for `Logger`
 - Add `SkadiBadge`
-- breaking change on `SkadiAsyncButton` to follow ElevatedButton parameter name
+- **breaking change**
+    - `SkadiAsyncButton` to follow ElevatedButton parameter name
 
 ## [0.1.2] - 13 September 2022
 

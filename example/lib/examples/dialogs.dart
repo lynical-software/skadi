@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
@@ -30,9 +32,11 @@ class _DialogsExampleState extends State<DialogsExample> {
                     content: const Text("Confirm this action?"),
                     onConfirm: () {
                       infoLog("you confirm");
+                      Navigator.pop(context);
                     },
                     onCancel: () {
                       infoLog("you cancel");
+                      Navigator.pop(context);
                     },
                   ),
                 );
@@ -47,11 +51,19 @@ class _DialogsExampleState extends State<DialogsExample> {
                       title: "Danger action",
                       confirmText: "Delete",
                       content: const Text("You want to delete?"),
-                      onConfirm: () {
+                      onConfirm: () async {
+                        LoadingOverlayProvider.toggle();
                         infoLog("you confirm");
+                        await SkadiUtils.wait(1000);
+                        bool success = Random().nextBool();
+                        LoadingOverlayProvider.toggle();
+                        if (success) {
+                          Navigator.pop(context);
+                        }
                       },
                       onCancel: () {
                         infoLog("you cancel");
+                        Navigator.pop(context);
                       },
                     ),
                   );

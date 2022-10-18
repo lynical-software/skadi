@@ -13,12 +13,16 @@ class ButtonsExample extends StatefulWidget {
 
 class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
   var d = Debouncer();
-  late ValueNotifier<bool> loadingNotifier = createDefer(() => ValueNotifier(true));
+  late ValueNotifier<bool> loadingNotifier = createDefer(() => ValueNotifier(false));
 
   Future loading() async {
     loadingNotifier.value = true;
     await SkadiUtils.wait();
     loadingNotifier.value = false;
+  }
+
+  Future otherloading() async {
+    await SkadiUtils.wait();
   }
 
   @override
@@ -64,19 +68,21 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
             ),
             SkadiAsyncButton(
               fullWidth: true,
-              onPressed: loading,
+              onPressed: otherloading,
               loadingType: LoadingType.disable,
               loadingNotifier: loadingNotifier,
               onSurface: Colors.grey,
-              child: const Text("SkadiAsyncButton disable style"),
+              child: const Text("SkadiAsyncButton disable style and LoadingNotifier"),
             ),
             SkadiAsyncIconButton(
-              onTap: loading,
+              onTap: otherloading,
               icon: const Icon(Icons.add, color: Colors.blue),
               borderSide: const BorderSide(color: Colors.blue),
             ),
             SkadiLoadingButton(
               fullWidth: false,
+              primary: Colors.red,
+              onPrimary: Colors.white,
               loadingNotifier: loadingNotifier,
               onPressed: loading,
               child: const Text("SkadiLoadingButton"),

@@ -1,6 +1,8 @@
-catchNothing(Function() fn) {
+import 'dart:async';
+
+catchNothing(FutureOr Function() fn) async {
   try {
-    return fn();
+    return await fn();
   } catch (e) {
     //Do nothing
   }
