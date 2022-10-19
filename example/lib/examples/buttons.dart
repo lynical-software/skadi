@@ -71,7 +71,7 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
               onPressed: otherloading,
               loadingType: LoadingType.disable,
               loadingNotifier: loadingNotifier,
-              onSurface: Colors.grey,
+              disableColor: Colors.grey,
               child: const Text("SkadiAsyncButton disable style and LoadingNotifier"),
             ),
             SkadiAsyncIconButton(
@@ -81,8 +81,8 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
             ),
             SkadiLoadingButton(
               fullWidth: false,
-              primary: Colors.red,
-              onPrimary: Colors.white,
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
               loadingNotifier: loadingNotifier,
               onPressed: loading,
               child: const Text("SkadiLoadingButton"),

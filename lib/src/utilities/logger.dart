@@ -17,14 +17,16 @@ class SkadiLogSetting {
 
 void httpLog([dynamic log, dynamic additional = "", bool? logInReleaseMode]) {
   var setting = SkadiProvider.loggerSetting;
-  if (kDebugMode || (logInReleaseMode ?? setting.http))
+  if (kDebugMode || (logInReleaseMode ?? setting.http)) {
     debugPrint("Http Log: $log $additional");
+  }
 }
 
 void infoLog([dynamic log, dynamic additional = "", bool? logInReleaseMode]) {
   var setting = SkadiProvider.loggerSetting;
-  if (kDebugMode || (logInReleaseMode ?? setting.http))
+  if (kDebugMode || (logInReleaseMode ?? setting.http)) {
     debugPrint("Info Log: $log $additional");
+  }
 }
 
 void errorLog([dynamic log, dynamic additional = ""]) {

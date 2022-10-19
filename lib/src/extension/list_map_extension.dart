@@ -22,6 +22,8 @@ extension SkadiListExtension<T> on List<T> {
     return null;
   }
 
+  ///Update list value that met the condition
+  ///[updateAll] param to indicate to update all pass test value or only first occurrence
   bool update(
     bool Function(T) test,
     T Function(T) value, {

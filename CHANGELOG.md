@@ -1,4 +1,4 @@
-## [0.3.0] - 9 October 2022
+## [1.0.0] - 19 October 2022
 
 - Add `catchNothing`
 - Add `loadingNotifier` and `onSurface` to `SkadiAsyncButton`

@@ -29,6 +29,7 @@ class _DialogsExampleState extends State<DialogsExample> {
                 showDialog(
                   context: context,
                   builder: (_) => SkadiConfirmationDialog(
+                    positiveTextStyle: const TextStyle(color: Colors.blue),
                     content: const Text("Confirm this action?"),
                     onConfirm: () {
                       infoLog("you confirm");
@@ -48,6 +49,7 @@ class _DialogsExampleState extends State<DialogsExample> {
                   showDialog(
                     context: context,
                     builder: (_) => SkadiConfirmationDialog.danger(
+                      positiveTextStyle: const TextStyle(color: Colors.blue),
                       title: "Danger action",
                       confirmText: "Delete",
                       content: const Text("You want to delete?"),

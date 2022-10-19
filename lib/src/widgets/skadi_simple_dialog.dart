@@ -68,7 +68,7 @@ class SkadiSimpleDialog extends StatelessWidget {
       actions: <Widget>[
         TextButton(
           style: TextButton.styleFrom(
-            primary: buttonColor,
+            backgroundColor: buttonColor,
           ),
           child: Text(confirmText),
           onPressed: () {

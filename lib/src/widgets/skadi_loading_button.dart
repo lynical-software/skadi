@@ -24,13 +24,13 @@ class SkadiLoadingButton extends StatefulWidget {
   final double? elevation;
 
   ///Button's background Color
-  final Color? primary;
+  final Color? backgroundColor;
 
   ///Text's color for a child that usually a Text
-  final Color? onPrimary;
+  final Color? foregroundColor;
 
   ///Button's disable layout color
-  final Color? onSurface;
+  final Color? disableColor;
 
   ///Loading indicator's color, default is [white]
   final Color loadingColor;
@@ -70,13 +70,13 @@ class SkadiLoadingButton extends StatefulWidget {
     this.elevation = 2.0,
     this.loadingNotifier,
     this.loadingWidget,
-    this.primary,
-    this.onPrimary,
+    this.backgroundColor,
+    this.foregroundColor,
     this.icon,
     this.onLongPressed,
     this.alignment,
     this.borderSide,
-    this.onSurface,
+    this.disableColor,
   }) : super(key: key);
 
   @override
@@ -113,9 +113,9 @@ class _SkadiLoadingButtonState extends State<SkadiLoadingButton> {
             onPressed: loading ? () {} : widget.onPressed,
             style: ElevatedButton.styleFrom(
               shape: widget.shape,
-              primary: widget.primary,
-              onSurface: widget.onSurface,
-              onPrimary: widget.onPrimary,
+              backgroundColor: widget.backgroundColor,
+              disabledForegroundColor: widget.disableColor,
+              foregroundColor: widget.foregroundColor,
               padding: widget.padding,
               elevation: widget.elevation,
               side: widget.borderSide,

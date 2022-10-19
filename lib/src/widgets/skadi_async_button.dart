@@ -35,13 +35,13 @@ class SkadiAsyncButton extends StatefulWidget {
   final double? height;
 
   ///Button's background color
-  final Color? primary;
+  final Color? backgroundColor;
 
   ///Button's text color
-  final Color? onPrimary;
+  final Color? foregroundColor;
 
   ///Button's disable layout color
-  final Color? onSurface;
+  final Color? disableColor;
 
   ///A color for default [loadingWidget]
   final Color loadingColor;
@@ -70,7 +70,7 @@ class SkadiAsyncButton extends StatefulWidget {
   ///Alignment of the [icon] and [child]
   final ValueNotifier<bool>? loadingNotifier;
 
-  ///Create a Material Elevated Button that can contain a [loadingWiidget] whenever you
+  ///Create a Material Elevated Button that can contain a [loadingWidget] whenever you
   ///execute a Future function in [onPressed] callback
   const SkadiAsyncButton({
     Key? key,
@@ -86,14 +86,14 @@ class SkadiAsyncButton extends StatefulWidget {
     this.loadingWidget,
     this.width,
     this.height,
-    this.primary,
+    this.backgroundColor,
     this.shape,
     this.alignment,
     this.borderSide,
-    this.onPrimary,
+    this.foregroundColor,
     this.elevation,
     this.loadingNotifier,
-    this.onSurface,
+    this.disableColor,
   }) : super(key: key);
   @override
   _SkadiAsyncButtonState createState() => _SkadiAsyncButtonState();
@@ -189,9 +189,9 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
         style: ElevatedButton.styleFrom(
           shape: widget.shape,
           padding: widget.padding,
-          primary: widget.primary,
-          onSurface: widget.onSurface,
-          onPrimary: widget.onPrimary,
+          backgroundColor: widget.backgroundColor,
+          disabledForegroundColor: widget.disableColor,
+          foregroundColor: widget.foregroundColor,
           side: widget.borderSide,
           elevation: widget.elevation,
         ),

@@ -22,7 +22,7 @@ class SkadiPlatformChecker extends StatelessWidget {
   }
 
   Widget buildPlatformChecker() {
-    if (UniversalPlatform.isIOS && iosWidget != null) {
+    if ((UniversalPlatform.isIOS || UniversalPlatform.isMacOS) && iosWidget != null) {
       return iosWidget ?? emptySizedBox;
     } else if (UniversalPlatform.isWeb && webWidget != null) {
       return webWidget ?? emptySizedBox;
