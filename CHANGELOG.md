@@ -2,8 +2,10 @@
 
 - Add `catchNothing`
 - Add `loadingNotifier` and `onSurface` to `SkadiAsyncButton`
+- Add `positiveTextStyle` to `SkadiConfirmationDialog`
 - **breaking change**
-    - `SkadiLoadingButton` to follow ElevatedButton parameter name
+    - `SkadiLoadingButton` to follow new ElevatedButton parameter name
+    - `SkadiAsyncButton` to follow new ElevatedButton parameter name
     - `SkadiConfirmationDialog` parameter behavior change:
       - `onConfirm` and `onCancel` no longer pop dialog by default
 

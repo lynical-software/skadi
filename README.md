@@ -1,6 +1,6 @@
 # skadi
 
-[![pub package](https://img.shields.io/badge/pub-0.3.0-blueviolet.svg)](https://pub.dev/packages/skadi) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/skadi)
+[![pub package](https://img.shields.io/badge/pub-1.0.0-blueviolet.svg)](https://pub.dev/packages/skadi) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/skadi)
 
 Flutter utilities packages for custom widgets and utilities function
 
@@ -10,7 +10,7 @@ Add this to pubspec.yaml
 
 ```dart
 dependencies:
-  skadi: ^0.3.0
+  skadi: ^1.0.0
 ```
 
 # Widgets
@@ -288,7 +288,7 @@ This input border solve a problem that TextField doesn't have a default elevatio
 
 More efficient way to use Navigator with less boilerplate. Use the same method name as Navigator class
 
-`routeName`: `name` argument for `RouteSetting`. You can still provide `RouteSetting` and this paramter will be ignore.
+`routeName`: `name` argument for `RouteSetting`. You can still provide `RouteSetting` and this parameter will be ignore.
 
 ```dart
   SkadiNavigator.push(context, HomePage(), routeName: "home");
