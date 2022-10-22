@@ -23,7 +23,8 @@ extension SkadiValueListenableExtension<T> on ValueListenable<T> {
   }
 
   ///ValueListenable listener widget that support [child]
-  Widget listenChild({required Widget Function(T, Widget?) builder, Widget? child}) {
+  Widget listenChild(
+      {required Widget Function(T, Widget?) builder, Widget? child}) {
     return AnimatedBuilder(
       animation: this,
       child: child,

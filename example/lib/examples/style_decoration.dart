@@ -7,12 +7,14 @@ class StyleAndDecorationExample extends StatefulWidget {
   const StyleAndDecorationExample({Key? key}) : super(key: key);
 
   @override
-  State<StyleAndDecorationExample> createState() => _StyleAndDecorationExampleState();
+  State<StyleAndDecorationExample> createState() =>
+      _StyleAndDecorationExampleState();
 }
 
 class _StyleAndDecorationExampleState extends State<StyleAndDecorationExample>
     with SingleTickerProviderStateMixin, DeferDispose {
-  late TabController tabController = createDefer(() => TabController(length: 3, vsync: this));
+  late TabController tabController =
+      createDefer(() => TabController(length: 3, vsync: this));
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,8 @@ class _StyleAndDecorationExampleState extends State<StyleAndDecorationExample>
             TextField(
               decoration: InputDecoration(
                 hintText: "Username",
-                errorText: "use this instead of other method to show error text correctly",
+                errorText:
+                    "use this instead of other method to show error text correctly",
                 errorStyle: TextStyle(fontSize: 10),
                 border: ShadowInputBorder(
                   elevation: 2.0,
@@ -87,7 +90,8 @@ class _StyleAndDecorationExampleState extends State<StyleAndDecorationExample>
             Container(
               width: 100,
               height: 100,
-              color: SkadiColor.toMaterial(const Color.fromARGB(255, 176, 251, 2)),
+              color:
+                  SkadiColor.toMaterial(const Color.fromARGB(255, 176, 251, 2)),
             ),
           ],
         ),

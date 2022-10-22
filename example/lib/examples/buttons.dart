@@ -13,7 +13,8 @@ class ButtonsExample extends StatefulWidget {
 
 class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
   var d = Debouncer();
-  late ValueNotifier<bool> loadingNotifier = createDefer(() => ValueNotifier(false));
+  late ValueNotifier<bool> loadingNotifier =
+      createDefer(() => ValueNotifier(false));
 
   Future loading() async {
     loadingNotifier.value = true;

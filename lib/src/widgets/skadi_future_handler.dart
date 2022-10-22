@@ -80,7 +80,8 @@ class _SkadiFutureHandlerState<T> extends State<SkadiFutureHandler<T>> {
           if (widget.loading != null) {
             return widget.loading!;
           }
-          return skadiProvider?.loadingWidget ?? const Center(child: CircularProgressIndicator());
+          return skadiProvider?.loadingWidget ??
+              const Center(child: CircularProgressIndicator());
         }
       },
     );

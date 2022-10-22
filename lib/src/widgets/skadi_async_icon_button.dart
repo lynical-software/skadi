@@ -81,8 +81,9 @@ class _SkadiAsyncIconButtonState extends State<SkadiAsyncIconButton> {
       side: widget.borderSide ?? BorderSide.none,
     );
 
-    final Widget loadingWidget =
-        widget.loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget ?? const CircularProgressIndicator();
+    final Widget loadingWidget = widget.loadingWidget ??
+        SkadiProvider.of(context)?.buttonLoadingWidget ??
+        const CircularProgressIndicator();
 
     final Widget buttonContent = Stack(
       children: [

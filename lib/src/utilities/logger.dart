@@ -31,5 +31,6 @@ void infoLog([dynamic log, dynamic additional = "", bool? logInReleaseMode]) {
 
 void errorLog([dynamic log, dynamic additional = ""]) {
   var setting = SkadiProvider.loggerSetting;
-  if (kDebugMode || setting.error) debugPrint("Skadi Error Log: $log $additional");
+  if (kDebugMode || setting.error)
+    debugPrint("Skadi Error Log: $log $additional");
 }
