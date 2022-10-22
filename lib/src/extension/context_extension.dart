@@ -18,7 +18,8 @@ extension SkadiContextX on BuildContext {
 
   void hideKeyboard() => FocusScope.of(this).unfocus();
 
-  ///SkadiNavigator
+  //SkadiNavigator
+
   Future<T?> push<T>(Widget page) {
     return SkadiNavigator.push<T>(this, page);
   }

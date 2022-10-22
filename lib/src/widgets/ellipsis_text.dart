@@ -3,13 +3,28 @@ import 'package:flutter/material.dart';
 import '../provider/skadi_provider.dart';
 
 class EllipsisText extends StatelessWidget {
+  ///
   final dynamic text;
+
+  ///
   final TextStyle style;
+
+  ///
   final int maxLines;
+
+  ///
   final StrutStyle? strutStyle;
+
+  ///
   final TextDirection? textDirection;
+
+  ///
   final TextAlign? textAlign;
+
+  ///
   final Locale? locale;
+
+  ///
   final bool? softWrap;
 
   ///A text shown when text is null

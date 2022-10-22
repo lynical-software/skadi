@@ -6,6 +6,8 @@ extension SkadiTextStyleExtension on TextStyle {
   // FontWeight
   TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
 
+  TextStyle get boldBlack => copyWith(fontWeight: FontWeight.w900);
+
   TextStyle get semibold => copyWith(fontWeight: FontWeight.w600);
 
   TextStyle get medium => copyWith(fontWeight: FontWeight.w500);
@@ -23,6 +25,8 @@ extension SkadiTextStyleExtension on TextStyle {
 
   TextStyle get grey => copyWith(color: Colors.grey);
 
+  TextStyle get blue => copyWith(color: Colors.blue);
+
   // Decoration
   TextStyle get underline => copyWith(decoration: TextDecoration.underline);
 
@@ -34,8 +38,7 @@ extension SkadiTextStyleExtension on TextStyle {
     return copyWith(fontSize: size);
   }
 
-  TextStyle get responsiveFontSize =>
-      copyWith(fontSize: _responsiveFontSize(fontSize ?? 14));
+  TextStyle get responsiveFontSize => copyWith(fontSize: _responsiveFontSize(fontSize ?? 14));
 }
 
 double _responsiveFontSize(double size) {
