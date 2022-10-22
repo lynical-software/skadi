@@ -62,9 +62,15 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
           isRow: false,
           children: [
             SkadiAsyncButton(
-              fullWidth: true,
+              fullWidth: false,
               onPressed: loading,
               child: const Text("SkadiAsyncButton"),
+            ),
+            SkadiAsyncButton(
+              fullWidth: false,
+              startIcon: const Icon(Icons.edit),
+              onPressed: otherloading,
+              child: const Text("With icon"),
             ),
             SkadiAsyncButton(
               fullWidth: true,
@@ -81,6 +87,7 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
             ),
             SkadiLoadingButton(
               fullWidth: false,
+              icon: const Icon(Icons.edit),
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
               loadingNotifier: loadingNotifier,

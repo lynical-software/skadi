@@ -18,7 +18,9 @@ class _UtilitiesMethodUsageState extends State<UtilitiesMethodUsage> {
       children: [
         Image.network(
           SkadiUtils.unsplashImage(category: "dogs"),
+          height: 200,
         ),
+        const Divider(),
         Section(
           title: "Logger",
           isRow: false,

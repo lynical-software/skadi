@@ -18,18 +18,18 @@ class SkadiLogSetting {
 void httpLog([dynamic log, dynamic additional = "", bool? logInReleaseMode]) {
   var setting = SkadiProvider.loggerSetting;
   if (kDebugMode || (logInReleaseMode ?? setting.http)) {
-    debugPrint("Http Log: $log $additional");
+    debugPrint("Skadi Http Log: $log $additional");
   }
 }
 
 void infoLog([dynamic log, dynamic additional = "", bool? logInReleaseMode]) {
   var setting = SkadiProvider.loggerSetting;
-  if (kDebugMode || (logInReleaseMode ?? setting.http)) {
-    debugPrint("Info Log: $log $additional");
+  if (kDebugMode || (logInReleaseMode ?? setting.info)) {
+    debugPrint("Skadi Info Log: $log $additional");
   }
 }
 
 void errorLog([dynamic log, dynamic additional = ""]) {
   var setting = SkadiProvider.loggerSetting;
-  if (kDebugMode || setting.error) debugPrint("Error Log: $log $additional");
+  if (kDebugMode || setting.error) debugPrint("Skadi Error Log: $log $additional");
 }

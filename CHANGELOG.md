@@ -8,7 +8,10 @@
     - `SkadiAsyncButton` to follow new ElevatedButton parameter name
     - `SkadiConfirmationDialog` parameter behavior change:
       - `onConfirm` and `onCancel` no longer pop dialog by default
-
+- Fix SkadiAsyncButton width
+- add `listenChild` to ValueListenable extension
+- fix logger bug
+- 
 ## [0.2.0] - 28 September 2022
 
 - Improve README

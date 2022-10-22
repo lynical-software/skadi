@@ -102,6 +102,20 @@ class SkadiAsyncButton extends StatefulWidget {
 class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
   bool _isLoading = false;
 
+  final GlobalKey _globalKey = GlobalKey();
+  double? width;
+
+  void maintainWidthOnLoading() {
+    if (widget.fullWidth == false && width == null) {
+      WidgetsBinding.instance.addPostFrameCallback((d) {
+        if (_globalKey.currentContext != null) {
+          RenderBox box = _globalKey.currentContext!.findRenderObject() as RenderBox;
+          width = box.size.width;
+        }
+      });
+    }
+  }
+
   void onButtonPressed() async {
     if (_isLoading) return;
     try {
@@ -150,14 +164,11 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
 
   @override
   Widget build(BuildContext context) {
-    ///Check if this button has an icon. use to stretch the button if there is an icon
-    final bool hasIcon = widget.startIcon != null || widget.endIcon != null;
-
-    ///
     final Widget buttonContent = Row(
+      key: _globalKey,
       mainAxisAlignment: widget.alignment ?? MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: hasIcon ? MainAxisSize.max : MainAxisSize.min,
+      mainAxisSize: widget.fullWidth ? MainAxisSize.max : MainAxisSize.min,
       children: [
         if (widget.startIcon != null) ...[
           widget.startIcon!,
@@ -170,6 +181,7 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
         ],
       ],
     );
+    maintainWidthOnLoading();
 
     final Widget loadingWidget =
         widget.loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget ?? _buildLoadingWidget();
@@ -206,10 +218,15 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
 
   Widget _buildLoadingWidget() {
     return SizedBox(
-      width: widget.startIcon != null ? 24 : 20,
-      height: widget.startIcon != null ? 24 : 20,
-      child: CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(widget.loadingColor),
+      width: width,
+      child: Center(
+        child: SizedBox(
+          width: widget.startIcon != null ? 24 : 20,
+          height: widget.startIcon != null ? 24 : 20,
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(widget.loadingColor),
+          ),
+        ),
       ),
     );
   }

@@ -11,7 +11,7 @@ class SkadiRouteException implements Exception {
 }
 
 class SkadiNavigator {
-  ///Less boilerplate MaterialPageRoute Navigatoe
+  ///Less boilerplate MaterialPageRoute Navigate
   SkadiNavigator._();
 
   ///short handed push navigator
@@ -126,7 +126,7 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
     if (route != null) {
       String? routeName = route.settings.name;
       if (routeName != null) {
-        ///Reverse history to remove last occurence
+        ///Reverse history to remove last occurrence
         var reverseList = _history.reversed.toList();
         reverseList.remove(routeName);
         _history.clear();

@@ -41,7 +41,7 @@ class SkadiAsyncIconButton extends StatefulWidget {
     Key? key,
     required this.onTap,
     required this.icon,
-    this.margin = const EdgeInsets.all(0),
+    this.margin = EdgeInsets.zero,
     this.padding = const EdgeInsets.all(8),
     this.borderRadius = 8,
     this.backgroundColor = Colors.transparent,
