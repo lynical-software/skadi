@@ -70,7 +70,7 @@ extension SkadiWidgetExtension on Widget {
     );
   }
 
-  ///Rotate a widget in Degreee
+  ///Rotate a widget in Degree
   Widget rotate([double degree = 0]) {
     return Transform.rotate(
       angle: SkadiUtils.degreeToRadian(degree),

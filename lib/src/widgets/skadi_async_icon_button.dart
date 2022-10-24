@@ -18,7 +18,7 @@ class SkadiAsyncIconButton extends StatefulWidget {
   final EdgeInsets padding;
 
   ///
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   ///Button's borderRadius, You can check [borderRadius] documentation on Flutter
   final double borderRadius;
@@ -44,7 +44,7 @@ class SkadiAsyncIconButton extends StatefulWidget {
     this.margin = EdgeInsets.zero,
     this.padding = const EdgeInsets.all(8),
     this.borderRadius = 8,
-    this.backgroundColor = Colors.transparent,
+    this.backgroundColor,
     this.elevation = 0.0,
     this.borderSide,
     this.badge,
@@ -58,32 +58,45 @@ class SkadiAsyncIconButton extends StatefulWidget {
 class _SkadiAsyncIconButtonState extends State<SkadiAsyncIconButton> {
   bool _isLoading = false;
 
+  final GlobalKey _globalKey = GlobalKey();
+  double? width;
+
+  void maintainWidthOnLoading() {
+    WidgetsBinding.instance.addPostFrameCallback((d) {
+      if (_globalKey.currentContext != null) {
+        RenderBox box =
+            _globalKey.currentContext!.findRenderObject() as RenderBox;
+        width = box.size.width;
+      }
+    });
+  }
+
   void onButtonPressed() async {
     if (_isLoading) return;
     try {
-      toggleLoading();
+      _toggleLoading(true);
       await widget.onTap?.call();
     } catch (exception) {
       rethrow;
     } finally {
-      toggleLoading();
+      _toggleLoading(false);
     }
   }
 
-  void toggleLoading() {
-    if (mounted) setState(() => _isLoading = !_isLoading);
+  void _toggleLoading(bool value) {
+    if (mounted) setState(() => _isLoading = value);
   }
 
   @override
   Widget build(BuildContext context) {
+    maintainWidthOnLoading();
     final shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(widget.borderRadius),
       side: widget.borderSide ?? BorderSide.none,
     );
 
-    final Widget loadingWidget = widget.loadingWidget ??
-        SkadiProvider.of(context)?.buttonLoadingWidget ??
-        const CircularProgressIndicator();
+    final Widget? providedLoadingWidget =
+        widget.loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget;
 
     final Widget buttonContent = Stack(
       children: [
@@ -102,26 +115,31 @@ class _SkadiAsyncIconButtonState extends State<SkadiAsyncIconButton> {
 
     const double defaultIconSize = 24;
 
-    return Card(
-      shape: shape,
-      color: widget.backgroundColor,
-      elevation: widget.elevation,
-      margin: widget.margin,
-      child: InkWell(
-        onTap: onButtonPressed,
-        mouseCursor: SystemMouseCursors.click,
-        customBorder: shape,
-        child: ConditionalWidget(
-          condition: _isLoading,
-          onTrue: () => Padding(
-            padding: widget.padding,
-            child: SizedBox(
-              width: defaultIconSize,
-              height: defaultIconSize,
-              child: loadingWidget,
+    return SizedBox(
+      width: width,
+      child: Card(
+        key: _globalKey,
+        shape: shape,
+        color: widget.backgroundColor ?? Colors.transparent,
+        elevation: widget.elevation,
+        margin: widget.margin,
+        child: InkWell(
+          onTap: onButtonPressed,
+          mouseCursor: SystemMouseCursors.click,
+          customBorder: shape,
+          child: ConditionalWidget(
+            condition: _isLoading,
+            onTrue: () => Padding(
+              padding: widget.padding,
+              child: providedLoadingWidget ??
+                  const SizedBox(
+                    width: defaultIconSize,
+                    height: defaultIconSize,
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
             ),
+            onFalse: () => buttonContent,
           ),
-          onFalse: () => buttonContent,
         ),
       ),
     );

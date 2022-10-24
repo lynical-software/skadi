@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:skadi/src/provider/skadi_provider.dart';
+import 'package:skadi/skadi.dart';
 
 import '../utilities/types.dart';
-import 'conditional_widget.dart';
-import 'spacing.dart';
 
 enum LoadingType { progress, disable }
 
@@ -96,7 +94,7 @@ class SkadiAsyncButton extends StatefulWidget {
     this.disableColor,
   }) : super(key: key);
   @override
-  _SkadiAsyncButtonState createState() => _SkadiAsyncButtonState();
+  State<SkadiAsyncButton> createState() => _SkadiAsyncButtonState();
 }
 
 class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
@@ -106,7 +104,7 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
   double? width;
 
   void maintainWidthOnLoading() {
-    if (widget.fullWidth == false && width == null) {
+    if (widget.fullWidth == false) {
       WidgetsBinding.instance.addPostFrameCallback((d) {
         if (_globalKey.currentContext != null) {
           RenderBox box =
@@ -165,11 +163,12 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
 
   @override
   Widget build(BuildContext context) {
+    maintainWidthOnLoading();
     final Widget buttonContent = Row(
       key: _globalKey,
       mainAxisAlignment: widget.alignment ?? MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: widget.fullWidth ? MainAxisSize.max : MainAxisSize.min,
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (widget.startIcon != null) ...[
           widget.startIcon!,
@@ -182,7 +181,6 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
         ],
       ],
     );
-    maintainWidthOnLoading();
 
     final Widget loadingWidget = widget.loadingWidget ??
         SkadiProvider.of(context)?.buttonLoadingWidget ??

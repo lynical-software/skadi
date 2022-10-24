@@ -110,14 +110,15 @@ class _MyOtherStatelessWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueNotifierWrapper<bool>(
       initialValue: false,
-      builder: (valueNotifier, value, child) => SkadiLoadingButton(
-        loadingNotifier: valueNotifier,
+      builder: (valueNotifier, value, child) => ElevatedButton(
         onPressed: () async {
           valueNotifier.value = true;
           await SkadiUtils.wait();
           valueNotifier.value = false;
         },
-        child: const Text("Click me"),
+        child: value
+            ? const CircularProgressIndicator.adaptive()
+            : const Text("Click me"),
       ),
     );
   }
@@ -136,14 +137,19 @@ class _MyStatelessWidget extends StatelessWidget {
         ///Dispose ChangeNotifier in StatelessWidget
         valueNotifier.dispose();
       },
-      child: SkadiLoadingButton(
-        loadingNotifier: valueNotifier,
-        onPressed: () async {
-          valueNotifier.value = true;
-          await SkadiUtils.wait();
-          valueNotifier.value = false;
+      child: valueNotifier.builder(
+        builder: (context, child) {
+          return ElevatedButton(
+            onPressed: () async {
+              valueNotifier.value = true;
+              await SkadiUtils.wait();
+              valueNotifier.value = false;
+            },
+            child: valueNotifier.value
+                ? const CircularProgressIndicator.adaptive()
+                : const Text("Click me"),
+          );
         },
-        child: const Text("Click me"),
       ),
     );
   }

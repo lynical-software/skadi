@@ -81,7 +81,7 @@ class SkadiPaginatedListView extends StatefulWidget {
     this.errorWidget,
   }) : super(key: key);
   @override
-  _SkadiPaginatedListViewState createState() => _SkadiPaginatedListViewState();
+  State<SkadiPaginatedListView> createState() => _SkadiPaginatedListViewState();
 }
 
 class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {

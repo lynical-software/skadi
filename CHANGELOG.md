@@ -1,4 +1,10 @@
-## [1.0.0] - 19 October 2022
+## [2.0.0] - 24 October 2022
+
+- **breaking change**
+    - Remove `SkadiLoadingButton` because `SkadiAsyncButton` can now work the same way
+- allow nullable parameter on some widgets (non breaking)
+
+## [1.0.0] - 23 October 2022
 
 - Add `catchNothing`
 - Add `loadingNotifier` and `onSurface` to `SkadiAsyncButton`

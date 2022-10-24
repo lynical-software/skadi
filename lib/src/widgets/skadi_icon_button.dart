@@ -14,7 +14,7 @@ class SkadiIconButton extends StatelessWidget {
   final EdgeInsets padding;
 
   ///
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   ///
   final double borderRadius;
@@ -36,7 +36,7 @@ class SkadiIconButton extends StatelessWidget {
     this.margin = EdgeInsets.zero,
     this.padding = const EdgeInsets.all(8),
     this.borderRadius = 8,
-    this.backgroundColor = Colors.transparent,
+    this.backgroundColor,
     this.elevation = 0.0,
     this.borderSide,
     this.badge,
@@ -50,7 +50,7 @@ class SkadiIconButton extends StatelessWidget {
     this.margin = const EdgeInsets.all(8),
     this.padding = const EdgeInsets.all(8),
     this.borderRadius = 32,
-    this.backgroundColor = Colors.transparent,
+    this.backgroundColor,
     this.elevation = 0.0,
     this.borderSide,
     this.badge,
@@ -64,7 +64,7 @@ class SkadiIconButton extends StatelessWidget {
 
     return Card(
       shape: shape,
-      color: backgroundColor,
+      color: backgroundColor ?? Colors.transparent,
       elevation: elevation,
       margin: margin,
       child: InkWell(

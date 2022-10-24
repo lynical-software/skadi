@@ -38,7 +38,6 @@ export 'src/widgets/skadi_badge.dart';
 export 'src/widgets/skadi_confirmation_dialog.dart';
 export 'src/widgets/skadi_future_handler.dart';
 export 'src/widgets/skadi_icon_button.dart';
-export 'src/widgets/skadi_loading_button.dart';
 export 'src/widgets/skadi_paginated_grid_view.dart';
 export 'src/widgets/skadi_paginated_list_view.dart';
 export 'src/widgets/skadi_platform_checker.dart';

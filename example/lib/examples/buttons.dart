@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 import 'package:skadi_example/widgets/section.dart';
@@ -15,6 +16,7 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
   var d = Debouncer();
   late ValueNotifier<bool> loadingNotifier =
       createDefer(() => ValueNotifier(false));
+  String asyncButton = "SkadiAsyncButton";
 
   Future loading() async {
     loadingNotifier.value = true;
@@ -35,7 +37,49 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Buttons Example',
+      actions: [
+        IconButton(
+          onPressed: () {
+            setState(() {
+              asyncButton = "Longer SkadiAsyncButton";
+            });
+          },
+          icon: const Icon(Icons.add),
+        ),
+      ],
       children: [
+        Section(
+          title: "SkadiAsyncIconButton",
+          subtitle: "customizable icon button with loading",
+          isRow: true,
+          children: [
+            SkadiAsyncIconButton(
+              onTap: otherloading,
+              icon: const Icon(Icons.notifications_active_outlined),
+            ),
+            SkadiAsyncIconButton(
+              onTap: otherloading,
+              backgroundColor: Colors.red[50],
+              icon: const Icon(Icons.add, size: 32),
+              loadingWidget: const SizedBox(
+                width: 32,
+                height: 32,
+                child: CircularProgressIndicator(),
+              ),
+            ),
+            SkadiAsyncIconButton(
+              onTap: otherloading,
+              icon: const Text("Sign In"),
+              padding: const EdgeInsets.all(12),
+              borderSide: const BorderSide(color: Colors.red),
+            ),
+            SkadiAsyncIconButton(
+              onTap: otherloading,
+              icon: const Icon(Icons.notifications_active_outlined),
+              borderSide: const BorderSide(color: Colors.purple),
+            ),
+          ],
+        ),
         Section(
           title: "SkadiIconButton",
           subtitle: "customizable icon button",
@@ -55,6 +99,12 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
               elevation: 2.0,
             ),
             SkadiIconButton(onTap: () {}, icon: const Text("Test")),
+            SkadiIconButton(
+              backgroundColor: Colors.blue[50],
+              onTap: () {},
+              icon: const Icon(CupertinoIcons.add),
+              padding: EdgeInsets.zero,
+            ),
           ],
         ),
         Section(
@@ -65,7 +115,7 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
             SkadiAsyncButton(
               fullWidth: false,
               onPressed: loading,
-              child: const Text("SkadiAsyncButton"),
+              child: Text(asyncButton),
             ),
             SkadiAsyncButton(
               fullWidth: false,
@@ -80,20 +130,6 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
               loadingNotifier: loadingNotifier,
               disableColor: Colors.grey,
               child: const Text("Disable style and LoadingNotifier"),
-            ),
-            SkadiAsyncIconButton(
-              onTap: otherloading,
-              icon: const Icon(Icons.add, color: Colors.blue),
-              borderSide: const BorderSide(color: Colors.blue),
-            ),
-            SkadiLoadingButton(
-              fullWidth: false,
-              icon: const Icon(Icons.edit),
-              backgroundColor: Colors.red,
-              foregroundColor: Colors.white,
-              loadingNotifier: loadingNotifier,
-              onPressed: loading,
-              child: const Text("SkadiLoadingButton"),
             ),
           ],
         ),

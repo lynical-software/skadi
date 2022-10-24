@@ -54,13 +54,14 @@ class _DialogsExampleState extends State<DialogsExample> {
                       confirmText: "Delete",
                       content: const Text("You want to delete?"),
                       onConfirm: () async {
+                        var nav = Navigator.of(context);
                         LoadingOverlayProvider.toggle();
                         infoLog("you confirm");
                         await SkadiUtils.wait(1000);
                         bool success = Random().nextBool();
                         LoadingOverlayProvider.toggle();
                         if (success) {
-                          Navigator.pop(context);
+                          nav.pop();
                         }
                       },
                       onCancel: () {

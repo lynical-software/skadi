@@ -73,7 +73,7 @@ class SkadiAccordion extends StatefulWidget {
     this.animatedOnStart = false,
   }) : super(key: key);
   @override
-  _SkadiAccordionState createState() => _SkadiAccordionState();
+  State<SkadiAccordion> createState() => _SkadiAccordionState();
 }
 
 class _SkadiAccordionState extends State<SkadiAccordion>

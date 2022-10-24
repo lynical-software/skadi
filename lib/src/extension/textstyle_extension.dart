@@ -30,6 +30,8 @@ extension SkadiTextStyleExtension on TextStyle {
   // Decoration
   TextStyle get underline => copyWith(decoration: TextDecoration.underline);
 
+  TextStyle get lineThrough => copyWith(decoration: TextDecoration.lineThrough);
+
   TextStyle setColor(Color color) {
     return copyWith(color: color);
   }

@@ -43,7 +43,7 @@ class SkadiFutureHandler<T> extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SkadiFutureHandlerState<T> createState() => _SkadiFutureHandlerState<T>();
+  State<SkadiFutureHandler<T>> createState() => _SkadiFutureHandlerState<T>();
 }
 
 class _SkadiFutureHandlerState<T> extends State<SkadiFutureHandler<T>> {

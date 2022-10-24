@@ -33,7 +33,7 @@ class SkadiStreamHandler<T> extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SkadiStreamHandlerState<T> createState() => _SkadiStreamHandlerState<T>();
+  State<SkadiStreamHandler<T>> createState() => _SkadiStreamHandlerState<T>();
 }
 
 class _SkadiStreamHandlerState<T> extends State<SkadiStreamHandler<T>> {

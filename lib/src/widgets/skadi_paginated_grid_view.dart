@@ -67,7 +67,7 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
     this.errorWidget,
   }) : super(key: key);
   @override
-  _SkadiPaginatedGridBuilderState createState() =>
+  State<SkadiPaginatedGridBuilder> createState() =>
       _SkadiPaginatedGridBuilderState();
 }
 

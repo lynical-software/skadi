@@ -67,7 +67,7 @@ class _MixinExampleState extends State<MixinExample>
                 );
               },
             ),
-            SkadiLoadingButton(
+            SkadiAsyncButton(
               loadingNotifier: notifier,
               shape: SkadiDecoration.roundRect(),
               onPressed: () {
