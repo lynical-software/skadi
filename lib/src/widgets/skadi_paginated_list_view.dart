@@ -21,10 +21,6 @@ class SkadiPaginatedListView extends StatefulWidget {
   final IndexedWidgetBuilder itemBuilder;
 
   ///[SkadiPaginatedListView] use ListView.separated, so you can provide divider widget
-  ///This can be use to replace separatorBuilder
-  final Widget? separator;
-
-  ///[SkadiPaginatedListView] use ListView.separated, so you can provide divider widget
   final IndexedWidgetBuilder? separatorBuilder;
 
   ///Normal List view padding
@@ -58,7 +54,7 @@ class SkadiPaginatedListView extends StatefulWidget {
   final bool hasError;
 
   ///A widget that show at the bottom of ListView when there is an error
-  final Widget? errorWidget;
+  final Widget Function()? errorWidget;
 
   const SkadiPaginatedListView({
     Key? key,
@@ -74,7 +70,6 @@ class SkadiPaginatedListView extends StatefulWidget {
     this.attachProvidedScrollControllerToListView = false,
     this.hasError = false,
     this.reverse = false,
-    this.separator,
     this.separatorBuilder,
     this.onEmpty,
     this.scrollController,
@@ -115,8 +110,7 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
       scrollController = ScrollController();
       scrollController!.addListener(() => scrollListener(scrollController!));
     } else {
-      widget.scrollController
-          ?.addListener(() => scrollListener(widget.scrollController!));
+      widget.scrollController?.addListener(() => scrollListener(widget.scrollController!));
     }
   }
 
@@ -146,8 +140,7 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
     }
     return ListView.separated(
       key: widget.key,
-      separatorBuilder: widget.separatorBuilder ??
-          (context, index) => widget.separator ?? emptySizedBox,
+      separatorBuilder: widget.separatorBuilder ?? (context, index) => emptySizedBox,
       itemCount: widget.itemCount + 1,
       controller: _isPrimaryScrollView
           ? scrollController
@@ -170,7 +163,7 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
 
   Widget _buildBottomLoadingWidget() {
     if (widget.hasError) {
-      return widget.errorWidget ??
+      return widget.errorWidget?.call() ??
           IconButton(
             onPressed: () => widget.dataLoader(),
             icon: const Icon(Icons.refresh),

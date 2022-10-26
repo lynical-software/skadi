@@ -2,6 +2,7 @@
 
 - **breaking change**
     - Remove `SkadiLoadingButton` because `SkadiAsyncButton` can now work the same way
+    - Remove `separator` from PaginatedList, user `separatorBuilder` instead
 - allow nullable parameter on some widgets (non breaking)
 
 ## [1.0.0] - 23 October 2022
@@ -17,7 +18,6 @@
 - Fix SkadiAsyncButton width
 - add `listenChild` to ValueListenable extension
 - fix logger bug
-- 
 ## [0.2.0] - 28 September 2022
 
 - Improve README

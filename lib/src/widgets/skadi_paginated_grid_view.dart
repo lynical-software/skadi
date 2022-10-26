@@ -46,7 +46,7 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
   final bool hasError;
 
   ///A widget that show at the bottom of ListView when there is an error
-  final Widget? errorWidget;
+  final Widget Function()? errorWidget;
 
   final Widget Function(BuildContext context, int index) itemBuilder;
   const SkadiPaginatedGridBuilder({
@@ -67,8 +67,7 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
     this.errorWidget,
   }) : super(key: key);
   @override
-  State<SkadiPaginatedGridBuilder> createState() =>
-      _SkadiPaginatedGridBuilderState();
+  State<SkadiPaginatedGridBuilder> createState() => _SkadiPaginatedGridBuilderState();
 }
 
 class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
@@ -99,8 +98,7 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
       scrollController = ScrollController();
       scrollController!.addListener(() => scrollListener(scrollController!));
     } else {
-      widget.scrollController
-          ?.addListener(() => scrollListener(widget.scrollController!));
+      widget.scrollController?.addListener(() => scrollListener(widget.scrollController!));
     }
   }
 
@@ -153,7 +151,7 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
 
   Widget _buildBottomLoadingWidget() {
     if (widget.hasError) {
-      return widget.errorWidget ??
+      return widget.errorWidget?.call() ??
           IconButton(
             onPressed: () => widget.dataLoader(),
             icon: const Icon(Icons.refresh),
