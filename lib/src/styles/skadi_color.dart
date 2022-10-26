@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class SkadiColor {
@@ -23,6 +25,16 @@ class SkadiColor {
   ///Get Color from RGB with optional opacity
   static Color fromRGB(int r, int g, int b, [double opacity = 1]) {
     return Color.fromRGBO(r, g, b, opacity);
+  }
+
+  ///Generate random color
+  static Color get random {
+    return Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+  }
+
+  ///Generate random color from Material Primary colors
+  static Color get randomFromPrimaries {
+    return Colors.primaries[math.Random().nextInt(Colors.primaries.length)];
   }
 
   ///Convert your color to MaterialColor
