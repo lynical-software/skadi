@@ -4,6 +4,7 @@
     - Remove `SkadiLoadingButton` because `SkadiAsyncButton` can now work the same way
     - Remove `separator` from PaginatedList, user `separatorBuilder` instead
 - allow nullable parameter on some widgets (non breaking)
+- fix `validateField` validator
 
 ## [1.0.0] - 23 October 2022
 
