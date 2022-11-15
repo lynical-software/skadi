@@ -91,3 +91,37 @@ extension SkadiWidgetExtension on Widget {
 
   Widget get ovalClip => ClipOval(child: this);
 }
+
+extension SkadiWidgetListExtension on List<Widget> {
+  ///Wrap list of widget in a Row and Expanded each widget
+  Widget wrapRowExpended() {
+    return Row(
+      children: [
+        for (var widget in this) Expanded(child: widget),
+      ],
+    );
+  }
+
+  ///Wrap list of widget in a Row
+  Widget wrapRow() {
+    return Row(
+      children: this,
+    );
+  }
+
+  ///Wrap list of widget in a Column and Expanded each widget
+  Widget wrapColumnExpended() {
+    return Column(
+      children: [
+        for (var widget in this) Expanded(child: widget),
+      ],
+    );
+  }
+
+  ///Wrap list of widget in a Column
+  Widget wrapColumn() {
+    return Column(
+      children: this,
+    );
+  }
+}
