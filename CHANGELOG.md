@@ -1,10 +1,11 @@
-## [2.0.0] - 24 October 2022
+## [2.0.0] - 15 November 2022
 
 - **breaking change**
     - Remove `SkadiLoadingButton` because `SkadiAsyncButton` can now work the same way
     - Remove `separator` from PaginatedList, user `separatorBuilder` instead
 - allow nullable parameter on some widgets (non breaking)
 - fix `validateField` validator
+- add `wrapRow`, `warpRowExpanded`, `wrapColumn`, `wrapColumnExpanded` on Widget extension
 
 ## [1.0.0] - 23 October 2022
 

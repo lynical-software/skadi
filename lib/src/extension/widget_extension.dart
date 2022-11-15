@@ -94,8 +94,13 @@ extension SkadiWidgetExtension on Widget {
 
 extension SkadiWidgetListExtension on List<Widget> {
   ///Wrap list of widget in a Row and Expanded each widget
-  Widget wrapRowExpended() {
+  Widget wrapRowExpended({
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+  }) {
     return Row(
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
       children: [
         for (var widget in this) Expanded(child: widget),
       ],
@@ -103,15 +108,25 @@ extension SkadiWidgetListExtension on List<Widget> {
   }
 
   ///Wrap list of widget in a Row
-  Widget wrapRow() {
+  Widget wrapRow({
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+  }) {
     return Row(
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
       children: this,
     );
   }
 
   ///Wrap list of widget in a Column and Expanded each widget
-  Widget wrapColumnExpended() {
+  Widget wrapColumnExpended({
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+  }) {
     return Column(
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
       children: [
         for (var widget in this) Expanded(child: widget),
       ],
@@ -119,8 +134,13 @@ extension SkadiWidgetListExtension on List<Widget> {
   }
 
   ///Wrap list of widget in a Column
-  Widget wrapColumn() {
+  Widget wrapColumn({
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+  }) {
     return Column(
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
       children: this,
     );
   }

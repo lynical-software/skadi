@@ -29,7 +29,8 @@ class SkadiColor {
 
   ///Generate random color
   static Color get random {
-    return Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+    return Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+        .withOpacity(1.0);
   }
 
   ///Generate random color from Material Primary colors

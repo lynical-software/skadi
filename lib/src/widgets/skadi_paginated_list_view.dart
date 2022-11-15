@@ -110,7 +110,8 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
       scrollController = ScrollController();
       scrollController!.addListener(() => scrollListener(scrollController!));
     } else {
-      widget.scrollController?.addListener(() => scrollListener(widget.scrollController!));
+      widget.scrollController
+          ?.addListener(() => scrollListener(widget.scrollController!));
     }
   }
 
@@ -140,7 +141,8 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
     }
     return ListView.separated(
       key: widget.key,
-      separatorBuilder: widget.separatorBuilder ?? (context, index) => emptySizedBox,
+      separatorBuilder:
+          widget.separatorBuilder ?? (context, index) => emptySizedBox,
       itemCount: widget.itemCount + 1,
       controller: _isPrimaryScrollView
           ? scrollController

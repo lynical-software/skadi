@@ -56,7 +56,8 @@ void main() {
     error = SkadiFormValidator.validateField("value", field: "Email");
     expect(error, null);
 
-    error = SkadiFormValidator.validateField("value", field: "Email", length: 3);
+    error =
+        SkadiFormValidator.validateField("value", field: "Email", length: 3);
     expect(error, null);
 
     ///Number

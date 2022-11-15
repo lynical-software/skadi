@@ -108,7 +108,7 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
           ],
         ),
         Section(
-          title: "Buttons with Loading",
+          title: "SkadiAsyncButton",
           subtitle: "buttons that support async and loading",
           isRow: false,
           children: [
@@ -123,6 +123,22 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
               onPressed: otherloading,
               child: const Text("With icon"),
             ),
+            [
+              SkadiAsyncButton(
+                fullWidth: false,
+                width: 260,
+                onPressed: otherloading,
+                child: const Text("Custom width and height"),
+              ),
+              const SpaceX(),
+              SkadiAsyncButton(
+                fullWidth: false,
+                width: 260,
+                height: 46,
+                onPressed: otherloading,
+                child: const Text("Sign In"),
+              ),
+            ].wrapRow(),
             SkadiAsyncButton(
               fullWidth: true,
               onPressed: otherloading,

@@ -67,7 +67,8 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
     this.errorWidget,
   }) : super(key: key);
   @override
-  State<SkadiPaginatedGridBuilder> createState() => _SkadiPaginatedGridBuilderState();
+  State<SkadiPaginatedGridBuilder> createState() =>
+      _SkadiPaginatedGridBuilderState();
 }
 
 class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
@@ -98,7 +99,8 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
       scrollController = ScrollController();
       scrollController!.addListener(() => scrollListener(scrollController!));
     } else {
-      widget.scrollController?.addListener(() => scrollListener(widget.scrollController!));
+      widget.scrollController
+          ?.addListener(() => scrollListener(widget.scrollController!));
     }
   }
 
