@@ -7,7 +7,7 @@ class EllipsisText extends StatelessWidget {
   final dynamic text;
 
   ///
-  final TextStyle style;
+  final TextStyle? style;
 
   ///
   final int maxLines;
@@ -35,7 +35,7 @@ class EllipsisText extends StatelessWidget {
     this.text, {
     Key? key,
     this.maxLines = 1,
-    this.style = const TextStyle(),
+    this.style,
     this.textAlign,
     this.emptyText,
     this.strutStyle,
@@ -48,9 +48,10 @@ class EllipsisText extends StatelessWidget {
   Widget build(BuildContext context) {
     SkadiProvider? skadiProvider = SkadiProvider.of(context);
     String replacement = emptyText ?? skadiProvider?.ellipsisText ?? "";
+    final s = style ?? const TextStyle();
     return Text(
       text == null ? replacement : text.toString(),
-      style: style.copyWith(height: 1.2),
+      style: s.copyWith(height: 1.2),
       maxLines: maxLines,
       strutStyle: strutStyle,
       textDirection: textDirection,

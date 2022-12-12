@@ -1,3 +1,6 @@
+## [2.0.1] - 12 December 2022
+- 
+
 ## [2.0.0] - 15 November 2022
 
 - **breaking change**

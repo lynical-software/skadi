@@ -90,6 +90,8 @@ extension SkadiWidgetExtension on Widget {
   Widget get flexible => Flexible(child: this);
 
   Widget get ovalClip => ClipOval(child: this);
+
+  SliverToBoxAdapter get sliverToBox => SliverToBoxAdapter(child: this);
 }
 
 extension SkadiWidgetListExtension on List<Widget> {
