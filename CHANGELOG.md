@@ -1,5 +1,8 @@
+## [2.0.2] - 12 December 2022
+- add confirmPassword related method to SkadiFormMixin
+
 ## [2.0.1] - 12 December 2022
-- 
+- fix issue [#2](https://github.com/lynical-software/skadi/issues/2) and [#3](https://github.com/lynical-software/skadi/issues/3)
 
 ## [2.0.0] - 15 November 2022
 
