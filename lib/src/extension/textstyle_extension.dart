@@ -8,7 +8,7 @@ extension SkadiTextStyleExtension on TextStyle {
 
   TextStyle get boldBlack => copyWith(fontWeight: FontWeight.w900);
 
-  TextStyle get semibold => copyWith(fontWeight: FontWeight.w600);
+  TextStyle get semiBold => copyWith(fontWeight: FontWeight.w600);
 
   TextStyle get medium => copyWith(fontWeight: FontWeight.w500);
 

@@ -1,3 +1,8 @@
+## [2.0.3] - 13 December 2022
+- `isTheSameDay` extension on DateTime is now nullable
+- - **breaking change**
+    - update `semibold` to `semiBold` on Textstyle extension
+
 ## [2.0.2] - 12 December 2022
 - add confirmPassword related method to SkadiFormMixin
 

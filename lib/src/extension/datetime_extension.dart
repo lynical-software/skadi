@@ -11,7 +11,8 @@ extension DateTimeExtensionX on DateTime {
     return formatter.format(this);
   }
 
-  bool isTheSameDay(DateTime dateTime) {
+  bool isTheSameDay(DateTime? dateTime) {
+    if (dateTime == null) return false;
     if (dateTime.day == day &&
         dateTime.month == month &&
         dateTime.year == year) {
