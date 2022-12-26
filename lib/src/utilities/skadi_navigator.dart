@@ -142,11 +142,7 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   }
 
   static void showRoutes() {
-    infoLog(
-      "Skadi Observer routes history:",
-      _history,
-      true,
-    );
+    infoLog("Skadi Observer routes history:", _history);
   }
 
   static void popUntilRoute(BuildContext context, String route) {
@@ -167,7 +163,6 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
       infoLog(
         "Skadi Route Observer: DidRemove",
         "Route: ${route.settings.name}, Previous Route: ${previousRoute?.settings.name}",
-        true,
       );
     }
   }
@@ -183,7 +178,6 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
       infoLog(
         "Skadi Route Observer: DidPop",
         "Route: ${route.settings.name}, Previous Route: ${previousRoute?.settings.name}",
-        true,
       );
     }
   }
@@ -197,7 +191,6 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
       infoLog(
         "Skadi Route Observer: DidReplace",
         "New Route: ${newRoute?.settings.name}, Old Route: ${oldRoute?.settings.name}",
-        true,
       );
     }
   }
@@ -210,7 +203,6 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
       infoLog(
         "Skadi Route Observer: DidPush",
         "Route: ${route.settings.name}, Previous Route: ${previousRoute?.settings.name}",
-        true,
       );
     }
   }
