@@ -1,3 +1,6 @@
+## [2.0.5] - 26 December 2022
+- add TextStyle utils: `kTs`
+- add `debugLog`
 ## [2.0.4] - 13 December 2022
 - add `onDismiss` in KeyboardDismiss
 
