@@ -1,3 +1,6 @@
+## [2.0.6] - 5 January 2023
+- export `kTs`
+
 ## [2.0.5] - 26 December 2022
 - add TextStyle utils: `kTs`
 - add `debugLog`

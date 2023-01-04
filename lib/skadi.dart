@@ -15,6 +15,7 @@ export 'src/styles/shadow_input_border.dart';
 export 'src/styles/skadi_color.dart';
 export 'src/styles/skadi_decoration.dart';
 export 'src/styles/skadi_responsive.dart';
+export 'src/styles/skadi_textstyle.dart';
 export 'src/styles/small_underline_tab_indicator.dart';
 //utilities
 export 'src/utilities/debouncer.dart';
