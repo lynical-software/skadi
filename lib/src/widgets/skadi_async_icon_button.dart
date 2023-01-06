@@ -131,12 +131,14 @@ class _SkadiAsyncIconButtonState extends State<SkadiAsyncIconButton> {
             condition: _isLoading,
             onTrue: () => Padding(
               padding: widget.padding,
-              child: providedLoadingWidget ??
-                  const SizedBox(
-                    width: defaultIconSize,
-                    height: defaultIconSize,
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
+              child: Center(
+                child: providedLoadingWidget ??
+                    const SizedBox(
+                      width: defaultIconSize,
+                      height: defaultIconSize,
+                      child: CircularProgressIndicator.adaptive(),
+                    ),
+              ),
             ),
             onFalse: () => buttonContent,
           ),

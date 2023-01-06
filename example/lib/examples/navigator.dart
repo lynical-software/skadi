@@ -118,7 +118,7 @@ class _SecondPageState extends State<SecondPage> {
               onPressed: () {
                 context.push(const ThirdPage());
               },
-              child: const Text("Push To Third Pagee"),
+              child: const Text("Push To Third Page"),
             ),
           ],
         ),
@@ -160,7 +160,7 @@ class ThirdPage extends StatelessWidget {
                 "Pop to the page that you know the route name\nExample: SkadiNavigatorExample",
                 textAlign: TextAlign.center,
               ),
-            ),
+            ).expanded,
           ],
         ),
       ],

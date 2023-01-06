@@ -1,3 +1,6 @@
+## [2.0.8] - 6 January 2023
+- fix `SkadiAsyncIconButton` loading bugs
+
 ## [2.0.7] - 6 January 2023
 - fix issue #3
 - Add `SkadiScaffold`

@@ -116,8 +116,8 @@ class _MyOtherStatelessWidget extends StatelessWidget {
           await SkadiUtils.wait();
           valueNotifier.value = false;
         },
-        child: value
-            ? const CircularProgressIndicator.adaptive()
+        child: valueNotifier.value
+            ? const Text("Loading...")
             : const Text("Click me"),
       ),
     );
@@ -146,7 +146,7 @@ class _MyStatelessWidget extends StatelessWidget {
               valueNotifier.value = false;
             },
             child: valueNotifier.value
-                ? const CircularProgressIndicator.adaptive()
+                ? const Text("Loading...")
                 : const Text("Click me"),
           );
         },

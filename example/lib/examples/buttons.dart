@@ -72,9 +72,11 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
               onTap: otherloading,
               icon: const Text("Custom"),
               loadingWidget: const SizedBox(
-                width: 16,
-                height: 16,
-                child: CircularProgressIndicator.adaptive(),
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator.adaptive(
+                  valueColor: AlwaysStoppedAnimation(Colors.red),
+                ),
               ),
               padding: const EdgeInsets.all(12),
               borderSide: const BorderSide(color: Colors.red),
@@ -129,33 +131,31 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
               onPressed: otherloading,
               child: const Text("With icon"),
             ),
-            [
-              SkadiAsyncButton(
-                fullWidth: false,
-                width: 260,
-                onPressed: otherloading,
-                child: const Text("Custom width and height"),
-              ),
-              const SpaceX(),
-              SkadiAsyncButton(
-                fullWidth: false,
-                width: 260,
-                height: 46,
-                onPressed: otherloading,
-                child: const Text("Sign In"),
-              ),
-              const SpaceX(),
-              SkadiAsyncButton(
-                fullWidth: false,
-                enable: enable,
-                onPressed: () {
-                  setState(() {
-                    enable = !enable;
-                  });
-                },
-                child: Text("Enable: $enable"),
-              ),
-            ].wrapRow(),
+            SkadiAsyncButton(
+              fullWidth: false,
+              width: 260,
+              onPressed: otherloading,
+              child: const Text("Custom width and height"),
+            ),
+            const SpaceX(),
+            SkadiAsyncButton(
+              fullWidth: false,
+              width: 260,
+              height: 46,
+              onPressed: otherloading,
+              child: const Text("Sign In"),
+            ),
+            const SpaceX(),
+            SkadiAsyncButton(
+              fullWidth: false,
+              enable: enable,
+              onPressed: () {
+                setState(() {
+                  enable = !enable;
+                });
+              },
+              child: Text("Enable: $enable"),
+            ),
             SkadiAsyncButton(
               fullWidth: true,
               onPressed: otherloading,

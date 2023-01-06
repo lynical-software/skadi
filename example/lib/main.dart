@@ -40,7 +40,6 @@ class MyApp extends StatelessWidget {
         title: 'Skadi Flutter Example',
         theme: ThemeData(
           primarySwatch: Colors.cyan,
-          visualDensity: VisualDensity.standard,
           appBarTheme: const AppBarTheme(
             foregroundColor: Colors.white,
           ),
@@ -68,8 +67,8 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   final examples = <ExampleButton>[
     ExampleButton(name: "Buttons", child: const ButtonsExample()),
-    ExampleButton(name: "Dialogs", child: const DialogsExample()),
     ExampleButton(name: "Controls", child: const ControlExample()),
+    ExampleButton(name: "Dialogs", child: const DialogsExample()),
     ExampleButton(
       name: "Mixin Example",
       child: const MixinExample(),
@@ -78,11 +77,11 @@ class _RootPageState extends State<RootPage> {
       name: "Navigator Example",
       child: const SkadiNavigatorExample(),
     ),
+    ExampleButton(name: "Other widgets", child: const OtherWidgetExample()),
     ExampleButton(
       name: "Style and Decoration",
       child: const StyleAndDecorationExample(),
     ),
-    ExampleButton(name: "Other widgets", child: const OtherWidgetExample()),
     ExampleButton(
       name: "Utilities Method Usage",
       child: const UtilitiesMethodUsage(),
