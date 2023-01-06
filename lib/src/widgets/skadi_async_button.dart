@@ -59,6 +59,8 @@ class SkadiAsyncButton extends StatefulWidget {
   ///whether button is set to stretch with available width
   final bool fullWidth;
 
+  final bool enable;
+
   /// select a loading type of the button
   final LoadingType loadingType;
 
@@ -79,6 +81,7 @@ class SkadiAsyncButton extends StatefulWidget {
     this.margin = const EdgeInsets.symmetric(vertical: 16),
     this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
     this.loadingType = LoadingType.progress,
+    this.enable = true,
     this.startIcon,
     this.endIcon,
     this.loadingWidget,
@@ -196,9 +199,11 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
             ? widget.loadingType == LoadingType.disable
                 ? null
                 : () {}
-            : widget.onPressed != null
-                ? onButtonPressed
-                : null,
+            : !widget.enable
+                ? null
+                : widget.onPressed != null
+                    ? onButtonPressed
+                    : null,
         style: ElevatedButton.styleFrom(
           shape: widget.shape,
           padding: widget.padding,

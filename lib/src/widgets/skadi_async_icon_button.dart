@@ -33,7 +33,7 @@ class SkadiAsyncIconButton extends StatefulWidget {
   final Widget? badge;
 
   ///A widget to show when button is loading
-  ///Using LoadingWidget from SuraProvider or default CircularProgressIndicator with 24px
+  ///Using LoadingWidget from SkadiProvider or default CircularProgressIndicator with 24px
   final Widget? loadingWidget;
 
   ///An IconButton with respectively small margin and shape
