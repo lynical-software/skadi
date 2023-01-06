@@ -1,3 +1,7 @@
+## [2.0.7] - 6 January 2023
+- fix issue #3
+- Add `SkadiScaffold`
+
 ## [2.0.6] - 5 January 2023
 - export `kTs`
 

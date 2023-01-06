@@ -1,6 +1,6 @@
 library skadi;
 
-//mixin
+//extension
 export 'src/extension/index.dart';
 //mixin
 export 'src/mixin/after_build_mixin.dart';
@@ -42,6 +42,7 @@ export 'src/widgets/skadi_icon_button.dart';
 export 'src/widgets/skadi_paginated_grid_view.dart';
 export 'src/widgets/skadi_paginated_list_view.dart';
 export 'src/widgets/skadi_platform_checker.dart';
+export 'src/widgets/skadi_scaffold.dart';
 export 'src/widgets/skadi_simple_dialog.dart';
 export 'src/widgets/skadi_stream_handler.dart';
 //

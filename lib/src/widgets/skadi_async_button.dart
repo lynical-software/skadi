@@ -41,6 +41,9 @@ class SkadiAsyncButton extends StatefulWidget {
   ///Button's disable layout color
   final Color? disableColor;
 
+  ///Button's disable layout color
+  final Color? disableBackgroundColor;
+
   ///A color for default [loadingWidget]
   final Color loadingColor;
 
@@ -70,6 +73,9 @@ class SkadiAsyncButton extends StatefulWidget {
   ///Alignment of the [icon] and [child]
   final ValueNotifier<bool>? loadingNotifier;
 
+  ///Use this style to override other parameter style
+  final ButtonStyle? style;
+
   ///Create a Material Elevated Button that can contain a [loadingWidget] whenever you
   ///execute a Future function in [onPressed] callback
   const SkadiAsyncButton({
@@ -81,6 +87,7 @@ class SkadiAsyncButton extends StatefulWidget {
     this.margin = const EdgeInsets.symmetric(vertical: 16),
     this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
     this.loadingType = LoadingType.progress,
+    this.style,
     this.enable = true,
     this.startIcon,
     this.endIcon,
@@ -95,6 +102,7 @@ class SkadiAsyncButton extends StatefulWidget {
     this.elevation,
     this.loadingNotifier,
     this.disableColor,
+    this.disableBackgroundColor,
   }) : super(key: key);
   @override
   State<SkadiAsyncButton> createState() => _SkadiAsyncButtonState();
@@ -204,15 +212,17 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
                 : widget.onPressed != null
                     ? onButtonPressed
                     : null,
-        style: ElevatedButton.styleFrom(
-          shape: widget.shape,
-          padding: widget.padding,
-          backgroundColor: widget.backgroundColor,
-          disabledForegroundColor: widget.disableColor,
-          foregroundColor: widget.foregroundColor,
-          side: widget.borderSide,
-          elevation: widget.elevation,
-        ),
+        style: widget.style ??
+            ElevatedButton.styleFrom(
+              shape: widget.shape,
+              padding: widget.padding,
+              backgroundColor: widget.backgroundColor,
+              disabledForegroundColor: widget.disableColor,
+              disabledBackgroundColor: widget.disableBackgroundColor,
+              foregroundColor: widget.foregroundColor,
+              side: widget.borderSide,
+              elevation: widget.elevation,
+            ),
         child: ConditionalWidget(
           condition: _isLoading,
           onTrue: () => widget.loadingType == LoadingType.disable
