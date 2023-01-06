@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 
 class SkadiScaffold extends StatelessWidget {
-  final AppBar? appbar;
+  final AppBar? appBar;
   final Widget? body;
   final bool allowPop;
   final Scaffold? scaffold;
   const SkadiScaffold({
     super.key,
-    this.appbar,
+    this.appBar,
     this.allowPop = false,
     this.body,
     this.scaffold,
@@ -21,7 +21,7 @@ class SkadiScaffold extends StatelessWidget {
       child: KeyboardDismiss(
         child: scaffold ??
             Scaffold(
-              appBar: appbar,
+              appBar: appBar,
               body: body,
             ),
       ),
