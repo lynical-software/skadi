@@ -104,6 +104,16 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
     }
   }
 
+  void removeListener() {
+    if (_isPrimaryScrollView) {
+      scrollController!.removeListener(() => scrollListener(scrollController!));
+      scrollController?.dispose();
+    } else {
+      widget.scrollController
+          ?.removeListener(() => scrollListener(widget.scrollController!));
+    }
+  }
+
   @override
   void initState() {
     initController();
@@ -112,7 +122,7 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
 
   @override
   void dispose() {
-    scrollController?.dispose();
+    removeListener();
     super.dispose();
   }
 
@@ -125,7 +135,7 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
         return widget.onEmpty!;
       }
       if (skadiProvider?.noDataWidget != null) {
-        return skadiProvider!.noDataWidget!;
+        return skadiProvider!.noDataWidget!.call(null);
       }
     }
     return Column(

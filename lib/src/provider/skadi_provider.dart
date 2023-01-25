@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 
@@ -25,7 +27,7 @@ class SkadiProvider extends InheritedWidget {
   final Widget? loadingWidget;
 
   ///A widget use in [PaginatedListView] when there is no data
-  final Widget? noDataWidget;
+  final Widget Function(FutureOr<void> Function()?)? noDataWidget;
 
   ///Error widget use in [SkadiFutureHandler,SkadiStreamHandler] class
   final CustomErrorWidget? errorWidget;

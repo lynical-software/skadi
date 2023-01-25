@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SkadiProvider(
       loadingWidget: const Text("loading..."),
-      noDataWidget: const Text("No data :("),
+      noDataWidget: (onRefresh) => const Text("No data :("),
       logSetting: const SkadiLogSetting(
         http: true,
         info: true,

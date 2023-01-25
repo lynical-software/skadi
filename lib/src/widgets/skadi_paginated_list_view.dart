@@ -115,6 +115,16 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
     }
   }
 
+  void removeListener() {
+    if (_isPrimaryScrollView) {
+      scrollController!.removeListener(() => scrollListener(scrollController!));
+      scrollController?.dispose();
+    } else {
+      widget.scrollController
+          ?.removeListener(() => scrollListener(widget.scrollController!));
+    }
+  }
+
   @override
   void initState() {
     initController();
@@ -123,7 +133,7 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
 
   @override
   void dispose() {
-    scrollController?.dispose();
+    removeListener();
     super.dispose();
   }
 
@@ -136,7 +146,7 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
         return widget.onEmpty!;
       }
       if (skadiProvider?.noDataWidget != null) {
-        return skadiProvider!.noDataWidget!;
+        return skadiProvider!.noDataWidget!.call(null);
       }
     }
     return ListView.separated(

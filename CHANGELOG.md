@@ -1,3 +1,7 @@
+## [2.1.0] - 26 January 2023
+- **breaking change**
+    - SkadiProvider `noDataWidget` has an onRefresh param callback
+
 ## [2.0.9] - 6 January 2023
 - fix `SkadiScaffold` bugs
 
@@ -19,7 +23,7 @@
 
 ## [2.0.3] - 13 December 2022
 - `isTheSameDay` extension on DateTime is now nullable
-- - **breaking change**
+- **breaking change**
     - update `semibold` to `semiBold` on Textstyle extension
 
 ## [2.0.2] - 12 December 2022
