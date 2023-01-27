@@ -31,6 +31,7 @@ export 'src/widgets/dot.dart';
 export 'src/widgets/ellipsis_text.dart';
 export 'src/widgets/keyboard_dismiss.dart';
 export 'src/widgets/loading_overlay.dart';
+export 'src/widgets/separator_column.dart';
 export 'src/widgets/skadi_accordion.dart';
 export 'src/widgets/skadi_action_sheet.dart';
 export 'src/widgets/skadi_async_button.dart';
