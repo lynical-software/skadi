@@ -1,3 +1,6 @@
+## [2.1.1] - 27 January 2023
+- fix pub score
+
 ## [2.1.0] - 26 January 2023
 - **breaking change**
     - SkadiProvider `noDataWidget` has an onRefresh param callback

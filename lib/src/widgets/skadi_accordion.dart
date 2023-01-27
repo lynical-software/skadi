@@ -154,7 +154,7 @@ class _SkadiAccordionState extends State<SkadiAccordion>
                   Flexible(
                     child: DefaultTextStyle.merge(
                       child: widget.title,
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
                   if (widget.iconPosition == IconPosition.end &&
