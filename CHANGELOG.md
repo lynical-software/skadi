@@ -1,3 +1,7 @@
+## [2.2.0] - 27 January 2023
+- bump `intl` down
+- Fix types
+
 ## [2.1.1] - 27 January 2023
 - fix pub score
 

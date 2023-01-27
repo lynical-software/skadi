@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 
@@ -34,7 +35,7 @@ class SkadiPaginatedListView extends StatefulWidget {
   final ScrollController? scrollController;
 
   ///callback for getting more data when ScrollController reach max scrollExtends
-  final Future<void> Function() dataLoader;
+  final AsyncCallback dataLoader;
 
   ///condition to check if we still have more data to fetch
   ///Example: currentItems == totalItems or currentPage == totalPages
@@ -146,7 +147,7 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
         return widget.onEmpty!;
       }
       if (skadiProvider?.noDataWidget != null) {
-        return skadiProvider!.noDataWidget!.call(null);
+        return skadiProvider!.noDataWidget!.call(widget.dataLoader);
       }
     }
     return ListView.separated(

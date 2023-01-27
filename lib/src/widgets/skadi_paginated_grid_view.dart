@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../provider/skadi_provider.dart';
@@ -17,7 +18,7 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
   final bool hasMoreData;
 
   ///Normal GridView padding
-  final Future<void> Function() dataLoader;
+  final AsyncCallback dataLoader;
 
   ///If [SkadiPaginatedGridBuilder] is user inside another scroll view,
   ///you must provide a [scrollController] that also use in your parent [scrollController] scroll view
