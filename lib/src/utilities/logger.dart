@@ -20,7 +20,7 @@ class SkadiLogSetting {
 void debugLog([dynamic log, dynamic additional = "", bool? logInReleaseMode]) {
   var setting = SkadiProvider.loggerSetting;
   if (kDebugMode || (logInReleaseMode ?? setting.debug)) {
-    debugPrint("Skadi Http Log: $log $additional");
+    debugPrint("Skadi Debug Log: $log $additional");
   }
 }
 

@@ -5,13 +5,13 @@ class JwtDecoder {
   static TokenPayload decode(String jwtToken) {
     final parts = jwtToken.split('.');
     if (parts.length != 3) {
-      throw Exception('Invalid token');
+      throw Exception('JwtDecoder: Invalid token');
     }
 
     final payload = _decodeBase64(parts[1]);
     final payloadMap = json.decode(payload);
     if (payloadMap is! Map<String, dynamic>) {
-      throw Exception("Invalid payload. Payload isn't a Map");
+      throw Exception("JwtDecoder: Invalid payload. Payload isn't a Map");
     }
 
     return TokenPayload.fromMap(payloadMap);
@@ -30,7 +30,7 @@ class JwtDecoder {
         output += '=';
         break;
       default:
-        throw Exception('Illegal base64url string!"');
+        throw Exception('JwtDecoder: Illegal base64url string!"');
     }
 
     return utf8.decode(base64Url.decode(output));

@@ -1,6 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+extension SkadiTimeOfDayExtension on TimeOfDay {
+  bool isAfter(TimeOfDay tod) {
+    if (hour > tod.hour) return true;
+    if (hour == tod.hour) {
+      return minute > tod.minute;
+    }
+    return false;
+  }
+}
+
+TimeOfDay todFromString(String data) {
+  var split = data.split(":");
+  int h = int.parse(split.first);
+  int m = int.parse(split.last);
+  return TimeOfDay(hour: h, minute: m);
+}
+
+String todToString(TimeOfDay data) {
+  return "${data.hour}:${data.minute}";
+}
+
 extension DateTimeExtensionX on DateTime {
   String formatDate({String format = "dd MMM yyyy", Locale? locale}) {
     String? localeCode;
