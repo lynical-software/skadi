@@ -9,6 +9,7 @@ import 'package:skadi_example/examples/style_decoration.dart';
 import 'examples/dialogs.dart';
 import 'examples/mixin.dart';
 import 'examples/other_widget.dart';
+import 'examples/pagination.dart';
 import 'examples/utilities.dart';
 import 'widgets/custom_overlay_loading.dart';
 
@@ -67,6 +68,7 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   final examples = <ExampleButton>[
     ExampleButton(name: "Buttons", child: const ButtonsExample()),
+    ExampleButton(name: "Pagination", child: const PaginationExample()),
     ExampleButton(name: "Controls", child: const ControlExample()),
     ExampleButton(name: "Dialogs", child: const DialogsExample()),
     ExampleButton(

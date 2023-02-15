@@ -57,6 +57,10 @@ class SkadiPaginatedListView extends StatefulWidget {
   ///A widget that show at the bottom of ListView when there is an error
   final Widget Function()? errorWidget;
 
+  ///Load more data if we reach this offset start from the bottom
+  ///Make sure to calculate with loading widget height
+  final double fetchOffset;
+
   const SkadiPaginatedListView({
     Key? key,
     required this.itemCount,
@@ -65,6 +69,7 @@ class SkadiPaginatedListView extends StatefulWidget {
     required this.hasMoreData,
     this.physics = const ClampingScrollPhysics(),
     this.shrinkWrap = false,
+    this.fetchOffset = 0.0,
     this.loadingWidget = const CircularProgressIndicator(),
     this.padding = const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
     this.scrollDirection = Axis.vertical,
@@ -90,7 +95,9 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
     if (widget.hasError) {
       return;
     }
-    if (controller.offset == controller.position.maxScrollExtent) {
+    double offsetToFetch =
+        controller.position.maxScrollExtent - widget.fetchOffset;
+    if (controller.offset >= offsetToFetch) {
       loadingState += 1;
       onLoadingMoreData();
     }

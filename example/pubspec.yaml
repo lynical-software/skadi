@@ -16,7 +16,9 @@ dependencies:
   future_manager: ^1.0.0
   skadi:
     path: ../
+    version:
   google_fonts: ^3.0.1
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:

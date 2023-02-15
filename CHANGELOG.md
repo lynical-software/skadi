@@ -1,3 +1,6 @@
+## [2.2.2] - 15 February 2023
+-  add `fetchOffset` to SkadiPaginatedWidget
+
 ## [2.2.1] - 1 February 2023
 - fix `debugLog` log
 - add `TimeOfDay` utils

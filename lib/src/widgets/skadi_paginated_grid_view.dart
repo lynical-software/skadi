@@ -33,6 +33,9 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
   ///Widget when loading for more data
   final Widget? loadingWidget;
 
+  //
+  final bool reverse;
+
   ///Widget to show when there is no data
   final Widget? onEmpty;
 
@@ -49,7 +52,15 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
   ///A widget that show at the bottom of ListView when there is an error
   final Widget Function()? errorWidget;
 
-  final Widget Function(BuildContext context, int index) itemBuilder;
+  ///Load more data if we reach this offset start from the bottom
+  final double fetchOffset;
+
+  ///Normal GridView itemBuilder
+  final IndexedWidgetBuilder itemBuilder;
+
+  ///
+  final Axis scrollDirection;
+
   const SkadiPaginatedGridBuilder({
     Key? key,
     required this.gridDelegate,
@@ -59,12 +70,15 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
     required this.hasMoreData,
     this.onEmpty,
     this.shrinkWrap = false,
+    this.fetchOffset = 0.0,
     this.loadingWidget = const CircularProgressIndicator(),
     this.padding = const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
     this.physics = const ClampingScrollPhysics(),
     this.scrollController,
     this.attachProvidedScrollControllerToListView = false,
     this.hasError = false,
+    this.reverse = false,
+    this.scrollDirection = Axis.vertical,
     this.errorWidget,
   }) : super(key: key);
   @override
@@ -79,7 +93,11 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
   bool get _isPrimaryScrollView => widget.scrollController == null;
 
   void scrollListener(ScrollController controller) {
-    if (controller.offset == controller.position.maxScrollExtent) {
+    if (widget.hasError) {
+      return;
+    }
+    if (controller.offset >=
+        controller.position.maxScrollExtent - widget.fetchOffset) {
       loadingState += 1;
       onLoadingMoreData();
     }
@@ -144,9 +162,11 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
         Expanded(
           flex: _isPrimaryScrollView ? 1 : 0,
           child: GridView.builder(
+            scrollDirection: widget.scrollDirection,
             gridDelegate: widget.gridDelegate,
             shrinkWrap: widget.shrinkWrap,
             padding: widget.padding,
+            reverse: widget.reverse,
             controller: _isPrimaryScrollView
                 ? scrollController
                 : widget.attachProvidedScrollControllerToListView
