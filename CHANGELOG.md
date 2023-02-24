@@ -1,3 +1,7 @@
+## [2.2.3] - 24 February 2023
+-  add `switchPosition` method to LoadingOverlayProvider
+-  `SkadiScaffold` now allow `PreferredSizeWidget` instead of `AppBar`
+
 ## [2.2.2] - 15 February 2023
 -  add `fetchOffset` to SkadiPaginatedWidget
 
