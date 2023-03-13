@@ -114,7 +114,7 @@ class SeparatorColumn extends StatelessWidget {
       verticalDirection: verticalDirection,
       children: List.generate(_totalChildren, (index) {
         final int itemIndex = index ~/ 2;
-        if (itemIndex.isEven) {
+        if (index.isEven) {
           return children[itemIndex];
         } else {
           return separatorBuilder(context, index);

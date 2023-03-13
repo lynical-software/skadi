@@ -1,4 +1,4 @@
-## [2.3.1] - 13 March 2023
+## [2.3.2] - 13 March 2023
 - Fix `SeparatorColumn` bug
 
 ## [2.3.0] - 13 March 2023
