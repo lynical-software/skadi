@@ -78,21 +78,18 @@ class _StyleAndDecorationExampleState extends State<StyleAndDecorationExample>
           isRow: true,
           children: [
             Container(
-              width: 100,
               height: 100,
               color: SkadiColor.fromHexString("FF0000"),
-            ),
+            ).expanded,
             Container(
-              width: 100,
               height: 100,
               color: SkadiColor.fromRGB(125, 255, 23),
-            ),
+            ).expanded,
             Container(
-              width: 100,
               height: 100,
               color:
                   SkadiColor.toMaterial(const Color.fromARGB(255, 176, 251, 2)),
-            ),
+            ).expanded,
           ],
         ),
       ],

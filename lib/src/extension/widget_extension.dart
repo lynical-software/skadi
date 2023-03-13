@@ -87,6 +87,8 @@ extension SkadiWidgetExtension on Widget {
 
   Widget get expanded => Expanded(child: this);
 
+  Widget get center => Center(child: this);
+
   Widget get flexible => Flexible(child: this);
 
   Widget get ovalClip => ClipOval(child: this);

@@ -10,9 +10,36 @@ class SkadiRouteException implements Exception {
   String toString() => message;
 }
 
-class SkadiNavigator {
+BuildContext get skadiContext {
+  return SkadiNavigator.navigatorContext;
+}
+
+abstract class SkadiNavigator {
   ///Less boilerplate MaterialPageRoute Navigate
   SkadiNavigator._();
+
+  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
+  static BuildContext get navigatorContext {
+    var ctx = navigatorKey.currentState?.context;
+    if (ctx == null) {
+      throw SkadiRouteException(
+          "Invalid Navigator key. Navigator probably haven't set in MaterialApp");
+    }
+    return ctx;
+  }
+
+  static keyPush(Widget page) {
+    return push(navigatorContext, page);
+  }
+
+  static keyPushReplacement(Widget page) {
+    return pushReplacement(navigatorContext, page);
+  }
+
+  static keyPushRemove(Widget page) {
+    return pushAndRemove(navigatorContext, page);
+  }
 
   ///short handed push navigator
   ///[routeName] parameter can be use instead of [settings] if you only need to provider routeName

@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 
-import '../utilities/types.dart';
-
 class SkadiProvider extends InheritedWidget {
   ///Provide a setting for Skadi related widgets
   SkadiProvider({

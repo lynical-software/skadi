@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        navigatorKey: SkadiNavigator.navigatorKey,
         navigatorObservers: [
           SkadiRouteObserver(
             log: true,
@@ -92,6 +93,7 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
+    infoLog(ModalRoute.of(skadiContext)?.canPop);
     return Scaffold(
       appBar: AppBar(title: const Text("Skadi Example")),
       body: ListView(
@@ -105,7 +107,7 @@ class _RootPageState extends State<RootPage> {
               margin: const EdgeInsets.only(bottom: 16),
               child: ElevatedButton(
                 onPressed: () async {
-                  await SkadiNavigator.push(context, widget.child);
+                  await SkadiNavigator.keyPush(widget.child);
                   SkadiUtils.wait().then((value) {
                     infoLog("Manager", manager);
                   });

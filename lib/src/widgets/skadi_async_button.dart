@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skadi/skadi.dart';
 
-import '../utilities/types.dart';
-
 enum LoadingType { progress, disable }
 
 ///Create a Material Elevated Button that can contain a [loadingWidget] whenever you

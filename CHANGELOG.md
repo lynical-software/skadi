@@ -1,9 +1,17 @@
+## [2.3.0] - 13 March 2023
+- add `WillPopDisable`, `WillPopPrompt` and `CircularLoading`
+- add `emptyReplacement` extension on `String`
+- add `center` extension on `Widget`
+- add `navigatorKey` to `SkadiNavigator`
+- add `keepAlive` widget (AutomaticKeepAliveClientMixin)
+- add `JsonMap` type
+
 ## [2.2.3] - 24 February 2023
--  add `switchPosition` method to LoadingOverlayProvider
--  `SkadiScaffold` now allow `PreferredSizeWidget` instead of `AppBar`
+- add `switchPosition` method to LoadingOverlayProvider
+- `SkadiScaffold` now allow `PreferredSizeWidget` instead of `AppBar`
 
 ## [2.2.2] - 15 February 2023
--  add `fetchOffset` to SkadiPaginatedWidget
+- add `fetchOffset` to SkadiPaginatedWidget
 
 ## [2.2.1] - 1 February 2023
 - fix `debugLog` log

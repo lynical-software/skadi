@@ -13,28 +13,9 @@ class ControlExample extends StatefulWidget {
 class _ControlExampleState extends State<ControlExample> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        bool isLoading = LoadingOverlayProvider.instance.isLoading;
-        if (isLoading) {
-          LoadingOverlayProvider.switchPosition(LoadingOverlayPosition.below);
-          bool? result = await showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => const SkadiConfirmationDialog.danger(
-              content: Text("Are you sure you want to cancel this operation?"),
-              confirmText: "Yes",
-              cancelText: "Discard",
-            ),
-          );
-          if (result == true) {
-            ///Cancel your operation
-            LoadingOverlayProvider.toggle(false);
-          }
-          LoadingOverlayProvider.switchPosition(LoadingOverlayPosition.above);
-          return false;
-        }
-        return true;
+    return WillPopPrompt(
+      onResult: (value) {
+        infoLog(value);
       },
       child: ExampleScaffold(
         title: "Control",
