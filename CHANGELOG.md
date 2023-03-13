@@ -1,3 +1,6 @@
+## [2.3.1] - 13 March 2023
+- Fix `SeparatorColumn` bug
+
 ## [2.3.0] - 13 March 2023
 - add `WillPopDisable`, `WillPopPrompt` and `CircularLoading`
 - add `emptyReplacement` extension on `String`
