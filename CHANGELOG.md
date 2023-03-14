@@ -1,4 +1,4 @@
-## [2.3.3] - 13 March 2023
+## [2.3.4] - 15 March 2023
 - Add `get` in `ListExtension`
 - Add `buildWhenTrue` in `ListenableExtension`
 

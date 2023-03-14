@@ -1,6 +1,6 @@
 # skadi
 
-[![pub package](https://img.shields.io/badge/pub-2.3.3-blueviolet.svg)](https://pub.dev/packages/skadi) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/skadi)
+[![pub package](https://img.shields.io/badge/pub-2.3.4-blueviolet.svg)](https://pub.dev/packages/skadi) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/skadi)
 
 Flutter utilities packages for custom widgets and utilities function.
 
@@ -10,7 +10,7 @@ Add this to pubspec.yaml
 
 ```dart
 dependencies:
-  skadi: ^2.3.3
+  skadi: ^2.3.4
 ```
 
 # Widgets

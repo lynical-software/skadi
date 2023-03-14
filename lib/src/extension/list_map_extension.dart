@@ -27,7 +27,7 @@ extension SkadiListExtension<T> on List<T> {
     if (index >= length) {
       return null;
     }
-    return null;
+    return this[index];
   }
 
   ///Update list value that met the condition
