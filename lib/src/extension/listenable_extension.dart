@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:skadi/skadi.dart';
 
 extension SkadiListenableExtension on Listenable {
   Widget builder({required TransitionBuilder builder, Widget? child}) {
@@ -30,6 +31,19 @@ extension SkadiValueListenableExtension<T> on ValueListenable<T> {
       child: child,
       builder: (context, child) {
         return builder(value, child);
+      },
+    );
+  }
+}
+
+extension SkadiBoolValueListenableExtension<bool> on ValueListenable<bool> {
+  ///ValueListenable listener widget that only build if value is true
+  Widget buildWhenTrue(Widget Function() builder, {Widget? onFalse}) {
+    return ValueListenableBuilder<bool>(
+      valueListenable: this,
+      builder: (context, value, child) {
+        if (value == true) return builder();
+        return onFalse ?? emptySizedBox;
       },
     );
   }

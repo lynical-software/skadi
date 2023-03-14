@@ -1,3 +1,7 @@
+## [2.3.3] - 13 March 2023
+- Add `get` in `ListExtension`
+- Add `buildWhenTrue` in `ListenableExtension`
+
 ## [2.3.2] - 13 March 2023
 - Fix `SeparatorColumn` bug
 

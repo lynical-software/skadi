@@ -27,7 +27,7 @@ class SkadiProvider extends InheritedWidget {
   final Widget Function(AsyncCallback?)? noDataWidget;
 
   ///Error widget use in [SkadiFutureHandler,SkadiStreamHandler] class
-  final CustomErrorWidget? errorWidget;
+  final ErrorWidgetFunction? errorWidget;
 
   ///A text to replace when EllipsisText's string is null
   final String ellipsisText;
