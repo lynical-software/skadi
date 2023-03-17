@@ -7,7 +7,7 @@ class SkadiFormValidator {
   static String? validateField(String? value, {String? field, int? length}) {
     if (value.isNullOrEmpty) {
       return field != null
-          ? "Please input your $field"
+          ? "Please input your ${field.toLowerCase()}"
           : "Please input required field";
     }
     if (length != null) {
@@ -25,7 +25,7 @@ class SkadiFormValidator {
   static String? isNumber(String? value, {String? field}) {
     if (value.isNullOrEmpty) {
       return field != null
-          ? "Please input your $field"
+          ? "Please input your ${field.toLowerCase()}"
           : "Please input required field";
     }
     num? asNumber = num.tryParse(value!);
@@ -39,10 +39,10 @@ class SkadiFormValidator {
 
   static String? validateEmail(String? value, {String field = "email"}) {
     if (value.isNullOrEmpty) {
-      return "Please input your $field";
+      return "Please input your ${field.toLowerCase()}";
     }
     if (!_emailRegex.hasMatch(value!)) {
-      return "Invalid $field";
+      return "Invalid ${field.toLowerCase()}";
     }
     return null;
   }

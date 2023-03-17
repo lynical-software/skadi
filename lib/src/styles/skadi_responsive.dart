@@ -14,6 +14,45 @@ enum SkadiResponsiveBreakpointName {
   desktop,
 }
 
+extension SkadiResponsiveExtension on BuildContext {
+  ///
+  bool get isDesktop {
+    final breakpoint = SkadiResponsive._getBreakpointName(this);
+    return breakpoint == SkadiResponsiveBreakpointName.desktop;
+  }
+
+  bool get isMobile {
+    final breakpoint = SkadiResponsive._getBreakpointName(this);
+    return breakpoint == SkadiResponsiveBreakpointName.mobile;
+  }
+
+  bool get isTablet {
+    final breakpoint = SkadiResponsive._getBreakpointName(this);
+    return breakpoint == SkadiResponsiveBreakpointName.tablet;
+  }
+
+  bool get isMobileSmall {
+    final breakpoint = SkadiResponsive._getBreakpointName(this);
+    return breakpoint == SkadiResponsiveBreakpointName.mobileSmall;
+  }
+
+  ///Return a provided value base of screen width's breakpoint
+  double responsive(
+    double mobile, [
+    double? tablet,
+    double? desktop,
+    double? mobileSmall,
+  ]) {
+    return SkadiResponsive.valueOf(
+      this,
+      mobile,
+      tablet,
+      desktop,
+      mobileSmall,
+    );
+  }
+}
+
 class SkadiResponsiveBreakpoint {
   final double mobileSmall;
   final double mobile;
@@ -36,7 +75,7 @@ class SkadiResponsiveBreakpoint {
 
 class SkadiResponsive {
   static Size? _size;
-  static BuildContext? context;
+  static late BuildContext context;
 
   static SkadiResponsiveBreakpoint _breakPoint =
       SkadiResponsiveBreakpoint.defaultValue();
@@ -60,14 +99,10 @@ class SkadiResponsive {
     _breakPoint = breakPoint;
   }
 
-  static SkadiResponsiveBreakpointName _getBreakpointName(
-      [BuildContext? context]) {
+  static SkadiResponsiveBreakpointName _getBreakpointName([BuildContext? ctx]) {
     double modifiedWidth = 0.0;
-    if (context != null) {
-      modifiedWidth = MediaQuery.of(context).size.width;
-    } else {
-      modifiedWidth = screenWidth;
-    }
+    ctx ??= context;
+    modifiedWidth = MediaQuery.of(ctx).size.width;
     if (modifiedWidth >= _breakPoint.desktop) {
       return SkadiResponsiveBreakpointName.desktop;
     } else if (modifiedWidth >= _breakPoint.tablet) {
@@ -78,12 +113,6 @@ class SkadiResponsive {
     return SkadiResponsiveBreakpointName.mobile;
   }
 
-  static bool get isDesktop => screenWidth >= _breakPoint.desktop;
-  static bool get isTablet => !isDesktop && screenWidth >= _breakPoint.tablet;
-  static bool get isMobile =>
-      screenWidth > _breakPoint.mobileSmall && screenWidth < _breakPoint.tablet;
-  static bool get isMobileSmall => screenWidth <= _breakPoint.mobileSmall;
-
   ///Build a widget base on device screen size
   ///[desktop] builder is nullable and will use [tablet]'s value if null
   ///[mobileSmall] builder is nullable and will use [mobile]'s value if null
@@ -91,9 +120,9 @@ class SkadiResponsive {
   static Widget builder({
     required Widget Function() mobile,
     required Widget Function() tablet,
+    required BuildContext? context,
     Widget Function()? desktop,
     Widget Function()? mobileSmall,
-    BuildContext? context,
   }) {
     SkadiResponsiveBreakpointName breakpointName = _getBreakpointName(context);
     Widget mobileWidget = mobile();
@@ -137,12 +166,37 @@ class SkadiResponsive {
         ///Calculate the value for desktop if it's null and tablet isn't null
         double? defaultForDesktop;
         if (desktop == null && tablet != null) {
-          defaultForDesktop = tablet + (tablet - mobile);
+          ///Check for edge case where mobile value using screen width which cause it to be bigger than tablet
+          if (mobile < tablet) {
+            defaultForDesktop = tablet + (tablet - mobile);
+          } else {
+            defaultForDesktop = tablet;
+          }
         }
         value = desktop ?? defaultForDesktop;
         break;
     }
     return value ?? mobile;
+  }
+
+  ///React immediately to MediaQuery change if [context] is provided
+  ///Define a value depend on Screen width
+  ///Will use [mobile] value if other value is null
+  ///Auto calculate for desktop if tablet isn't null
+  static double valueOf(
+    BuildContext context,
+    double mobile, [
+    double? tablet,
+    double? desktop,
+    double? mobileSmall,
+  ]) {
+    return value(
+      mobile,
+      tablet,
+      desktop,
+      mobileSmall,
+      context,
+    );
   }
 
   ///Define a responsive value base on defined rule
