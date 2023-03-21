@@ -10,6 +10,14 @@ extension SkadiListExtension<T> on List<T> {
     return filtered;
   }
 
+  void addOrRemove(T value) {
+    if (contains(value)) {
+      remove(value);
+    } else {
+      add(value);
+    }
+  }
+
   ///Find one item in the List with the condition
   ///Return null if no item found instead of throwing an exception
   T? findOne(bool Function(T) test) {

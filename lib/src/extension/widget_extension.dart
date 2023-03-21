@@ -124,7 +124,7 @@ extension SkadiWidgetListExtension on List<Widget> {
   }
 
   ///Wrap list of widget in a Column and Expanded each widget
-  Widget wrapColumnExpended({
+  Widget wrapColumnExpanded({
     MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
     CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
   }) {
