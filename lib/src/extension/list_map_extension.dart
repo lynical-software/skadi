@@ -30,6 +30,14 @@ extension SkadiListExtension<T> on List<T> {
     return null;
   }
 
+  ///Get element from list without throwing an error
+  T? get(int index) {
+    if (index >= length) {
+      return null;
+    }
+    return this[index];
+  }
+
   ///Update list value that met the condition
   ///[updateAll] param to indicate to update all pass test value or only first occurrence
   bool update(

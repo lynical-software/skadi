@@ -1,3 +1,15 @@
+## [2.4.1] - 21 March 2023
+- fix extension name
+
+## [2.4.0] - 18 March 2023
+- Add `valueOf` to SkadiResponsive
+- Add `responsive` to BuildContext extension
+- remove screen size check from SkadiResponsive and add them to `BuildContext` extension instead
+
+## [2.3.4] - 15 March 2023
+- Add `get` in `ListExtension`
+- Add `buildWhenTrue` in `ListenableExtension`
+
 ## [2.3.2] - 13 March 2023
 - Fix `SeparatorColumn` bug
 

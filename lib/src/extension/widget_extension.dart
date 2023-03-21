@@ -78,6 +78,13 @@ extension SkadiWidgetExtension on Widget {
     );
   }
 
+  Widget underline([double opacity = 1]) {
+    return Opacity(
+      opacity: opacity,
+      child: this,
+    );
+  }
+
   Widget opacity([double opacity = 1]) {
     return Opacity(
       opacity: opacity,

@@ -92,6 +92,24 @@ class _StyleAndDecorationExampleState extends State<StyleAndDecorationExample>
             ).expanded,
           ],
         ),
+        Section(
+          title: "SkadiResponsive",
+          isRow: false,
+          children: [
+            Container(
+              color: Colors.red,
+              padding: const EdgeInsets.all(32),
+              width:
+                  SkadiResponsive.valueOf(context, double.infinity, 400, 500),
+              alignment: Alignment.center,
+              child: Text(context.isDesktop ? "Desktop" : "Other"),
+            ),
+            Text("Desktop: ${context.isDesktop}"),
+            Text("Mobile: ${context.isMobile}"),
+            Text("Tablet: ${context.isTablet}"),
+            Text("Mobile small: ${context.isMobileSmall}"),
+          ],
+        ),
       ],
     );
   }
