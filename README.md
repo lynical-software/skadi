@@ -10,7 +10,7 @@ Add this to pubspec.yaml
 
 ```dart
 dependencies:
-  skadi: ^2.4.1
+  skadi: ^2.4.2
 ```
 
 # Widgets

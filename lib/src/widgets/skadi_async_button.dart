@@ -116,8 +116,7 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
     if (widget.fullWidth == false) {
       WidgetsBinding.instance.addPostFrameCallback((d) {
         if (_globalKey.currentContext != null) {
-          RenderBox box =
-              _globalKey.currentContext!.findRenderObject() as RenderBox;
+          RenderBox box = _globalKey.currentContext!.findRenderObject() as RenderBox;
           width = box.size.width;
         }
       });
@@ -137,6 +136,7 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
   }
 
   void _toggleLoading(bool value) {
+    if (widget.loadingNotifier != null) return;
     if (_isLoading == value) return;
     if (mounted) setState(() => _isLoading = value);
   }
@@ -156,7 +156,8 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
 
   void _listener() {
     bool value = widget.loadingNotifier!.value;
-    _toggleLoading(value);
+    if (_isLoading == value) return;
+    if (mounted) setState(() => _isLoading = value);
   }
 
   @override
@@ -192,9 +193,8 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
       ],
     );
 
-    final Widget loadingWidget = widget.loadingWidget ??
-        SkadiProvider.of(context)?.buttonLoadingWidget ??
-        _buildLoadingWidget();
+    final Widget loadingWidget =
+        widget.loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget ?? _buildLoadingWidget();
 
     return Container(
       height: widget.height,
@@ -223,9 +223,7 @@ class _SkadiAsyncButtonState extends State<SkadiAsyncButton> {
             ),
         child: ConditionalWidget(
           condition: _isLoading,
-          onTrue: () => widget.loadingType == LoadingType.disable
-              ? buttonContent
-              : loadingWidget,
+          onTrue: () => widget.loadingType == LoadingType.disable ? buttonContent : loadingWidget,
           onFalse: () => buttonContent,
         ),
       ),

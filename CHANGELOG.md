@@ -1,3 +1,6 @@
+## [2.4.2] - 27 March 2023
+- fix SkadiAsyncButton loading notifier
+
 ## [2.4.1] - 21 March 2023
 - fix extension name
 
