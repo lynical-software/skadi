@@ -108,6 +108,7 @@ class _StyleAndDecorationExampleState extends State<StyleAndDecorationExample>
             Text("Mobile: ${context.isMobile}"),
             Text("Tablet: ${context.isTablet}"),
             Text("Mobile small: ${context.isMobileSmall}"),
+            Text("Desktop (Non responsive): ${SkadiResponsive.isDesktop}"),
           ],
         ),
       ],

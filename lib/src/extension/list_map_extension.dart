@@ -10,6 +10,8 @@ extension SkadiListExtension<T> on List<T> {
     return filtered;
   }
 
+  ///Add item to List if it doesn't exist
+  ///Remove item if exist
   void addOrRemove(T value) {
     if (contains(value)) {
       remove(value);

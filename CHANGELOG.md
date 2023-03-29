@@ -1,3 +1,7 @@
+## [2.5.0] - 29 March 2023
+- Bring back what's remove in SkadiResponsive in 2.4.0
+- Add more extension and method for SkadiResponsive
+
 ## [2.4.2] - 27 March 2023
 - fix SkadiAsyncButton loading notifier
 

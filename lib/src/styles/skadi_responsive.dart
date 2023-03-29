@@ -36,6 +36,10 @@ extension SkadiResponsiveExtension on BuildContext {
     return breakpoint == SkadiResponsiveBreakpointName.mobileSmall;
   }
 
+  bool get isBigScreenDevice {
+    return isTablet || isDesktop;
+  }
+
   ///Return a provided value base of screen width's breakpoint
   double responsive(
     double mobile, [
@@ -75,11 +79,16 @@ class SkadiResponsiveBreakpoint {
 
 class SkadiResponsive {
   static Size? _size;
-  static late BuildContext context;
+  static late BuildContext _context;
 
   static SkadiResponsiveBreakpoint _breakPoint =
       SkadiResponsiveBreakpoint.defaultValue();
 
+  static SkadiResponsiveBreakpoint get breakPoint {
+    return _breakPoint;
+  }
+
+  ///Get the initial screen width
   static double get screenWidth {
     if (_size == null) {
       throw FlutterError(
@@ -88,9 +97,19 @@ class SkadiResponsive {
     return _size!.width;
   }
 
+  static bool get isDesktop => screenWidth >= _breakPoint.desktop;
+  static bool get isTablet => !isDesktop && screenWidth >= _breakPoint.tablet;
+  static bool get isMobile =>
+      screenWidth > _breakPoint.mobileSmall && screenWidth < _breakPoint.tablet;
+  static bool get isMobileSmall => screenWidth <= _breakPoint.mobileSmall;
+
+  static bool get isBigScreenDevice {
+    return screenWidth > _breakPoint.tablet;
+  }
+
   @protected
   static void _init(BuildContext ctx) {
-    context = ctx;
+    _context = ctx;
     _size = MediaQuery.of(ctx).size;
   }
 
@@ -101,7 +120,7 @@ class SkadiResponsive {
 
   static SkadiResponsiveBreakpointName _getBreakpointName([BuildContext? ctx]) {
     double modifiedWidth = 0.0;
-    ctx ??= context;
+    ctx ??= _context;
     modifiedWidth = MediaQuery.of(ctx).size.width;
     if (modifiedWidth >= _breakPoint.desktop) {
       return SkadiResponsiveBreakpointName.desktop;
