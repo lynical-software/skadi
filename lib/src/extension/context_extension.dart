@@ -40,7 +40,7 @@ extension SkadiContextX on BuildContext {
     return SkadiNavigator.popAll(this);
   }
 
-  void pop(dynamic result) {
+  void pop([dynamic result]) {
     return Navigator.of(this).pop(result);
   }
 }

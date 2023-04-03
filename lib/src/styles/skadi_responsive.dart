@@ -73,16 +73,15 @@ class SkadiResponsiveBreakpoint {
   SkadiResponsiveBreakpoint.defaultValue()
       : mobileSmall = 360,
         mobile = 480,
-        tablet = 768,
-        desktop = 1024;
+        tablet = 600,
+        desktop = 900;
 }
 
 class SkadiResponsive {
   static Size? _size;
-  static late BuildContext _context;
+  static late BuildContext? _context;
 
-  static SkadiResponsiveBreakpoint _breakPoint =
-      SkadiResponsiveBreakpoint.defaultValue();
+  static SkadiResponsiveBreakpoint _breakPoint = SkadiResponsiveBreakpoint.defaultValue();
 
   static SkadiResponsiveBreakpoint get breakPoint {
     return _breakPoint;
@@ -91,16 +90,14 @@ class SkadiResponsive {
   ///Get the initial screen width
   static double get screenWidth {
     if (_size == null) {
-      throw FlutterError(
-          'Please initialize SkadiResponsiveBuilder in MaterialApp builder');
+      throw FlutterError('Please initialize SkadiResponsiveBuilder in MaterialApp builder');
     }
     return _size!.width;
   }
 
   static bool get isDesktop => screenWidth >= _breakPoint.desktop;
   static bool get isTablet => !isDesktop && screenWidth >= _breakPoint.tablet;
-  static bool get isMobile =>
-      screenWidth > _breakPoint.mobileSmall && screenWidth < _breakPoint.tablet;
+  static bool get isMobile => screenWidth > _breakPoint.mobileSmall && screenWidth < _breakPoint.tablet;
   static bool get isMobileSmall => screenWidth <= _breakPoint.mobileSmall;
 
   static bool get isBigScreenDevice {
@@ -118,10 +115,10 @@ class SkadiResponsive {
     _breakPoint = breakPoint;
   }
 
-  static SkadiResponsiveBreakpointName _getBreakpointName([BuildContext? ctx]) {
+  static SkadiResponsiveBreakpointName _getBreakpointName([BuildContext? context]) {
     double modifiedWidth = 0.0;
-    ctx ??= _context;
-    modifiedWidth = MediaQuery.of(ctx).size.width;
+    context ??= _context;
+    modifiedWidth = context == null ? screenWidth : MediaQuery.of(context).size.width;
     if (modifiedWidth >= _breakPoint.desktop) {
       return SkadiResponsiveBreakpointName.desktop;
     } else if (modifiedWidth >= _breakPoint.tablet) {

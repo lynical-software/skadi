@@ -6,9 +6,7 @@ class SkadiFormValidator {
 
   static String? validateField(String? value, {String? field, int? length}) {
     if (value.isNullOrEmpty) {
-      return field != null
-          ? "Please input your ${field.toLowerCase()}"
-          : "Please input required field";
+      return field != null ? "Please input your ${field.toLowerCase()}" : "Please input required field";
     }
     if (length != null) {
       if (value!.length < length) {
@@ -24,15 +22,11 @@ class SkadiFormValidator {
 
   static String? isNumber(String? value, {String? field}) {
     if (value.isNullOrEmpty) {
-      return field != null
-          ? "Please input your ${field.toLowerCase()}"
-          : "Please input required field";
+      return field != null ? "Please input your ${field.toLowerCase()}" : "Please input required field";
     }
     num? asNumber = num.tryParse(value!);
     if (asNumber is! num) {
-      return field != null
-          ? "$field must be a number"
-          : "This field must be a number";
+      return field != null ? "$field must be a number" : "This field must be a number";
     }
     return null;
   }

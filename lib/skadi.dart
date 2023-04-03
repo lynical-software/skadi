@@ -24,6 +24,7 @@ export 'src/utilities/global.dart';
 export 'src/utilities/jwt_decoder.dart';
 export 'src/utilities/logger.dart';
 export 'src/utilities/skadi_navigator.dart';
+export 'src/utilities/skadi_route_observer.dart';
 export 'src/utilities/skadi_utils.dart';
 export 'src/utilities/types.dart';
 //widget
