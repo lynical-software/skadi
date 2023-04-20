@@ -12,6 +12,7 @@ class SkadiProvider extends InheritedWidget {
     this.buttonLoadingWidget,
     this.noDataWidget,
     this.ellipsisText = "",
+    this.ellipsisTextMaxLines = 1,
     SkadiLogSetting? logSetting,
   }) : super(child: child, key: key) {
     loggerSetting = logSetting ?? const SkadiLogSetting();
@@ -28,6 +29,9 @@ class SkadiProvider extends InheritedWidget {
 
   ///Error widget use in [SkadiFutureHandler,SkadiStreamHandler] class
   final ErrorWidgetFunction? errorWidget;
+
+  ///Default max lines for EllipsisText widget
+  final int ellipsisTextMaxLines;
 
   ///A text to replace when EllipsisText's string is null
   final String ellipsisText;
