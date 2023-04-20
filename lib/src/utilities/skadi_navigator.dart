@@ -21,7 +21,8 @@ abstract class SkadiNavigator {
   static BuildContext get navigatorContext {
     var ctx = navigatorKey.currentState?.context;
     if (ctx == null) {
-      throw SkadiRouteException("Invalid Navigator key. Navigator probably haven't set in MaterialApp");
+      throw SkadiRouteException(
+          "Invalid Navigator key. Navigator probably haven't set in MaterialApp");
     }
     return ctx;
   }
