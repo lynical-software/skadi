@@ -5,7 +5,7 @@ import 'skadi_navigator.dart';
 
 class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   final bool log;
-  final void Function(Route)? analyticCallBack;
+  final void Function(Route route)? analyticCallBack;
 
   ///Route observer that support logging and analytic callback
   SkadiRouteObserver({

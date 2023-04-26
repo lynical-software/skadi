@@ -10,7 +10,7 @@ class SkadiFutureHandler<T> extends StatefulWidget {
   final Future<T> Function()? futureFunction;
 
   ///A callback when Future's snapshot hasData
-  final Widget Function(T) ready;
+  final Widget Function(T data) ready;
 
   ///
   final Widget? loading;
@@ -19,7 +19,7 @@ class SkadiFutureHandler<T> extends StatefulWidget {
   final T? initialData;
 
   ///On snapshot error callback
-  final Widget Function(dynamic)? error;
+  final Widget Function(dynamic error)? error;
 
   ///Create a FutureBuilder with less boilerplate code
   const SkadiFutureHandler({

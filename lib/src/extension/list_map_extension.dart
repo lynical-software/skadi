@@ -1,7 +1,7 @@
 extension SkadiListExtension<T> on List<T> {
   ///Filter list that return empty if no item found
   ///instead of throwing an exception
-  List<T> filter(bool Function(T) test) {
+  List<T> filter(bool Function(T element) test) {
     List<T> filtered = [];
     for (var item in this) {
       bool passed = test(item);
@@ -22,7 +22,7 @@ extension SkadiListExtension<T> on List<T> {
 
   ///Find one item in the List with the condition
   ///Return null if no item found instead of throwing an exception
-  T? findOne(bool Function(T) test) {
+  T? findOne(bool Function(T element) test) {
     for (var item in this) {
       bool passed = test(item);
       if (passed) {
@@ -43,8 +43,8 @@ extension SkadiListExtension<T> on List<T> {
   ///Update list value that met the condition
   ///[updateAll] param to indicate to update all pass test value or only first occurrence
   bool update(
-    bool Function(T) test,
-    T Function(T) value, {
+    bool Function(T element) test,
+    T Function(T element) value, {
     bool updateAll = true,
   }) {
     bool found = false;

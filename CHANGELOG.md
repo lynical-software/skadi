@@ -1,6 +1,7 @@
-## [2.6.0] - 15 April 2023
+## [2.6.0] - 26 April 2023
 - tweak some value in SkadiResponsive
 - add new provider param for EllipsisText
+- Improve parameter variable name
 
 ## [2.5.0] - 29 March 2023
 - Bring back what's remove in SkadiResponsive in 2.4.0

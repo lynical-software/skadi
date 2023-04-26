@@ -98,7 +98,7 @@ extension SkadiWidgetExtension on Widget {
 
 extension SkadiWidgetListExtension on List<Widget> {
   ///Wrap list of widget in a Row and Expanded each widget
-  Widget wrapRowExpended({
+  Widget wrapRowExpanded({
     MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
     CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
   }) {

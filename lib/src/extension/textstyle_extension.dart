@@ -28,17 +28,23 @@ extension SkadiTextStyleExtension on TextStyle {
   TextStyle get blue => copyWith(color: Colors.blue);
 
   // Decoration
+
+  ///Create an underline text
   TextStyle get underline => copyWith(decoration: TextDecoration.underline);
 
+  ///Underline the text with custom style
+  TextStyle get underline2 => copyWith(
+        decoration: TextDecoration.underline,
+        color: Colors.transparent,
+        shadows: [
+          Shadow(
+            color: color ?? Colors.black,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      );
+
   TextStyle get lineThrough => copyWith(decoration: TextDecoration.lineThrough);
-
-  TextStyle setColor(Color color) {
-    return copyWith(color: color);
-  }
-
-  TextStyle setSize(double size) {
-    return copyWith(fontSize: size);
-  }
 
   TextStyle get responsiveFontSize =>
       copyWith(fontSize: _responsiveFontSize(fontSize ?? 14));

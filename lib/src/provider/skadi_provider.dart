@@ -18,16 +18,16 @@ class SkadiProvider extends InheritedWidget {
     loggerSetting = logSetting ?? const SkadiLogSetting();
   }
 
-  ///Loading widget use in [SkadiAsyncButton,SkadiAsyncIconButton and SkadiLoadingButton]
+  ///Loading widget use in [SkadiAsyncButton, SkadiAsyncIconButton and SkadiLoadingButton]
   final Widget? buttonLoadingWidget;
 
-  ///Loading widget use in [SkadiFutureHandler,SkadiStreamHandler] class
+  ///Loading widget use in [SkadiFutureHandler, SkadiStreamHandler] class
   final Widget? loadingWidget;
 
   ///A widget use in [PaginatedListView] when there is no data
-  final Widget Function(AsyncCallback?)? noDataWidget;
+  final Widget Function(AsyncCallback? onRefresh)? noDataWidget;
 
-  ///Error widget use in [SkadiFutureHandler,SkadiStreamHandler] class
+  ///Error widget use in [SkadiFutureHandler, SkadiStreamHandler] class
   final ErrorWidgetFunction? errorWidget;
 
   ///Default max lines for EllipsisText widget

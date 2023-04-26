@@ -7,7 +7,7 @@ class SkadiStreamHandler<T> extends StatefulWidget {
   final Stream<T?> stream;
 
   ///A callback when Stream's snapshot hasData
-  final Widget Function(T) ready;
+  final Widget Function(T data) ready;
 
   ///A widget that showing when stream's has no data
   final Widget? loading;
@@ -16,10 +16,10 @@ class SkadiStreamHandler<T> extends StatefulWidget {
   final T? initialData;
 
   ///On snapshot error callback
-  final Widget Function(dynamic)? error;
+  final Widget Function(dynamic error)? error;
 
   ///A function call when stream has an error
-  final void Function(dynamic)? onError;
+  final void Function(dynamic error)? onError;
 
   ///create a StreamBuilder with less boilerplate code
   const SkadiStreamHandler({

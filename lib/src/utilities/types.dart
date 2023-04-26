@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-typedef ErrorWidgetFunction = Widget Function(dynamic, BuildContext);
+typedef ErrorWidgetFunction = Widget Function(
+    dynamic error, BuildContext context);
 
 typedef FutureOrCallBack = FutureOr<void> Function();
 

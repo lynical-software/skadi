@@ -14,7 +14,7 @@ extension SkadiListenableExtension on Listenable {
 
 extension SkadiValueListenableExtension<T> on ValueListenable<T> {
   ///ValueListenable listener widget that only expose value
-  Widget listen(Widget Function(T) builder) {
+  Widget listen(Widget Function(T value) builder) {
     return AnimatedBuilder(
       animation: this,
       builder: (context, child) {
@@ -24,8 +24,10 @@ extension SkadiValueListenableExtension<T> on ValueListenable<T> {
   }
 
   ///ValueListenable listener widget that support [child]
-  Widget listenChild(
-      {required Widget Function(T, Widget?) builder, Widget? child}) {
+  Widget listenChild({
+    required Widget Function(T, Widget?) builder,
+    Widget? child,
+  }) {
     return AnimatedBuilder(
       animation: this,
       child: child,
