@@ -1,3 +1,7 @@
+## [2.7.0] - 11 May 2023
+- Improve `PaginatedGridView` and `PaginatedListView`
+- Add `SkadiSliverPaginatedListView`
+
 ## [2.6.0] - 26 April 2023
 - tweak some value in SkadiResponsive
 - add new provider param for EllipsisText

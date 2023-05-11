@@ -50,6 +50,7 @@ export 'src/widgets/skadi_platform_checker.dart';
 export 'src/widgets/skadi_pop_scope.dart';
 export 'src/widgets/skadi_scaffold.dart';
 export 'src/widgets/skadi_simple_dialog.dart';
+export 'src/widgets/skadi_sliver_paginated_list.dart';
 export 'src/widgets/skadi_stream_handler.dart';
 //
 export 'src/widgets/spacing.dart';

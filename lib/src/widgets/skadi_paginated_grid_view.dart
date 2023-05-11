@@ -96,8 +96,9 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
     if (widget.hasError) {
       return;
     }
-    if (controller.offset >=
-        controller.position.maxScrollExtent - widget.fetchOffset) {
+    double offsetToFetch =
+        controller.position.maxScrollExtent - widget.fetchOffset;
+    if (controller.offset >= offsetToFetch) {
       loadingState += 1;
       onLoadingMoreData();
     }
@@ -123,6 +124,17 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
     }
   }
 
+  void checkInitialScrollPosition() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      double maxExtents = _isPrimaryScrollView
+          ? scrollController!.position.maxScrollExtent
+          : widget.scrollController!.position.maxScrollExtent;
+      if (maxExtents <= 0 && !widget.hasError) {
+        onLoadingMoreData();
+      }
+    });
+  }
+
   void removeListener() {
     if (_isPrimaryScrollView) {
       scrollController!.removeListener(() => scrollListener(scrollController!));
@@ -136,6 +148,7 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
   @override
   void initState() {
     initController();
+    checkInitialScrollPosition();
     super.initState();
   }
 
@@ -157,27 +170,28 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
         return skadiProvider!.noDataWidget!.call(null);
       }
     }
-    return Column(
-      children: [
-        Expanded(
-          flex: _isPrimaryScrollView ? 1 : 0,
-          child: GridView.builder(
-            scrollDirection: widget.scrollDirection,
+    return CustomScrollView(
+      controller: _isPrimaryScrollView
+          ? scrollController
+          : widget.attachProvidedScrollControllerToListView
+              ? widget.scrollController
+              : null,
+      physics: widget.physics,
+      scrollDirection: widget.scrollDirection,
+      shrinkWrap: widget.shrinkWrap,
+      reverse: widget.reverse,
+      slivers: [
+        SliverPadding(
+          padding: widget.padding,
+          sliver: SliverGrid.builder(
             gridDelegate: widget.gridDelegate,
-            shrinkWrap: widget.shrinkWrap,
-            padding: widget.padding,
-            reverse: widget.reverse,
-            controller: _isPrimaryScrollView
-                ? scrollController
-                : widget.attachProvidedScrollControllerToListView
-                    ? widget.scrollController
-                    : null,
-            physics: widget.physics,
             itemCount: widget.itemCount,
             itemBuilder: widget.itemBuilder,
           ),
         ),
-        _buildBottomLoadingWidget(),
+        SliverToBoxAdapter(
+          child: _buildBottomLoadingWidget(),
+        ),
       ],
     );
   }

@@ -12,13 +12,16 @@ class PaginationExample extends StatefulWidget {
   State<PaginationExample> createState() => _PaginationExampleState();
 }
 
-class _PaginationExampleState extends State<PaginationExample> {
+class _PaginationExampleState extends State<PaginationExample>
+    with DeferDispose {
   late FutureManager<UserResponse> userManager =
       FutureManager(reloading: false);
-
+  late ScrollController scrollController =
+      createDefer(() => ScrollController());
   late PaginationHandler<UserResponse, UserModel> paginationHandler =
       PaginationHandler(userManager);
   int maxTimeToShowError = 0;
+  bool sliver = true;
 
   Future fetchData([bool reload = false]) async {
     if (reload) {
@@ -56,43 +59,97 @@ class _PaginationExampleState extends State<PaginationExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Pagination Example")),
-      body: FutureManagerBuilder<UserResponse>(
-        futureManager: userManager,
-        ready: (context, UserResponse response) {
-          return SkadiPaginatedListView(
-            itemCount: response.data.length,
-            fetchOffset: 550,
-            hasMoreData: paginationHandler.hasMoreData,
-            dataLoader: fetchData,
-            padding: EdgeInsets.zero,
-            hasError: userManager.hasError,
-            itemBuilder: (context, index) {
-              final user = response.data[index];
-              return ListTile(
-                leading: const CircleAvatar(
-                  child: Icon(Icons.person),
-                ),
-                onTap: () {},
-                title: Text("${index + 1}: ${user.firstName} ${user.lastName}"),
-                subtitle: Text(user.email!),
-              );
+      appBar: AppBar(
+        title: const Text("Pagination Example"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                sliver = !sliver;
+                fetchData(true);
+              });
             },
-            errorWidget: () => Column(
-              children: [
-                Text(userManager.error.toString()),
-                IconButton(
-                  onPressed: () {
-                    userManager.clearError();
-                    fetchData();
+            icon: const Icon(Icons.tune),
+          ),
+        ],
+      ),
+      body: sliver
+          ? CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                const SliverAppBar(
+                  backgroundColor: Colors.red,
+                  elevation: 2.0,
+                  pinned: true,
+                  floating: true,
+                  stretch: true,
+                  title: Text("Pagination"),
+                  expandedHeight: 300.0,
+                  flexibleSpace: FlexibleSpaceBar(),
+                ),
+                userManager.when(
+                  loading: const CircularLoading(center: true).sliverToBox,
+                  ready: (response) {
+                    return SkadiSliverPaginatedListView(
+                      itemCount: response.data.length,
+                      scrollController: scrollController,
+                      hasMoreData: paginationHandler.hasMoreData,
+                      dataLoader: fetchData,
+                      hasError: userManager.hasError,
+                      itemBuilder: (context, index) {
+                        final user = response.data[index];
+                        return ListTile(
+                          leading: const CircleAvatar(
+                            child: Icon(Icons.person),
+                          ),
+                          onTap: () {},
+                          title: Text(
+                              "${index + 1}: ${user.firstName} ${user.lastName}"),
+                          subtitle: Text(user.email!),
+                        );
+                      },
+                    );
                   },
-                  icon: const Icon(Icons.refresh),
                 ),
               ],
+            )
+          : FutureManagerBuilder<UserResponse>(
+              futureManager: userManager,
+              ready: (context, UserResponse response) {
+                return SkadiPaginatedListView(
+                  itemCount: response.data.length,
+                  fetchOffset: 550,
+                  hasMoreData: paginationHandler.hasMoreData,
+                  dataLoader: fetchData,
+                  padding: EdgeInsets.zero,
+                  hasError: userManager.hasError,
+                  itemBuilder: (context, index) {
+                    final user = response.data[index];
+                    return ListTile(
+                      leading: const CircleAvatar(
+                        child: Icon(Icons.person),
+                      ),
+                      onTap: () {},
+                      title: Text(
+                          "${index + 1}: ${user.firstName} ${user.lastName}"),
+                      subtitle: Text(user.email!),
+                    );
+                  },
+                  errorWidget: () => Column(
+                    children: [
+                      Text(userManager.error.toString()),
+                      IconButton(
+                        onPressed: () {
+                          userManager.clearError();
+                          fetchData();
+                        },
+                        icon: const Icon(Icons.refresh),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }

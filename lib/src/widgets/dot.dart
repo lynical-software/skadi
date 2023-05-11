@@ -4,7 +4,11 @@ class Dot extends StatelessWidget {
   final double size;
   final double? width;
   final double? height;
+
+  ///
   final BoxShape shape;
+
+  ///
   final Widget? child;
 
   ///Use Theme's primary color if color isn't provide

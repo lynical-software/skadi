@@ -9,8 +9,9 @@ class SkadiBadge extends StatelessWidget {
   final TextStyle textStyle;
   final Color color;
   final bool enable;
+  final EdgeInsets? margin;
 
-  ///A badge that often us in fpr notification
+  ///A badge that often use for notification
   const SkadiBadge({
     Key? key,
     this.radius = 8.0,
@@ -18,6 +19,7 @@ class SkadiBadge extends StatelessWidget {
     this.color = Colors.red,
     this.enable = true,
     this.textStyle = const TextStyle(fontSize: 8, color: Colors.white),
+    this.margin,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class SkadiBadge extends StatelessWidget {
     return Container(
       width: radius * 2,
       height: radius * 2,
+      margin: margin,
       decoration: BoxDecoration(
         color: color,
         shape: BoxShape.circle,

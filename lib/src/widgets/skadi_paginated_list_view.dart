@@ -106,7 +106,7 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
   void onLoadingMoreData() async {
     if (loadingState > 1) return;
     if (widget.hasMoreData) {
-      await widget.dataLoader.call();
+      await widget.dataLoader();
       if (mounted) {
         loadingState = 0;
       }
@@ -123,6 +123,17 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
     }
   }
 
+  void checkInitialScrollPosition() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      double maxExtents = _isPrimaryScrollView
+          ? scrollController!.position.maxScrollExtent
+          : widget.scrollController!.position.maxScrollExtent;
+      if (maxExtents <= 0 && !widget.hasError) {
+        onLoadingMoreData();
+      }
+    });
+  }
+
   void removeListener() {
     if (_isPrimaryScrollView) {
       scrollController!.removeListener(() => scrollListener(scrollController!));
@@ -136,6 +147,7 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
   @override
   void initState() {
     initController();
+    checkInitialScrollPosition();
     super.initState();
   }
 
