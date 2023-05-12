@@ -61,6 +61,8 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
   ///
   final Axis scrollDirection;
 
+  final bool autoFetchOnShortList;
+
   const SkadiPaginatedGridBuilder({
     Key? key,
     required this.gridDelegate,
@@ -80,6 +82,7 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
     this.reverse = false,
     this.scrollDirection = Axis.vertical,
     this.errorWidget,
+    this.autoFetchOnShortList = false,
   }) : super(key: key);
   @override
   State<SkadiPaginatedGridBuilder> createState() =>
@@ -125,16 +128,18 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
   }
 
   void checkInitialScrollPosition() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (widget.itemCount > 0) {
-        double maxExtents = _isPrimaryScrollView
-            ? scrollController!.position.maxScrollExtent
-            : widget.scrollController!.position.maxScrollExtent;
-        if (maxExtents <= 0 && !widget.hasError) {
-          onLoadingMoreData();
+    if (widget.autoFetchOnShortList) {
+      Future.delayed(const Duration(milliseconds: 100)).then((timeStamp) {
+        if (widget.itemCount > 0) {
+          double maxExtents = _isPrimaryScrollView
+              ? scrollController!.position.maxScrollExtent
+              : widget.scrollController!.position.maxScrollExtent;
+          if (maxExtents <= 0 && !widget.hasError) {
+            onLoadingMoreData();
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   void removeListener() {

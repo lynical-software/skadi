@@ -61,6 +61,8 @@ class SkadiPaginatedListView extends StatefulWidget {
   ///Make sure to calculate with loading widget height
   final double fetchOffset;
 
+  final bool autoFetchOnShortList;
+
   const SkadiPaginatedListView({
     Key? key,
     required this.itemCount,
@@ -76,6 +78,7 @@ class SkadiPaginatedListView extends StatefulWidget {
     this.attachProvidedScrollControllerToListView = false,
     this.hasError = false,
     this.reverse = false,
+    this.autoFetchOnShortList = false,
     this.separatorBuilder,
     this.onEmpty,
     this.scrollController,
@@ -124,16 +127,18 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
   }
 
   void checkInitialScrollPosition() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (widget.itemCount > 0) {
-        double maxExtents = _isPrimaryScrollView
-            ? scrollController!.position.maxScrollExtent
-            : widget.scrollController!.position.maxScrollExtent;
-        if (maxExtents <= 0 && !widget.hasError) {
-          onLoadingMoreData();
+    if (widget.autoFetchOnShortList) {
+      Future.delayed(const Duration(milliseconds: 200)).then((timeStamp) {
+        if (widget.itemCount > 0) {
+          double maxExtents = _isPrimaryScrollView
+              ? scrollController!.position.maxScrollExtent
+              : widget.scrollController!.position.maxScrollExtent;
+          if (maxExtents <= 0 && !widget.hasError) {
+            onLoadingMoreData();
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   void removeListener() {

@@ -1,3 +1,6 @@
+## [2.7.4] - 12 May 2023
+- Fix `PaginatedGridView` and `PaginatedListView` bugs 
+
 ## [2.7.2] - 12 May 2023
 - Rename `TabAlignment` to `TabBarAlignment` to fix issue with Flutter 3.10
 
