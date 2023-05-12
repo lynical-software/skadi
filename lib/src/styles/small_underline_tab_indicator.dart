@@ -20,7 +20,7 @@ class SmallUnderLineTabIndicator extends Decoration {
   final Color color;
 
   ///[DotAlignment] whether it's bottom or top of tab's label
-  final TabAlignment tabAlignment;
+  final TabBarAlignment tabAlignment;
 
   const SmallUnderLineTabIndicator({
     required this.color,
@@ -28,7 +28,7 @@ class SmallUnderLineTabIndicator extends Decoration {
     this.height = 8,
     this.radius = 8,
     this.paddingLeft = 0,
-    this.tabAlignment = TabAlignment.bottom,
+    this.tabAlignment = TabBarAlignment.bottom,
   });
 
   @override
@@ -51,7 +51,7 @@ class _SmallUnderLineTabIndicatorPainter extends BoxPainter {
   final double height;
   final double radius;
   final double paddingLeft;
-  final TabAlignment tabAlignment;
+  final TabBarAlignment tabAlignment;
   _SmallUnderLineTabIndicatorPainter(
     VoidCallback onChanged,
     this.color,
@@ -63,7 +63,7 @@ class _SmallUnderLineTabIndicatorPainter extends BoxPainter {
   ) : super(onChanged);
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    final double yOffset = tabAlignment == TabAlignment.bottom
+    final double yOffset = tabAlignment == TabBarAlignment.bottom
         ? configuration.size!.height - 8
         : 0;
     final Offset indicatorOffset = offset + Offset(paddingLeft, yOffset);
