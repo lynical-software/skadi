@@ -125,11 +125,13 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
 
   void checkInitialScrollPosition() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      double maxExtents = _isPrimaryScrollView
-          ? scrollController!.position.maxScrollExtent
-          : widget.scrollController!.position.maxScrollExtent;
-      if (maxExtents <= 0 && !widget.hasError) {
-        onLoadingMoreData();
+      if (widget.itemCount > 0) {
+        double maxExtents = _isPrimaryScrollView
+            ? scrollController!.position.maxScrollExtent
+            : widget.scrollController!.position.maxScrollExtent;
+        if (maxExtents <= 0 && !widget.hasError) {
+          onLoadingMoreData();
+        }
       }
     });
   }

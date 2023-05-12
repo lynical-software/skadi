@@ -1,3 +1,6 @@
+## [2.7.1] - 12 May 2023
+- Fix `PaginatedGridView` and `PaginatedListView` bugs while item is empty
+
 ## [2.7.0] - 11 May 2023
 - Improve `PaginatedGridView` and `PaginatedListView`
 - Add `SkadiSliverPaginatedListView`
