@@ -12,11 +12,11 @@ class CustomLoadingOverlay extends StatelessWidget {
         child: Material(
           shape: SkadiDecoration.roundRect(12),
           color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
+          child: const Padding(
+            padding: EdgeInsets.all(24.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children: [
                 CircularProgressIndicator(),
                 SpaceX(24),
                 Text("Please wait...", style: TextStyle(fontSize: 16)),

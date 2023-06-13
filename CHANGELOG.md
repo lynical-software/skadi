@@ -1,3 +1,8 @@
+## [3.0.0] - 13 June 2023
+- Update dependencies
+- add `SkadiInjector` and `SkadiLocator`
+- add new extension on number
+
 ## [2.7.4] - 12 May 2023
 - Fix `PaginatedGridView` and `PaginatedListView` bugs 
 

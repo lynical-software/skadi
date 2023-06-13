@@ -4,9 +4,12 @@ class ExampleScaffold extends StatelessWidget {
   final String title;
   final List<Widget> children;
   final List<Widget>? actions;
-  const ExampleScaffold(
-      {Key? key, required this.title, required this.children, this.actions})
-      : super(key: key);
+  const ExampleScaffold({
+    Key? key,
+    required this.title,
+    required this.children,
+    this.actions,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
