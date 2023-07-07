@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../provider/skadi_provider.dart';
-import '../utilities/types.dart';
-import 'conditional_widget.dart';
+import 'package:skadi/skadi.dart';
 
 class SkadiAsyncIconButton extends StatefulWidget {
   ///
@@ -19,6 +16,9 @@ class SkadiAsyncIconButton extends StatefulWidget {
 
   ///
   final Color? backgroundColor;
+
+  ///
+  final Color? loadingColor;
 
   ///Button's borderRadius, You can check [borderRadius] documentation on Flutter
   final double borderRadius;
@@ -49,6 +49,7 @@ class SkadiAsyncIconButton extends StatefulWidget {
     this.borderSide,
     this.badge,
     this.loadingWidget,
+    this.loadingColor,
   }) : super(key: key);
 
   @override
@@ -56,40 +57,8 @@ class SkadiAsyncIconButton extends StatefulWidget {
 }
 
 class _SkadiAsyncIconButtonState extends State<SkadiAsyncIconButton> {
-  bool _isLoading = false;
-
-  final GlobalKey _globalKey = GlobalKey();
-  double? width;
-
-  void maintainWidthOnLoading() {
-    WidgetsBinding.instance.addPostFrameCallback((d) {
-      if (_globalKey.currentContext != null) {
-        RenderBox box =
-            _globalKey.currentContext!.findRenderObject() as RenderBox;
-        width = box.size.width;
-      }
-    });
-  }
-
-  void onButtonPressed() async {
-    if (_isLoading) return;
-    try {
-      _toggleLoading(true);
-      await widget.onTap?.call();
-    } catch (exception) {
-      rethrow;
-    } finally {
-      _toggleLoading(false);
-    }
-  }
-
-  void _toggleLoading(bool value) {
-    if (mounted) setState(() => _isLoading = value);
-  }
-
   @override
   Widget build(BuildContext context) {
-    maintainWidthOnLoading();
     final shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(widget.borderRadius),
       side: widget.borderSide ?? BorderSide.none,
@@ -98,10 +67,22 @@ class _SkadiAsyncIconButtonState extends State<SkadiAsyncIconButton> {
     final Widget? providedLoadingWidget =
         widget.loadingWidget ?? SkadiProvider.of(context)?.buttonLoadingWidget;
 
-    final Widget buttonContent = Stack(
+    return Stack(
       children: [
-        Padding(
-          padding: widget.padding,
+        SkadiAsyncButton(
+          onPressed: widget.onTap,
+          fullWidth: false,
+          style: ElevatedButton.styleFrom(
+            shape: shape,
+            elevation: widget.elevation,
+            splashFactory: InkSplash.splashFactory,
+            padding: widget.padding,
+            minimumSize: const Size(40, 40),
+            backgroundColor: widget.backgroundColor ?? Colors.transparent,
+          ),
+          margin: widget.margin,
+          loadingColor: widget.loadingColor ?? context.primaryColor,
+          loadingWidget: providedLoadingWidget,
           child: widget.icon,
         ),
         if (widget.badge != null)
@@ -111,39 +92,6 @@ class _SkadiAsyncIconButtonState extends State<SkadiAsyncIconButton> {
             child: widget.badge!,
           ),
       ],
-    );
-
-    const double defaultIconSize = 24;
-
-    return SizedBox(
-      width: width,
-      child: Card(
-        key: _globalKey,
-        shape: shape,
-        color: widget.backgroundColor ?? Colors.transparent,
-        elevation: widget.elevation,
-        margin: widget.margin,
-        child: InkWell(
-          onTap: onButtonPressed,
-          mouseCursor: SystemMouseCursors.click,
-          customBorder: shape,
-          child: ConditionalWidget(
-            condition: _isLoading,
-            onTrue: () => Padding(
-              padding: widget.padding,
-              child: Center(
-                child: providedLoadingWidget ??
-                    const SizedBox(
-                      width: defaultIconSize,
-                      height: defaultIconSize,
-                      child: CircularProgressIndicator.adaptive(),
-                    ),
-              ),
-            ),
-            onFalse: () => buttonContent,
-          ),
-        ),
-      ),
     );
   }
 }

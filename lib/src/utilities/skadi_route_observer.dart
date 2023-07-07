@@ -6,10 +6,12 @@ import 'skadi_navigator.dart';
 class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   final bool log;
   final void Function(Route route)? analyticCallBack;
+  final void Function(String name, String description)? logger;
 
   ///Route observer that support logging and analytic callback
   SkadiRouteObserver({
     this.log = false,
+    this.logger,
     this.analyticCallBack,
   });
 
@@ -48,9 +50,12 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   ///Get a copy list of history
   static List<String> get history => [..._history];
 
-  ///Log current page history to console
-  static void showRoutes() {
-    infoLog("Skadi Observer routes history:", _history);
+  void _log(String name, String description) {
+    if (logger != null) {
+      logger!.call(name, description);
+    } else {
+      infoLog(name, description);
+    }
   }
 
   ///Pop the route until a below route name
@@ -70,7 +75,7 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
     super.didRemove(route, previousRoute);
     _removeHistory(route);
     if (log) {
-      infoLog(
+      _log(
         "Skadi Route Observer: DidRemove",
         "Route: ${route.settings.name}, Previous Route: ${previousRoute?.settings.name}",
       );
@@ -85,7 +90,7 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
     }
     _removeHistory(route);
     if (log) {
-      infoLog(
+      _log(
         "Skadi Route Observer: DidPop",
         "Route: ${route.settings.name}, Previous Route: ${previousRoute?.settings.name}",
       );
@@ -98,7 +103,7 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
     _addHistory(newRoute);
     _removeHistory(oldRoute);
     if (log) {
-      infoLog(
+      _log(
         "Skadi Route Observer: DidReplace",
         "New Route: ${newRoute?.settings.name}, Old Route: ${oldRoute?.settings.name}",
       );
@@ -110,7 +115,7 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
     super.didPush(route, previousRoute);
     _addHistory(route);
     if (log) {
-      infoLog(
+      _log(
         "Skadi Route Observer: DidPush",
         "Route: ${route.settings.name}, Previous Route: ${previousRoute?.settings.name}",
       );

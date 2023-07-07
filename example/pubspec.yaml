@@ -6,18 +6,17 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.3 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  future_manager: ^1.0.0
+  future_manager: ^1.6.0
   skadi:
     path: ../
     version:
-  google_fonts: ^3.0.1
   dio: ^4.0.6
 
 dev_dependencies:

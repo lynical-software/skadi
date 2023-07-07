@@ -10,7 +10,7 @@ extension SkadiStringExtension on String {
   }
 
   num? get toNum {
-    return num.tryParse(this);
+    return num.tryParse(replaceAll(",", ""));
   }
 
   String emptyReplace(String replacement) {

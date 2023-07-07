@@ -1,3 +1,8 @@
+## [3.0.1] - 7 July 2023
+- add new param to SkadiRouteObserver
+- Rework SkadiAsyncIconButton to use SkadiAsyncButton instead
+- Small improvement
+
 ## [3.0.0] - 13 June 2023
 - Update dependencies
 - add `SkadiInjector` and `SkadiLocator`

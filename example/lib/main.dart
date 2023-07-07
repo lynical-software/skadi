@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:skadi/skadi.dart';
 import 'package:skadi_example/examples/buttons.dart';
 import 'package:skadi_example/examples/controls.dart';
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SkadiProvider(
-      loadingWidget: const Text("loading..."),
+      // loadingWidget: const Text("loading..."),
       noDataWidget: (onRefresh) => const Text("No data :("),
       logSetting: const SkadiLogSetting(
         http: true,
@@ -45,7 +44,6 @@ class MyApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             foregroundColor: Colors.white,
           ),
-          fontFamily: GoogleFonts.kantumruy().fontFamily,
         ),
         home: const RootPage(),
         builder: (context, child) {
