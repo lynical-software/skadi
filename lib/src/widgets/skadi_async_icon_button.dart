@@ -36,6 +36,8 @@ class SkadiAsyncIconButton extends StatefulWidget {
   ///Using LoadingWidget from SkadiProvider or default CircularProgressIndicator with 24px
   final Widget? loadingWidget;
 
+  final double? width;
+
   ///An IconButton with respectively small margin and shape
   const SkadiAsyncIconButton({
     Key? key,
@@ -50,6 +52,7 @@ class SkadiAsyncIconButton extends StatefulWidget {
     this.badge,
     this.loadingWidget,
     this.loadingColor,
+    this.width,
   }) : super(key: key);
 
   @override
@@ -72,10 +75,10 @@ class _SkadiAsyncIconButtonState extends State<SkadiAsyncIconButton> {
         SkadiAsyncButton(
           onPressed: widget.onTap,
           fullWidth: false,
-          style: ElevatedButton.styleFrom(
+          width: widget.width,
+          style: TextButton.styleFrom(
             shape: shape,
             elevation: widget.elevation,
-            splashFactory: InkSplash.splashFactory,
             padding: widget.padding,
             minimumSize: const Size(40, 40),
             backgroundColor: widget.backgroundColor ?? Colors.transparent,

@@ -1,3 +1,8 @@
+## [3.1.0] - 12 July 2023
+- add `SeparatorRow`
+- Rework SkadiAsyncIconButton style
+- Fix Form validator empty space
+
 ## [3.0.1] - 7 July 2023
 - add new param to SkadiRouteObserver
 - Rework SkadiAsyncIconButton to use SkadiAsyncButton instead

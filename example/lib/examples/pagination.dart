@@ -21,7 +21,7 @@ class _PaginationExampleState extends State<PaginationExample>
   late PaginationHandler<UserResponse, UserModel> paginationHandler =
       PaginationHandler(userManager);
   int maxTimeToShowError = 0;
-  bool sliver = true;
+  bool sliver = false;
 
   Future fetchData([bool reload = false]) async {
     if (reload) {

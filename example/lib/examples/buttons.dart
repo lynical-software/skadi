@@ -70,9 +70,10 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
             ),
             SkadiAsyncIconButton(
               onTap: otherloading,
+              width: 100,
               icon: const Text("Custom"),
               loadingWidget: const CircularLoading(size: 16),
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(8),
               borderSide: const BorderSide(color: Colors.red),
             ),
             SkadiAsyncIconButton(

@@ -5,6 +5,7 @@ class SkadiFormValidator {
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
   static String? validateField(String? value, {String? field, int? length}) {
+    value = value?.trim();
     if (value.isNullOrEmpty) {
       return field != null
           ? "Please input your ${field.toLowerCase()}"
@@ -23,6 +24,7 @@ class SkadiFormValidator {
   }
 
   static String? isNumber(String? value, {String? field}) {
+    value = value?.trim();
     if (value.isNullOrEmpty) {
       return field != null
           ? "Please input your ${field.toLowerCase()}"
@@ -38,6 +40,7 @@ class SkadiFormValidator {
   }
 
   static String? validateEmail(String? value, {String field = "email"}) {
+    value = value?.trim();
     if (value.isNullOrEmpty) {
       return "Please input your ${field.toLowerCase()}";
     }
