@@ -31,16 +31,16 @@ class _PaginationExampleState extends State<PaginationExample>
       () async {
         await SkadiUtils.wait();
         infoLog("Page", paginationHandler.page);
-        if (paginationHandler.page > 2 && maxTimeToShowError < 2) {
-          maxTimeToShowError++;
-          throw "Expected error thrown from execute";
-        }
+        // if (paginationHandler.page > 2 && maxTimeToShowError < 2) {
+        //   maxTimeToShowError++;
+        //   throw "Expected error thrown from execute";
+        // }
 
         final response = await Dio().get(
           "https://express-boilerplate-dev.lynical.com/api/user/all",
           queryParameters: {
             "page": paginationHandler.page,
-            "count": 20,
+            "count": 5,
           },
         );
         return UserResponse.fromJson(response.data);
@@ -118,9 +118,12 @@ class _PaginationExampleState extends State<PaginationExample>
               ready: (context, UserResponse response) {
                 return SkadiPaginatedListView(
                   itemCount: response.data.length,
-                  fetchOffset: 550,
                   hasMoreData: paginationHandler.hasMoreData,
                   dataLoader: fetchData,
+                  fetchOptions: const SkadiListViewFetchOptions(
+                    autoFetchOnShortList: true,
+                    fetchOffset: 550,
+                  ),
                   padding: EdgeInsets.zero,
                   hasError: userManager.hasError,
                   itemBuilder: (context, index) {

@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import '../provider/skadi_provider.dart';
-import 'spacing.dart';
+import 'package:skadi/skadi.dart';
 
 class SkadiPaginatedGridBuilder extends StatefulWidget {
   ///Delegate for GridView
@@ -52,16 +50,14 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
   ///A widget that show at the bottom of ListView when there is an error
   final Widget Function()? errorWidget;
 
-  ///Load more data if we reach this offset start from the bottom
-  final double fetchOffset;
-
   ///Normal GridView itemBuilder
   final IndexedWidgetBuilder itemBuilder;
 
   ///
   final Axis scrollDirection;
 
-  final bool autoFetchOnShortList;
+  ///options
+  final SkadiListViewFetchOptions fetchOptions;
 
   const SkadiPaginatedGridBuilder({
     Key? key,
@@ -72,7 +68,7 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
     required this.hasMoreData,
     this.onEmpty,
     this.shrinkWrap = false,
-    this.fetchOffset = 0.0,
+    this.fetchOptions = const SkadiListViewFetchOptions(),
     this.loadingWidget = const CircularProgressIndicator(),
     this.padding = const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
     this.physics = const ClampingScrollPhysics(),
@@ -82,7 +78,6 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
     this.reverse = false,
     this.scrollDirection = Axis.vertical,
     this.errorWidget,
-    this.autoFetchOnShortList = false,
   }) : super(key: key);
   @override
   State<SkadiPaginatedGridBuilder> createState() =>
@@ -92,6 +87,7 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
 class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
   ScrollController? scrollController;
   int loadingState = 0;
+  bool _stopAutoFetch = false;
 
   bool get _isPrimaryScrollView => widget.scrollController == null;
 
@@ -100,14 +96,14 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
       return;
     }
     double offsetToFetch =
-        controller.position.maxScrollExtent - widget.fetchOffset;
+        controller.position.maxScrollExtent - widget.fetchOptions.fetchOffset;
     if (controller.offset >= offsetToFetch) {
       loadingState += 1;
       onLoadingMoreData();
     }
   }
 
-  void onLoadingMoreData() async {
+  Future<void> onLoadingMoreData() async {
     if (loadingState > 1) return;
     if (widget.hasMoreData) {
       await widget.dataLoader();
@@ -117,25 +113,40 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
     }
   }
 
+  void _nonPrimaryListener() {
+    scrollListener(widget.scrollController!);
+  }
+
+  void _primaryListener() {
+    scrollListener(scrollController!);
+  }
+
   void initController() {
     if (_isPrimaryScrollView) {
       scrollController = ScrollController();
-      scrollController!.addListener(() => scrollListener(scrollController!));
+      scrollController!.addListener(_primaryListener);
     } else {
-      widget.scrollController
-          ?.addListener(() => scrollListener(widget.scrollController!));
+      widget.scrollController?.addListener(_nonPrimaryListener);
     }
   }
 
   void checkInitialScrollPosition() {
-    if (widget.autoFetchOnShortList) {
+    if (widget.fetchOptions.autoFetchOnShortList && !_stopAutoFetch) {
       Future.delayed(const Duration(milliseconds: 100)).then((timeStamp) {
         if (widget.itemCount > 0) {
           double maxExtents = _isPrimaryScrollView
               ? scrollController!.position.maxScrollExtent
               : widget.scrollController!.position.maxScrollExtent;
-          if (maxExtents <= 0 && !widget.hasError) {
-            onLoadingMoreData();
+          if (maxExtents <= widget.fetchOptions.autoFetchOffset &&
+              !widget.hasError &&
+              widget.hasMoreData) {
+            onLoadingMoreData().then((value) {
+              if (widget.fetchOptions.recursiveAutoFetch) {
+                checkInitialScrollPosition();
+              }
+            });
+          } else {
+            _stopAutoFetch = true;
           }
         }
       });
@@ -144,11 +155,10 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
 
   void removeListener() {
     if (_isPrimaryScrollView) {
-      scrollController!.removeListener(() => scrollListener(scrollController!));
+      scrollController!.removeListener(_primaryListener);
       scrollController?.dispose();
     } else {
-      widget.scrollController
-          ?.removeListener(() => scrollListener(widget.scrollController!));
+      widget.scrollController?.removeListener(_nonPrimaryListener);
     }
   }
 

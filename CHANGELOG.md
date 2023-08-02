@@ -1,3 +1,8 @@
+## [3.2.0] - 02 August 2023
+- Breaking changes:
+    - SkadiPaginatedListView and SkadiPaginatedGridView has a new param call `fetchOptions`.
+- Support recursive fetch for SkadiPaginatedListView and SkadiPaginatedGridView if the List isn't scrollable while having more data
+
 ## [3.1.0] - 12 July 2023
 - add `SeparatorRow`
 - Rework SkadiAsyncIconButton style
