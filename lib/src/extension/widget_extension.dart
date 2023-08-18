@@ -93,6 +93,12 @@ extension SkadiWidgetExtension on Widget {
 
   Widget get ovalClip => ClipOval(child: this);
 
+  ///Useful for debugging a widget
+  Widget get red => DecoratedBox(
+        decoration: const BoxDecoration(color: Colors.red),
+        child: this,
+      );
+
   SliverToBoxAdapter get sliverToBox => SliverToBoxAdapter(child: this);
 }
 

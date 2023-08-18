@@ -21,7 +21,7 @@ class _PaginationExampleState extends State<PaginationExample>
   late PaginationHandler<UserResponse, UserModel> paginationHandler =
       PaginationHandler(userManager);
   int maxTimeToShowError = 0;
-  bool sliver = false;
+  bool grid = true;
 
   Future fetchData([bool reload = false]) async {
     if (reload) {
@@ -29,7 +29,7 @@ class _PaginationExampleState extends State<PaginationExample>
     }
     await userManager.execute(
       () async {
-        await SkadiUtils.wait();
+        await SkadiUtils.wait(3000);
         infoLog("Page", paginationHandler.page);
         // if (paginationHandler.page > 2 && maxTimeToShowError < 2) {
         //   maxTimeToShowError++;
@@ -40,7 +40,7 @@ class _PaginationExampleState extends State<PaginationExample>
           "https://express-boilerplate-dev.lynical.com/api/user/all",
           queryParameters: {
             "page": paginationHandler.page,
-            "count": 5,
+            "count": 15,
           },
         );
         return UserResponse.fromJson(response.data);
@@ -59,101 +59,102 @@ class _PaginationExampleState extends State<PaginationExample>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Pagination Example"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              setState(() {
-                sliver = !sliver;
-                fetchData(true);
-              });
-            },
-            icon: const Icon(Icons.tune),
-          ),
-        ],
-      ),
-      body: sliver
-          ? CustomScrollView(
-              controller: scrollController,
-              slivers: [
-                const SliverAppBar(
-                  backgroundColor: Colors.red,
-                  elevation: 2.0,
-                  pinned: true,
-                  floating: true,
-                  stretch: true,
-                  title: Text("Pagination"),
-                  expandedHeight: 300.0,
-                  flexibleSpace: FlexibleSpaceBar(),
+        appBar: AppBar(
+          title: const Text("Pagination Example"),
+          actions: [
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  grid = !grid;
+                  fetchData(true);
+                });
+              },
+              icon: const Icon(Icons.tune),
+            ),
+          ],
+        ),
+        body: FutureManagerBuilder<UserResponse>(
+          futureManager: userManager,
+          ready: (context, UserResponse response) {
+            if (grid) {
+              return SkadiPaginatedGridBuilder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 5,
                 ),
-                userManager.when(
-                  loading: const CircularLoading(center: true).sliverToBox,
-                  ready: (response) {
-                    return SkadiSliverPaginatedListView(
-                      itemCount: response.data.length,
-                      scrollController: scrollController,
-                      hasMoreData: paginationHandler.hasMoreData,
-                      dataLoader: fetchData,
-                      hasError: userManager.hasError,
-                      itemBuilder: (context, index) {
-                        final user = response.data[index];
-                        return ListTile(
-                          leading: const CircleAvatar(
-                            child: Icon(Icons.person),
-                          ),
-                          onTap: () {},
-                          title: Text(
-                              "${index + 1}: ${user.firstName} ${user.lastName}"),
-                          subtitle: Text(user.email!),
-                        );
+                itemCount: response.data.length,
+                hasMoreData: paginationHandler.hasMoreData,
+                dataLoader: fetchData,
+                fetchOptions: const SkadiListViewFetchOptions(
+                  autoFetchOnShortList: true,
+                  recursiveAutoFetch: true,
+                  fetchOffset: 550,
+                ),
+                padding: EdgeInsets.zero,
+                hasError: userManager.hasError,
+                itemBuilder: (context, index) {
+                  final user = response.data[index];
+                  return Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(
+                        child: Text(
+                            "${index + 1}: ${user.firstName} ${user.lastName}"),
+                      ),
+                    ),
+                  );
+                },
+                errorWidget: () => Column(
+                  children: [
+                    Text(userManager.error.toString()),
+                    IconButton(
+                      onPressed: () {
+                        userManager.clearError();
+                        fetchData();
                       },
-                    );
-                  },
+                      icon: const Icon(Icons.refresh),
+                    ),
+                  ],
                 ),
-              ],
-            )
-          : FutureManagerBuilder<UserResponse>(
-              futureManager: userManager,
-              ready: (context, UserResponse response) {
-                return SkadiPaginatedListView(
-                  itemCount: response.data.length,
-                  hasMoreData: paginationHandler.hasMoreData,
-                  dataLoader: fetchData,
-                  fetchOptions: const SkadiListViewFetchOptions(
-                    autoFetchOnShortList: true,
-                    fetchOffset: 550,
+              );
+            }
+            return SkadiPaginatedListView(
+              itemCount: response.data.length,
+              hasMoreData: paginationHandler.hasMoreData,
+              dataLoader: fetchData,
+              fetchOptions: const SkadiListViewFetchOptions(
+                autoFetchOnShortList: true,
+                recursiveAutoFetch: true,
+                fetchOffset: 550,
+              ),
+              padding: EdgeInsets.zero,
+              hasError: userManager.hasError,
+              itemBuilder: (context, index) {
+                final user = response.data[index];
+                return ListTile(
+                  leading: const CircleAvatar(
+                    child: Icon(Icons.person),
                   ),
-                  padding: EdgeInsets.zero,
-                  hasError: userManager.hasError,
-                  itemBuilder: (context, index) {
-                    final user = response.data[index];
-                    return ListTile(
-                      leading: const CircleAvatar(
-                        child: Icon(Icons.person),
-                      ),
-                      onTap: () {},
-                      title: Text(
-                          "${index + 1}: ${user.firstName} ${user.lastName}"),
-                      subtitle: Text(user.email!),
-                    );
-                  },
-                  errorWidget: () => Column(
-                    children: [
-                      Text(userManager.error.toString()),
-                      IconButton(
-                        onPressed: () {
-                          userManager.clearError();
-                          fetchData();
-                        },
-                        icon: const Icon(Icons.refresh),
-                      ),
-                    ],
-                  ),
+                  onTap: () {},
+                  title:
+                      Text("${index + 1}: ${user.firstName} ${user.lastName}"),
+                  subtitle: Text(user.email!),
                 );
               },
-            ),
-    );
+              errorWidget: () => Column(
+                children: [
+                  Text(userManager.error.toString()),
+                  IconButton(
+                    onPressed: () {
+                      userManager.clearError();
+                      fetchData();
+                    },
+                    icon: const Icon(Icons.refresh),
+                  ),
+                ],
+              ),
+            );
+          },
+        ));
   }
 }
 

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:skadi/skadi.dart';
 
 class SeparatorRow extends StatelessWidget {
   /// How the children should be placed along the main axis.
@@ -87,7 +88,7 @@ class SeparatorRow extends StatelessWidget {
 
   final List<Widget> children;
 
-  final Widget Function(BuildContext, int) separatorBuilder;
+  final SeparatorBuilder separatorBuilder;
 
   final int _totalChildren;
 
@@ -117,7 +118,8 @@ class SeparatorRow extends StatelessWidget {
         if (index.isEven) {
           return children[itemIndex];
         } else {
-          return separatorBuilder(context, index);
+          return separatorBuilder(
+              context, itemIndex, index == _totalChildren - 1);
         }
       }).toList(),
     );

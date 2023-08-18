@@ -86,7 +86,7 @@ class SkadiPaginatedGridBuilder extends StatefulWidget {
 
 class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
   ScrollController? scrollController;
-  int loadingState = 0;
+  ValueNotifier<int> loadingState = ValueNotifier(0);
   bool _stopAutoFetch = false;
 
   bool get _isPrimaryScrollView => widget.scrollController == null;
@@ -95,20 +95,22 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
     if (widget.hasError) {
       return;
     }
+    double offset = controller.offset.abs();
     double offsetToFetch =
-        controller.position.maxScrollExtent - widget.fetchOptions.fetchOffset;
-    if (controller.offset >= offsetToFetch) {
-      loadingState += 1;
+        (controller.position.maxScrollExtent - widget.fetchOptions.fetchOffset)
+            .abs();
+    if (offset >= offsetToFetch) {
+      loadingState.value += 1;
       onLoadingMoreData();
     }
   }
 
   Future<void> onLoadingMoreData() async {
-    if (loadingState > 1) return;
+    if (loadingState.value > 1) return;
     if (widget.hasMoreData) {
       await widget.dataLoader();
       if (mounted) {
-        loadingState = 0;
+        loadingState.value = 0;
       }
     }
   }
@@ -140,6 +142,7 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
           if (maxExtents <= widget.fetchOptions.autoFetchOffset &&
               !widget.hasError &&
               widget.hasMoreData) {
+            loadingState.value += 1;
             onLoadingMoreData().then((value) {
               if (widget.fetchOptions.recursiveAutoFetch) {
                 checkInitialScrollPosition();
@@ -171,6 +174,7 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
 
   @override
   void dispose() {
+    loadingState.dispose();
     removeListener();
     super.dispose();
   }
@@ -224,7 +228,14 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
     return widget.hasMoreData
         ? Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Center(child: widget.loadingWidget),
+            child: ValueListenableBuilder<int>(
+              valueListenable: loadingState,
+              child: Center(child: widget.loadingWidget),
+              builder: (context, value, child) {
+                if (value == 0) return emptySizedBox;
+                return child!;
+              },
+            ),
           )
         : emptySizedBox;
   }

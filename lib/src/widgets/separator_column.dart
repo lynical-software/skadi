@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+typedef SeparatorBuilder = Widget Function(BuildContext, int, bool);
+
 class SeparatorColumn extends StatelessWidget {
   /// How the children should be placed along the main axis.
   ///
@@ -87,7 +89,7 @@ class SeparatorColumn extends StatelessWidget {
 
   final List<Widget> children;
 
-  final Widget Function(BuildContext, int) separatorBuilder;
+  final SeparatorBuilder separatorBuilder;
 
   final int _totalChildren;
 
@@ -117,7 +119,8 @@ class SeparatorColumn extends StatelessWidget {
         if (index.isEven) {
           return children[itemIndex];
         } else {
-          return separatorBuilder(context, index);
+          return separatorBuilder(
+              context, itemIndex, index == _totalChildren - 1);
         }
       }).toList(),
     );

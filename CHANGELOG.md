@@ -1,3 +1,7 @@
+## [3.3.0] - 18 August 2023
+- Improve `SkadiPaginatedListView` and `SkadiPaginatedGridView` loading mechanism
+- Fix `SeparatorRow` and `SeparatorColumn` separator builder index
+
 ## [3.2.0] - 02 August 2023
 - Breaking changes:
     - SkadiPaginatedListView and SkadiPaginatedGridView has a new param call `fetchOptions`.
