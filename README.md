@@ -1,6 +1,6 @@
 # skadi
 
-[![pub package](https://img.shields.io/badge/pub-3.3.0-blueviolet.svg)](https://pub.dev/packages/skadi) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/skadi)
+[![pub package](https://img.shields.io/badge/pub-3.4.0-blueviolet.svg)](https://pub.dev/packages/skadi) ![Latest commit](https://badgen.net/github/last-commit/lynical-software/skadi)
 
 Flutter utilities packages for custom widgets and utilities function.
 
