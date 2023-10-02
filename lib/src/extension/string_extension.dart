@@ -9,6 +9,8 @@ extension SkadiStringExtension on String {
     return split(".").last;
   }
 
+  String removeExtension() => split(".").first;
+
   num? get toNum {
     return num.tryParse(replaceAll(",", ""));
   }

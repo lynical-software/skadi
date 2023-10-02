@@ -1,3 +1,6 @@
+## [3.4.0] - 2 October 2023
+- Add `ReadMoreText`
+
 ## [3.3.0] - 18 August 2023
 - Improve `SkadiPaginatedListView` and `SkadiPaginatedGridView` loading mechanism
 - Fix `SeparatorRow` and `SeparatorColumn` separator builder index

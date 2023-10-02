@@ -25,10 +25,26 @@ class _OtherWidgetExampleState extends State<OtherWidgetExample> {
             subtitle: "nullable Text with ellipsis",
             isRow: false,
             children: [
-              EllipsisText(nullableString),
+              EllipsisText(
+                nullableString,
+                style: kTs14.blue.betterUnderline(),
+              ),
             ],
           ),
           const SpaceX(),
+          Section(
+            title: "ReadMoreText",
+            subtitle: "Text with read more or read less",
+            isRow: false,
+            children: [
+              ReadMoreText(
+                text: "Lorem\n" * 30,
+                trimLines: 3,
+                style: kTs14.red,
+                readMoreStyle: kTs14.blue,
+              ),
+            ],
+          ),
           const Section(
             title: "SkadiPlatformChecker",
             subtitle: "adaptive platform widget",
@@ -36,8 +52,7 @@ class _OtherWidgetExampleState extends State<OtherWidgetExample> {
             children: [
               SkadiPlatformChecker(
                 androidWidget: TextField(
-                  decoration:
-                      InputDecoration(hintText: "Android Material textfield"),
+                  decoration: InputDecoration(hintText: "Android Material textfield"),
                 ),
                 iosWidget: CupertinoTextField(
                   placeholder: "iOS cupertino textfield",
@@ -116,9 +131,7 @@ class _MyOtherStatelessWidget extends StatelessWidget {
           await SkadiUtils.wait();
           valueNotifier.value = false;
         },
-        child: valueNotifier.value
-            ? const Text("Loading...")
-            : const Text("Click me"),
+        child: valueNotifier.value ? const Text("Loading...") : const Text("Click me"),
       ),
     );
   }
@@ -145,9 +158,7 @@ class _MyStatelessWidget extends StatelessWidget {
               await SkadiUtils.wait();
               valueNotifier.value = false;
             },
-            child: valueNotifier.value
-                ? const Text("Loading...")
-                : const Text("Click me"),
+            child: valueNotifier.value ? const Text("Loading...") : const Text("Click me"),
           );
         },
       ),

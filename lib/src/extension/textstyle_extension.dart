@@ -33,16 +33,22 @@ extension SkadiTextStyleExtension on TextStyle {
   TextStyle get underline => copyWith(decoration: TextDecoration.underline);
 
   ///Underline the text with custom style
-  TextStyle get underline2 => copyWith(
-        decoration: TextDecoration.underline,
-        color: Colors.transparent,
-        shadows: [
-          Shadow(
-            color: color ?? Colors.black,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      );
+  TextStyle betterUnderline({
+    Color underlineColor = Colors.black,
+    double offset = -1,
+  }) {
+    return copyWith(
+      shadows: [
+        Shadow(
+          color: color ?? underlineColor,
+          offset: Offset(0, offset),
+        ),
+      ],
+      color: Colors.transparent,
+      decoration: TextDecoration.underline,
+      decorationColor: color ?? underlineColor,
+    );
+  }
 
   TextStyle get lineThrough => copyWith(decoration: TextDecoration.lineThrough);
 

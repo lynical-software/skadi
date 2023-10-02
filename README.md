@@ -10,7 +10,7 @@ Add this to pubspec.yaml
 
 ```dart
 dependencies:
-  skadi: ^3.3.0
+  skadi: ^3.4.0
 ```
 
 # Widgets
@@ -18,11 +18,13 @@ dependencies:
 | Widget                             | Description                                                                 |
 | ---------------------------------- | --------------------------------------------------------------------------- |
 | [ConditionalWidget][other]         | Build a widget based on a condition                                         |
+| [CircularLoading][other]           | Loading widget                                                              |
 | [Dot][other]                       | Create a customizable Dot or bullet point                                   |
 | [EllipsisText][other]              | Nullable Text with ellipsis as default overflow                             |
 | [KeyboardDismiss][other]           | Dismiss keyboard on tap                                                     |
 | [LoadingOverlay][controls]         | Create an overlay loading that cover entire screen and disable input        |
 | [LoadingOverlayPopScope][controls] | prevent or allow user from pop the screen when LoadingOverlay is displaying |
+| [ReadMoreText][other]              | Read more or read less text                                                 |
 | [SkadiAccordion][controls]         | Custom ExpansionTile                                                        |
 | [SkadiActionSheet][dialog]         | Custom CupertinoActionSheet for option selector                             |
 | [SkadiAsyncButton][buttons]        | Custom ElevatedButton for asynchronous onPressed callback                   |
