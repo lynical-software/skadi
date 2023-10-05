@@ -23,6 +23,21 @@ class SkadiFormValidator {
     return null;
   }
 
+  static String? validateNumber(num? value,
+      {String? field, (bool, String) Function(num value)? condition}) {
+    if (value == null) {
+      return field != null
+          ? "Please input your ${field.toLowerCase()}"
+          : "Please input required field";
+    }
+
+    if (condition != null && condition(value).$1) {
+      return condition(value).$2;
+    }
+
+    return null;
+  }
+
   static String? isNumber(String? value, {String? field}) {
     value = value?.trim();
     if (value.isNullOrEmpty) {

@@ -21,6 +21,7 @@ export 'src/styles/small_underline_tab_indicator.dart';
 export 'src/utilities/debouncer.dart';
 export 'src/utilities/form_validator.dart';
 export 'src/utilities/global.dart';
+export 'src/utilities/injector.dart';
 export 'src/utilities/jwt_decoder.dart';
 export 'src/utilities/logger.dart';
 export 'src/utilities/skadi_navigator.dart';
@@ -37,6 +38,7 @@ export 'src/widgets/keyboard_dismiss.dart';
 export 'src/widgets/loading_overlay.dart';
 export 'src/widgets/readmore_text.dart';
 export 'src/widgets/separator_column.dart';
+//
 export 'src/widgets/skadi_accordion.dart';
 export 'src/widgets/skadi_action_sheet.dart';
 export 'src/widgets/skadi_async_button.dart';

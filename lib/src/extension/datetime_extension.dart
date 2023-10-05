@@ -32,6 +32,16 @@ extension DateTimeExtensionX on DateTime {
     return formatter.format(this);
   }
 
+  ///Default format for US date
+  String formatUSDate({String format = "MMM dd yyyy", Locale? locale}) {
+    String? localeCode;
+    if (locale != null) {
+      localeCode = locale.languageCode;
+    }
+    var formatter = DateFormat(format, localeCode);
+    return formatter.format(this);
+  }
+
   bool isTheSameDay(DateTime? dateTime) {
     if (dateTime == null) return false;
     if (dateTime.day == day &&

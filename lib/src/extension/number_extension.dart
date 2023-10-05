@@ -6,6 +6,11 @@ extension SkadiNumberExtension on num {
     return "$this";
   }
 
+  num? get nullIfZero {
+    if (this == 0) return null;
+    return this;
+  }
+
   String zeroReplacement(String replacement) {
     if (this == 0) return replacement;
     return "$this";

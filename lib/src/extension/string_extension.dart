@@ -15,8 +15,15 @@ extension SkadiStringExtension on String {
     return num.tryParse(replaceAll(",", ""));
   }
 
+  num toNumber() => num.tryParse(replaceAll(",", "")) ?? 0;
+
   String emptyReplace(String replacement) {
     return isEmpty ? replacement : this;
+  }
+
+  String? get nullIfEmpty {
+    if (isEmpty) return null;
+    return this;
   }
 }
 

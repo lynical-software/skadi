@@ -52,7 +52,8 @@ class _OtherWidgetExampleState extends State<OtherWidgetExample> {
             children: [
               SkadiPlatformChecker(
                 androidWidget: TextField(
-                  decoration: InputDecoration(hintText: "Android Material textfield"),
+                  decoration:
+                      InputDecoration(hintText: "Android Material textfield"),
                 ),
                 iosWidget: CupertinoTextField(
                   placeholder: "iOS cupertino textfield",
@@ -131,7 +132,9 @@ class _MyOtherStatelessWidget extends StatelessWidget {
           await SkadiUtils.wait();
           valueNotifier.value = false;
         },
-        child: valueNotifier.value ? const Text("Loading...") : const Text("Click me"),
+        child: valueNotifier.value
+            ? const Text("Loading...")
+            : const Text("Click me"),
       ),
     );
   }
@@ -158,7 +161,9 @@ class _MyStatelessWidget extends StatelessWidget {
               await SkadiUtils.wait();
               valueNotifier.value = false;
             },
-            child: valueNotifier.value ? const Text("Loading...") : const Text("Click me"),
+            child: valueNotifier.value
+                ? const Text("Loading...")
+                : const Text("Click me"),
           );
         },
       ),

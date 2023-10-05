@@ -1,3 +1,10 @@
+## [4.0.0] - 5 October 2023
+- fix export `SkadiInjector` and `SkadiLocator`
+- add `formatUSDate` 
+- add `nullIfZero`
+- add `nullIfEmpty`
+- Now required dart `>= 3.0.0`
+
 ## [3.4.0] - 2 October 2023
 - Add `ReadMoreText`
 
