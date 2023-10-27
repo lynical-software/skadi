@@ -1,3 +1,5 @@
+import 'package:skadi/skadi.dart';
+
 extension SkadiListExtension<T> on List<T> {
   ///Filter list that return empty if no item found
   ///instead of throwing an exception
@@ -40,6 +42,12 @@ extension SkadiListExtension<T> on List<T> {
     return this[index];
   }
 
+  T? get beforeLast {
+    if (isEmpty) return null;
+    if (length == 1) return first;
+    return this.get(length - 2);
+  }
+
   ///Update list value that met the condition
   ///[updateAll] param to indicate to update all pass test value or only first occurrence
   bool update(
@@ -59,6 +67,19 @@ extension SkadiListExtension<T> on List<T> {
       }
     }
     return found;
+  }
+
+  ///Convert to a List of number to `SkadiResponsive`'s value.
+  ///Return cast error if isn't a List of number
+  double responsive() {
+    List<num> values = map((e) => e as num).toList();
+    if (isEmpty) return 0;
+    return SkadiResponsive.value(
+      values.first.toDouble(),
+      values.get(1)?.toDouble(),
+      values.get(2)?.toDouble(),
+      values.get(3)?.toDouble(),
+    );
   }
 }
 

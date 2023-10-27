@@ -3,6 +3,8 @@ import 'package:skadi/skadi.dart';
 
 class SkadiScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;
+
+  ///
   final Widget? body;
 
   ///Allow to pop screen if LoadingOverlay is currently showing

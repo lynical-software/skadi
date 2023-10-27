@@ -93,6 +93,17 @@ class _ButtonsExampleState extends State<ButtonsExample> with DeferDispose {
               icon: const Icon(Icons.notifications_active_outlined),
               borderSide: const BorderSide(color: Colors.purple),
             ),
+            IconButton(
+              onPressed: () {},
+              style: IconButton.styleFrom(
+                padding: const EdgeInsets.all(0),
+                shape: SkadiDecoration.roundRect(),
+                side: const BorderSide(color: Colors.purple),
+              ),
+              color: Colors.red,
+              padding: EdgeInsets.zero,
+              icon: const Icon(Icons.add),
+            ),
             SkadiIconButton(
               onTap: () {},
               icon: const Icon(Icons.settings, color: Colors.white),

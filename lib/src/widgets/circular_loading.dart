@@ -20,6 +20,13 @@ class CircularLoading extends StatelessWidget {
     this.color,
   }) : _adaptive = true;
 
+  const CircularLoading.center({
+    super.key,
+    this.center = true,
+    this.size = 24,
+    this.color,
+  }) : _adaptive = false;
+
   @override
   Widget build(BuildContext context) {
     late Widget child;

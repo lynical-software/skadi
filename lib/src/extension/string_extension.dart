@@ -15,12 +15,18 @@ extension SkadiStringExtension on String {
     return num.tryParse(replaceAll(",", ""));
   }
 
+  bool toBool() => bool.tryParse(this, caseSensitive: false) ?? false;
+
+  DateTime? toDateTime() => DateTime.tryParse(this);
+
+  ///Convert String to Number with default value of `0`
   num toNumber() => num.tryParse(replaceAll(",", "")) ?? 0;
 
   String emptyReplace(String replacement) {
     return isEmpty ? replacement : this;
   }
 
+  ///Using with dropdown menu to apply null value
   String? get nullIfEmpty {
     if (isEmpty) return null;
     return this;

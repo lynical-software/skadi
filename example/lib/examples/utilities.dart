@@ -13,12 +13,15 @@ class UtilitiesMethodUsage extends StatefulWidget {
 class _UtilitiesMethodUsageState extends State<UtilitiesMethodUsage> {
   @override
   Widget build(BuildContext context) {
+    final width = [200, 223].responsive()..logObj();
+    final height = [200, 223.5].responsive();
+    final size = [200.5, 223.5].responsive();
     return ExampleScaffold(
       title: "Utilities Method Usage",
       children: [
         Image.network(
           SkadiUtils.unsplashImage(category: "dogs"),
-          height: 200,
+          height: width,
         ),
         const Divider(),
         Section(
@@ -37,7 +40,7 @@ class _UtilitiesMethodUsageState extends State<UtilitiesMethodUsage> {
         ),
         Section(
           title: "Others",
-          isRow: true,
+          isRow: false,
           children: [
             ElevatedButton(
               onPressed: () async {
@@ -46,6 +49,15 @@ class _UtilitiesMethodUsageState extends State<UtilitiesMethodUsage> {
               },
               child: const Text("Check connection"),
             ),
+            Container(
+              color: Colors.blue,
+              height: width,
+              width: height,
+            ),
+            const SpaceY(32),
+            SizedBox.square(
+              dimension: size,
+            ).red,
           ],
         ),
       ],

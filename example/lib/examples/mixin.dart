@@ -19,6 +19,8 @@ class _MixinExampleState extends State<MixinExample>
   ///
   ///Create an auto dispose ChangeNotifier
   late ValueNotifier<bool> notifier = createDefer(() => ValueNotifier(false));
+
+  //
   late Cat cat = createDefer(() => Cat());
   @override
   void initState() {
@@ -53,6 +55,7 @@ class _MixinExampleState extends State<MixinExample>
                   elevation: 2.0,
                   fillColor: Colors.white,
                 ),
+                errorText: "hi",
               ),
             ),
             cat.builder(builder: ((context, child) => emptySizedBox)),
@@ -61,17 +64,29 @@ class _MixinExampleState extends State<MixinExample>
             boolNotifier.listen(
               (value) {
                 return SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
                   title: const Text("Remember me"),
                   value: value,
                   onChanged: toggleValue,
                 );
               },
             ),
+            CheckboxListTile.adaptive(
+              value: false,
+              contentPadding: EdgeInsets.zero,
+              title: const Text("Hello"),
+              onChanged: (value) {},
+            ),
             SkadiAsyncButton(
               loadingNotifier: notifier,
               shape: SkadiDecoration.roundRect(),
-              onPressed: () {
-                if (isFormValidated) {}
+              onPressed: () async {
+                notifier.value = true;
+                await SkadiUtils.wait();
+                if (isFormValidated) {
+                  debugLog("Validated");
+                }
+                notifier.value = false;
               },
               child: const Text("Validate"),
             ),

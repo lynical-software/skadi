@@ -16,9 +16,15 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool useMaterial3 = false;
   @override
   Widget build(BuildContext context) {
     return SkadiProvider(
@@ -40,15 +46,44 @@ class MyApp extends StatelessWidget {
         ],
         title: 'Skadi Flutter Example',
         theme: ThemeData(
-          primarySwatch: Colors.cyan,
+          primarySwatch: useMaterial3 ? null : Colors.cyan,
+          colorSchemeSeed: useMaterial3 ? Colors.cyan : null,
+          useMaterial3: useMaterial3,
           appBarTheme: const AppBarTheme(
             foregroundColor: Colors.white,
+            backgroundColor: Colors.cyan,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.cyan,
+              foregroundColor: Colors.black,
+            ),
           ),
         ),
         home: const RootPage(),
         builder: (context, child) {
           return LoadingOverlayProvider.builder(
-            child: SkadiResponsiveBuilder(builder: (_) => child!),
+            child: SkadiResponsiveBuilder(
+              builder: (_) => Column(
+                children: [
+                  child!.expanded,
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black12),
+                      color: Colors.white,
+                    ),
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() => useMaterial3 = !useMaterial3);
+                      },
+                      child: const Text("Switch Material Version"),
+                    ),
+                  )
+                ],
+              ),
+            ),
             loadingWidget: const CustomLoadingOverlay(),
           );
         },

@@ -44,7 +44,8 @@ class WillPopPrompt extends StatelessWidget {
                   const WillPopDisable(
                     child: SkadiConfirmationDialog.danger(
                       content: Text(
-                          "Are you sure you want to cancel this operation?"),
+                        "Are you sure you want to cancel this operation?",
+                      ),
                       confirmText: "Cancel",
                       cancelText: "Discard",
                     ),

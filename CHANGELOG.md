@@ -1,8 +1,17 @@
+## [4.1.0] - 26 October 2023
+- Fix `SkadiConfirmationDialog` content cutout on iOS
+- Improve `ReadmoreText` param
+- New extension
+  -  `responsive`, `beforeLast` : **List**
+  -  `logObj` : **Object**
+  -  `toBool`,`toDateTime`: **String**
+
 ## [4.0.0] - 5 October 2023
 - fix export `SkadiInjector` and `SkadiLocator`
-- add `formatUSDate` 
-- add `nullIfZero`
-- add `nullIfEmpty`
+- New extension
+  -  `formatUSDate` : **DateTime**
+  -  `nullIfZero` : **num**
+  -  `nullIfEmpty` **String**
 - Now required dart `>= 3.0.0`
 
 ## [3.4.0] - 2 October 2023
@@ -14,8 +23,8 @@
 
 ## [3.2.0] - 02 August 2023
 - Breaking changes:
-    - SkadiPaginatedListView and SkadiPaginatedGridView has a new param call `fetchOptions`.
-- Support recursive fetch for SkadiPaginatedListView and SkadiPaginatedGridView if the List isn't scrollable while having more data
+    - `SkadiPaginatedListView` and `SkadiPaginatedGridView` has a new param call `fetchOptions`.
+- Support recursive fetch for `SkadiPaginatedListView` and `SkadiPaginatedGridView` if the List isn't scrollable while having more data
 
 ## [3.1.0] - 12 July 2023
 - add `SeparatorRow`

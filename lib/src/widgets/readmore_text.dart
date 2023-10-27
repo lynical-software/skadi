@@ -10,15 +10,15 @@ class ReadMoreText extends StatefulWidget {
   final int trimLines;
   final ValueChanged<bool>? onLinkTap;
 
-  const ReadMoreText({
-    super.key,
-    required this.text,
+  const ReadMoreText(
+    this.text, {
     required this.trimLines,
     this.style,
     this.readMoreStyle,
     this.readMoreText = "Read more",
     this.readLessText = "Read less",
     this.onLinkTap,
+    super.key,
   });
 
   @override

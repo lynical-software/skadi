@@ -101,7 +101,7 @@ class SkadiConfirmationDialog extends StatelessWidget {
     return CupertinoAlertDialog(
       title: Text(title),
       content: Padding(
-        padding: const EdgeInsets.only(top: 12),
+        padding: const EdgeInsets.only(top: 8),
         child: content,
       ),
       actions: actions,

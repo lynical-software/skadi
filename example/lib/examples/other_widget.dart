@@ -38,7 +38,7 @@ class _OtherWidgetExampleState extends State<OtherWidgetExample> {
             isRow: false,
             children: [
               ReadMoreText(
-                text: "Lorem\n" * 30,
+                "Lorem\n" * 30,
                 trimLines: 3,
                 style: kTs14.red,
                 readMoreStyle: kTs14.blue,

@@ -1,5 +1,8 @@
 import '../extension/string_extension.dart';
 
+///Validate the number and return the error message
+typedef NumberValidatorFunction = (bool, String) Function(num value);
+
 class SkadiFormValidator {
   static final _emailRegex = RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
@@ -23,8 +26,11 @@ class SkadiFormValidator {
     return null;
   }
 
-  static String? validateNumber(num? value,
-      {String? field, (bool, String) Function(num value)? condition}) {
+  static String? validateNumber(
+    num? value, {
+    String? field,
+    NumberValidatorFunction? condition,
+  }) {
     if (value == null) {
       return field != null
           ? "Please input your ${field.toLowerCase()}"
