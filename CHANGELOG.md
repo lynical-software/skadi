@@ -1,3 +1,7 @@
+## [4.2.0] - 7 November 2023
+- add `titleBuilder` for `SkadiAccordion`
+  
+
 ## [4.1.0] - 26 October 2023
 - Fix `SkadiConfirmationDialog` content cutout on iOS
 - Improve `ReadmoreText` param

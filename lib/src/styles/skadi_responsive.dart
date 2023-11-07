@@ -250,8 +250,13 @@ class SkadiResponsive {
   }
 
   ///Return a responsive EdgeInsets.all that follow Material Design value
-  static EdgeInsets get marginAll {
+  static EdgeInsets get marginAll16 {
     return EdgeInsets.all(value(16, 24, 32, 12));
+  }
+
+  ///Return a responsive EdgeInsets.all that follow Material Design value
+  static EdgeInsets get marginAll8 {
+    return EdgeInsets.all(value(8, 16, 24, 8));
   }
 }
 

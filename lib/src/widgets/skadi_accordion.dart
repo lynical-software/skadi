@@ -9,7 +9,7 @@ enum IconPosition {
 ///Custom accordion that similar to Flutter's [ExpansionTile]
 class SkadiAccordion extends StatefulWidget {
   ///Accordion title, usually a Text
-  final Widget title;
+  final Widget? title;
 
   ///A trailing icon that rotate on expanded or collapse
   final Widget icon;
@@ -53,10 +53,12 @@ class SkadiAccordion extends StatefulWidget {
   ///Position of the trailing icon
   final IconPosition iconPosition;
 
+  final Widget Function(Animation<double> rotation)? titleBuilder;
+
   ///Custom accordion that similar to Flutter's [ExpansionTile]
   const SkadiAccordion({
     Key? key,
-    required this.title,
+    this.title,
     required this.children,
     required this.onToggle,
     required this.value,
@@ -71,6 +73,7 @@ class SkadiAccordion extends StatefulWidget {
     this.iconPosition = IconPosition.end,
     this.childrenBackgroundColor,
     this.animatedOnStart = false,
+    this.titleBuilder,
   }) : super(key: key);
   @override
   State<SkadiAccordion> createState() => _SkadiAccordionState();
@@ -138,30 +141,32 @@ class _SkadiAccordionState extends State<SkadiAccordion>
               borderRadius: widget.titleDecoration?.borderRadius ??
                   SkadiDecoration.radius(0),
             ),
-            child: Ink(
-              decoration: widget.titleDecoration,
-              padding: widget.titlePadding ?? const EdgeInsets.all(16),
-              child: Row(
-                mainAxisAlignment: widget.iconPosition == IconPosition.start
-                    ? MainAxisAlignment.start
-                    : MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  if (widget.iconPosition == IconPosition.start &&
-                      widget.showIcon) ...[
-                    icon,
-                    const SpaceX(),
-                  ],
-                  Flexible(
-                    child: DefaultTextStyle.merge(
-                      child: widget.title,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
+            child: widget.titleBuilder?.call(rotation) ??
+                Ink(
+                  decoration: widget.titleDecoration,
+                  padding: widget.titlePadding ?? const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: widget.iconPosition == IconPosition.start
+                        ? MainAxisAlignment.start
+                        : MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      if (widget.iconPosition == IconPosition.start &&
+                          widget.showIcon) ...[
+                        icon,
+                        const SpaceX(),
+                      ],
+                      if (widget.title != null)
+                        Flexible(
+                          child: DefaultTextStyle.merge(
+                            child: widget.title!,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ),
+                      if (widget.iconPosition == IconPosition.end &&
+                          widget.showIcon) ...[icon],
+                    ],
                   ),
-                  if (widget.iconPosition == IconPosition.end &&
-                      widget.showIcon) ...[icon],
-                ],
-              ),
-            ),
+                ),
           ),
           SizeTransition(
             sizeFactor: size,

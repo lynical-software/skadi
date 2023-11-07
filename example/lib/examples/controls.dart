@@ -42,6 +42,37 @@ class _ControlExampleState extends State<ControlExample> {
                   );
                 },
               ),
+              ValueNotifierWrapper<bool>(
+                initialValue: false,
+                builder: (notifier, value, child) {
+                  return SkadiAccordion(
+                    titleBuilder: (rotation) {
+                      return Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          children: [
+                            const Text("Custom"),
+                            RotationTransition(
+                              turns: rotation,
+                              child: const Icon(Icons.arrow_drop_down),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    onToggle: (value) {
+                      notifier.value = value;
+                    },
+                    value: value,
+                    children: List.generate(
+                      3,
+                      (index) => ListTile(
+                        title: Text("I'm a children $index"),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
           Section(
