@@ -1,4 +1,4 @@
-## [4.2.1] - 22 November 2023
+## [4.2.2] - 22 November 2023
 - Fix `SkadiSimpleDialog` content cutout on iOS
 - Add `error` constructor to `SkadiSimpleDialog`
 - New extension
