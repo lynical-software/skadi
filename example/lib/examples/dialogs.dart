@@ -114,6 +114,18 @@ class _DialogsExampleState extends State<DialogsExample> {
               },
               child: const Text("Show simple dialog"),
             ),
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const SkadiSimpleDialog.error(
+                    title: "Error",
+                    content: "We encounter some issue!",
+                  ),
+                );
+              },
+              child: const Text("Show simple error dialog"),
+            ),
           ],
         ),
         Section(

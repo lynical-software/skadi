@@ -16,3 +16,11 @@ extension SkadiNumberExtension on num {
     return "$this";
   }
 }
+
+extension SkadiNullableNumberExtension on num? {
+  bool get isNotNullOrZero {
+    if (this == null) return false;
+    if (this == 0 || this == 0.0) return false;
+    return true;
+  }
+}

@@ -52,8 +52,12 @@ extension SkadiTextStyleExtension on TextStyle {
 
   TextStyle get lineThrough => copyWith(decoration: TextDecoration.lineThrough);
 
+  ///Create a responsive font size from SkadiResponsive
   TextStyle get responsiveFontSize =>
       copyWith(fontSize: _responsiveFontSize(fontSize ?? 14));
+
+  ///Create a responsive font size from SkadiResponsive
+  TextStyle get rfs => copyWith(fontSize: _responsiveFontSize(fontSize ?? 14));
 }
 
 double _responsiveFontSize(double size) {

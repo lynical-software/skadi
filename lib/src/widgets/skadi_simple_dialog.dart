@@ -16,21 +16,40 @@ class SkadiSimpleDialog extends StatelessWidget {
   final Widget? child;
 
   ///Confirm button color
-  final Color? buttonColor;
+  final TextStyle? buttonTextStyle;
 
   ///A string to show in Dialog
-  final String content;
+  final String? content;
+
+  ///
+  final TextStyle? titleTextStyle;
+
+  final bool _erorr;
 
   ///An alert dialog with title and content
   const SkadiSimpleDialog({
     Key? key,
-    required this.content,
+    this.content,
     this.child,
     this.title = "Information",
     this.confirmText = "OK",
     this.onConfirm,
-    this.buttonColor,
-  }) : super(key: key);
+    this.buttonTextStyle,
+    this.titleTextStyle,
+  })  : _erorr = false,
+        super(key: key);
+
+  const SkadiSimpleDialog.error({
+    Key? key,
+    this.content,
+    this.child,
+    this.title = "Information",
+    this.confirmText = "OK",
+    this.onConfirm,
+    this.buttonTextStyle,
+    this.titleTextStyle,
+  })  : _erorr = true,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,34 +60,51 @@ class SkadiSimpleDialog extends StatelessWidget {
   }
 
   Widget _buildIOSDialog(BuildContext context) {
+    const errorStyle = TextStyle(
+      fontSize: 17,
+      color: CupertinoColors.systemRed,
+      fontWeight: FontWeight.w600,
+    );
     return CupertinoAlertDialog(
-      title: Text(title),
+      title: Text(
+        title,
+        style: titleTextStyle ?? (_erorr ? errorStyle : null),
+      ),
       content: child ??
           Padding(
-            padding: const EdgeInsets.only(top: 12.0),
-            child: Text(content),
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(content ?? ""),
           ),
       actions: <Widget>[
         CupertinoDialogAction(
-          child: Text(confirmText),
+          isDestructiveAction: _erorr,
           onPressed: () {
             onConfirm?.call();
             Navigator.of(context).pop(true);
           },
+          child: Text(confirmText),
         ),
       ],
     );
   }
 
   Widget _buildAndroidDialog(BuildContext context) {
+    final errorColor = Theme.of(context).colorScheme.error;
     return AlertDialog(
       shape: SkadiDecoration.roundRect(16),
       title: Text(title),
-      content: child ?? Text(content),
+      titleTextStyle: titleTextStyle ??
+          (_erorr
+              ? Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(color: errorColor)
+              : null),
+      content: child ?? Text(content ?? ""),
       actions: <Widget>[
         TextButton(
           style: TextButton.styleFrom(
-            backgroundColor: buttonColor,
+            foregroundColor: _erorr ? errorColor : null,
           ),
           child: Text(confirmText),
           onPressed: () {

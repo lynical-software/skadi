@@ -5,7 +5,9 @@ mixin BoolNotifierMixin<T extends StatefulWidget> on State<T> {
   late ValueNotifier<bool> boolNotifier;
 
   void toggleValue([bool? value]) {
-    boolNotifier.value = value ?? !boolNotifier.value;
+    if (mounted) {
+      boolNotifier.value = value ?? !boolNotifier.value;
+    }
   }
 
   @override

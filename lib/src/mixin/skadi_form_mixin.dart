@@ -8,16 +8,22 @@ mixin SkadiFormMixin<T extends StatefulWidget> on State<T> {
   final confirmPasswordObscureNotifier = ValueNotifier<bool>(true);
 
   void toggleLoading() {
-    loadingNotifier.value = !loadingNotifier.value;
+    if (mounted) {
+      loadingNotifier.value = !loadingNotifier.value;
+    }
   }
 
   void togglePasswordObscure() {
-    passwordObscureNotifier.value = !passwordObscureNotifier.value;
+    if (mounted) {
+      passwordObscureNotifier.value = !passwordObscureNotifier.value;
+    }
   }
 
   void toggleConfirmPasswordObscure() {
-    confirmPasswordObscureNotifier.value =
-        !confirmPasswordObscureNotifier.value;
+    if (mounted) {
+      confirmPasswordObscureNotifier.value =
+          !confirmPasswordObscureNotifier.value;
+    }
   }
 
   bool get isFormValidated => formKey.currentState?.validate() ?? true;
