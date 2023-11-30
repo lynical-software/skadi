@@ -11,9 +11,16 @@ extension SkadiNumberExtension on num {
     return this;
   }
 
+  ///Replace number with String replacement if number is [zero]
   String zeroReplacement(String replacement) {
     if (this == 0) return replacement;
     return "$this";
+  }
+
+  ///Replace number with replacement if number is [zero]
+  num zeroNumberReplacement(num replacement) {
+    if (this == 0) return replacement;
+    return this;
   }
 }
 

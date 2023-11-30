@@ -1,9 +1,14 @@
+## [4.2.3] - 30 November 2023
+- Code improvement
+- New extension
+  -  `zeroNumberReplacement` : **num**
+  
 ## [4.2.2] - 22 November 2023
 - Fix `SkadiSimpleDialog` content cutout on iOS
 - Add `error` constructor to `SkadiSimpleDialog`
 - New extension
   -  `rfs` : **TextStyle**
-  -  
+
 ## [4.2.0] - 7 November 2023
 - add `titleBuilder` for `SkadiAccordion`
   
