@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 typedef DisposeCallback = void Function(List<Object>);
 
 class SkadiInjector extends StatefulWidget {
-  final List<Object> dependencies;
+  final List<Object> Function() dependencies;
   final DisposeCallback? onDispose;
   final Widget child;
   const SkadiInjector({
@@ -18,6 +18,7 @@ class SkadiInjector extends StatefulWidget {
 }
 
 class _SkadiInjectorState extends State<SkadiInjector> {
+  late List<Object> instances = widget.dependencies();
   //
   void inject(List<Object> objects) {
     for (var obj in objects) {
@@ -34,22 +35,15 @@ class _SkadiInjectorState extends State<SkadiInjector> {
 
   @override
   void initState() {
-    inject(widget.dependencies);
+    inject(instances);
     super.initState();
   }
 
   @override
   void dispose() {
-    widget.onDispose?.call(widget.dependencies);
-    eject(widget.dependencies);
+    widget.onDispose?.call(instances);
+    eject(instances);
     super.dispose();
-  }
-
-  @override
-  void didUpdateWidget(covariant SkadiInjector oldWidget) {
-    eject(oldWidget.dependencies);
-    inject(widget.dependencies);
-    super.didUpdateWidget(oldWidget);
   }
 
   @override

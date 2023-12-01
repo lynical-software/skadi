@@ -1,3 +1,6 @@
+## [4.2.4] - 1 December 2023
+- improve SkadiInjector
+
 ## [4.2.3] - 30 November 2023
 - Code improvement
 - New extension
