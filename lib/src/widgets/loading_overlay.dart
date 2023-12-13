@@ -131,13 +131,15 @@ class _LoadingOverlayPopScopeState extends State<LoadingOverlayPopScope> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    bool canPop() {
+      final bool isLoading = LoadingOverlayProvider.instance.isLoading;
+      if (!isLoading) return true;
+      return widget.allowPop ? true : !isLoading;
+    }
+
+    return PopScope(
+      canPop: canPop(),
       child: widget.child,
-      onWillPop: () async {
-        final bool isLoading = LoadingOverlayProvider.instance.isLoading;
-        if (!isLoading) return true;
-        return widget.allowPop ? true : !isLoading;
-      },
     );
   }
 }

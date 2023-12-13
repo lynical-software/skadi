@@ -3,6 +3,7 @@ import 'package:skadi/skadi.dart';
 import 'package:skadi_example/examples/buttons.dart';
 import 'package:skadi_example/examples/controls.dart';
 import 'package:skadi_example/examples/navigator.dart';
+import 'package:skadi_example/examples/popscope.dart';
 import 'package:skadi_example/examples/style_decoration.dart';
 
 import 'examples/dialogs.dart';
@@ -121,6 +122,10 @@ class _RootPageState extends State<RootPage> {
     ExampleButton(
       name: "Utilities Method Usage",
       child: const UtilitiesMethodUsage(),
+    ),
+    ExampleButton(
+      name: "PopScope example",
+      child: const PopScopeExample(),
     ),
   ];
 

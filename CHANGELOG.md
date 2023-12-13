@@ -1,3 +1,6 @@
+## [4.3.0] - 13 December 2023
+- Flutter 3.16 update
+
 ## [4.2.4] - 1 December 2023
 - improve SkadiInjector
 

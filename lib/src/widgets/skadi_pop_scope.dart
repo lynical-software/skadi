@@ -5,13 +5,19 @@ import '../../skadi.dart';
 class WillPopDisable extends StatelessWidget {
   final Widget child;
 
+  final bool canPop;
+
   ///Disable pop screen
-  const WillPopDisable({super.key, required this.child});
+  const WillPopDisable({
+    super.key,
+    required this.child,
+    this.canPop = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: canPop,
       child: child,
     );
   }
@@ -32,36 +38,47 @@ class WillPopPrompt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        bool isLoading = LoadingOverlayProvider.instance.isLoading;
-        if (isLoading) {
-          LoadingOverlayProvider.switchPosition(LoadingOverlayPosition.below);
-          bool? result = await showDialog(
-            context: context,
-            builder: (context) {
-              return popupChild ??
-                  const WillPopDisable(
-                    child: SkadiConfirmationDialog.danger(
-                      content: Text(
-                        "Are you sure you want to cancel this operation?",
-                      ),
-                      confirmText: "Cancel",
-                      cancelText: "Discard",
+    Future<bool> canPop() async {
+      bool isLoading = LoadingOverlayProvider.instance.isLoading;
+      if (isLoading) {
+        LoadingOverlayProvider.switchPosition(LoadingOverlayPosition.below);
+        bool? result = await showDialog(
+          context: context,
+          builder: (context) {
+            return popupChild ??
+                const WillPopDisable(
+                  child: SkadiConfirmationDialog.danger(
+                    content: Text(
+                      "Are you sure you want to cancel this operation?",
                     ),
-                  );
-            },
-          );
-          if (result == true) {
-            LoadingOverlayProvider.toggle(false);
-          }
-          LoadingOverlayProvider.switchPosition(LoadingOverlayPosition.above);
-          onResult?.call(result ?? false);
-          return false;
-        } else {
-          onResult?.call(true);
+                    confirmText: "Cancel",
+                    cancelText: "Discard",
+                  ),
+                );
+          },
+        );
+        if (result == true) {
+          LoadingOverlayProvider.toggle(false);
         }
-        return true;
+        LoadingOverlayProvider.switchPosition(LoadingOverlayPosition.above);
+        final pop = result ?? false;
+        onResult?.call(pop);
+        return pop;
+      } else {
+        onResult?.call(true);
+      }
+      return true;
+    }
+
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (!didPop) {
+          bool result = await canPop();
+          if (result && context.mounted) {
+            Navigator.pop(context);
+          }
+        }
       },
       child: child,
     );

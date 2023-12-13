@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:skadi/skadi.dart';
 
 extension SkadiListExtension<T> on List<T> {
@@ -71,7 +72,7 @@ extension SkadiListExtension<T> on List<T> {
 
   ///Convert to a List of number to `SkadiResponsive`'s value.
   ///Return cast error if isn't a List of number
-  double responsive() {
+  double responsive([BuildContext? context]) {
     List<num> values = map((e) => e as num).toList();
     if (isEmpty) return 0;
     return SkadiResponsive.value(
@@ -79,6 +80,7 @@ extension SkadiListExtension<T> on List<T> {
       values.get(1)?.toDouble(),
       values.get(2)?.toDouble(),
       values.get(3)?.toDouble(),
+      context,
     );
   }
 }
