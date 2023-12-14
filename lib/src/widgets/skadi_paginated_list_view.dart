@@ -16,11 +16,15 @@ class SkadiListViewFetchOptions {
   ///Recursive the auto fetch until List is scrollable
   final bool recursiveAutoFetch;
 
+  ///Scrolling check debouncer
+  final int debouncerInMs;
+
   const SkadiListViewFetchOptions({
     this.fetchOffset = 0.0,
     this.autoFetchOffset = 0.0,
     this.autoFetchOnShortList = false,
     this.recursiveAutoFetch = false,
+    this.debouncerInMs = 50,
   });
 }
 
@@ -113,18 +117,23 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
 
   bool get _isPrimaryScrollView => widget.scrollController == null;
 
+  late final Debouncer _debouncer =
+      Debouncer(milliseconds: widget.fetchOptions.debouncerInMs);
+
   void scrollListener(ScrollController controller) {
     if (widget.hasError) {
       return;
     }
-    double offset = controller.offset.abs();
-    double offsetToFetch =
-        (controller.position.maxScrollExtent - widget.fetchOptions.fetchOffset)
-            .abs();
-    if (offset >= offsetToFetch) {
-      loadingState.value += 1;
-      onLoadingMoreData();
-    }
+    _debouncer.run(() {
+      double offset = controller.offset.abs();
+      double offsetToFetch = (controller.position.maxScrollExtent -
+              widget.fetchOptions.fetchOffset)
+          .abs();
+      if (offset >= offsetToFetch) {
+        loadingState.value += 1;
+        onLoadingMoreData();
+      }
+    });
   }
 
   Future<void> onLoadingMoreData() async {

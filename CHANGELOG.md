@@ -1,3 +1,7 @@
+## [4.3.1] - 14 December 2023
+- add Debouncer to `SkadiPaginatedView`
+- add `dispose` to `Debouncer`
+
 ## [4.3.0] - 13 December 2023
 - Flutter 3.16 update
 

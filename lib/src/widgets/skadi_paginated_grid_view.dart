@@ -91,18 +91,23 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
 
   bool get _isPrimaryScrollView => widget.scrollController == null;
 
+  late final Debouncer _debouncer =
+      Debouncer(milliseconds: widget.fetchOptions.debouncerInMs);
+
   void scrollListener(ScrollController controller) {
     if (widget.hasError) {
       return;
     }
-    double offset = controller.offset.abs();
-    double offsetToFetch =
-        (controller.position.maxScrollExtent - widget.fetchOptions.fetchOffset)
-            .abs();
-    if (offset >= offsetToFetch) {
-      loadingState.value += 1;
-      onLoadingMoreData();
-    }
+    _debouncer.run(() {
+      double offset = controller.offset.abs();
+      double offsetToFetch = (controller.position.maxScrollExtent -
+              widget.fetchOptions.fetchOffset)
+          .abs();
+      if (offset >= offsetToFetch) {
+        loadingState.value += 1;
+        onLoadingMoreData();
+      }
+    });
   }
 
   Future<void> onLoadingMoreData() async {
