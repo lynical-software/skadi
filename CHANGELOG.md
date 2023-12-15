@@ -1,3 +1,6 @@
+## [4.3.2] - 15 December 2023
+- fix debouncer dispose `SkadiPaginatedView`
+
 ## [4.3.1] - 14 December 2023
 - add Debouncer to `SkadiPaginatedView`
 - add `dispose` to `Debouncer`

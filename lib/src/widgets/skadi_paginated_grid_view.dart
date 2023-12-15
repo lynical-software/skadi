@@ -179,6 +179,7 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
 
   @override
   void dispose() {
+    _debouncer.dispose();
     loadingState.dispose();
     removeListener();
     super.dispose();

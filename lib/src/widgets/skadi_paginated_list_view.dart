@@ -205,6 +205,7 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
 
   @override
   void dispose() {
+    _debouncer.dispose();
     loadingState.dispose();
     removeListener();
     super.dispose();
