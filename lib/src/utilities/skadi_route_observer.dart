@@ -5,12 +5,14 @@ import 'skadi_navigator.dart';
 
 class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   final bool log;
+  final bool logHistory;
   final void Function(Route route)? analyticCallBack;
   final void Function(String name, String description)? logger;
 
   ///Route observer that support logging and analytic callback
   SkadiRouteObserver({
     this.log = false,
+    this.logHistory = false,
     this.logger,
     this.analyticCallBack,
   });
@@ -53,8 +55,14 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   void _log(String name, String description) {
     if (logger != null) {
       logger!.call(name, description);
+      if (logHistory) {
+        logger!.call("History", history.join());
+      }
     } else {
       infoLog(name, description);
+      if (logHistory) {
+        infoLog("History", history);
+      }
     }
   }
 
@@ -67,7 +75,7 @@ class SkadiRouteObserver extends RouteObserver<PageRoute<dynamic>> {
       throw SkadiRouteException("Route not found");
     }
     int popCount = _history.length - (routePopToIndex + 1);
-    Navigator.of(context).popUntil((route) => popCount-- <= 0);
+    Navigator.of(context).popUntil((route) => popCount-- <= 0 || route.isFirst);
   }
 
   @override

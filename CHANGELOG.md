@@ -1,3 +1,6 @@
+## [4.4.0] - 28 February 2024
+- add route validator to `SkadiNavigator`
+
 ## [4.3.2] - 15 December 2023
 - fix debouncer dispose `SkadiPaginatedView`
 

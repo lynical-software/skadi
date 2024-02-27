@@ -47,7 +47,11 @@ class _SkadiNavigatorExampleState extends State<SkadiNavigatorExample> {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.pushAndRemove(const RootPage());
+                SkadiNavigator.pushAndRemove(
+                  context,
+                  const RootPage(),
+                  routeName: "/",
+                );
               },
               child: const Text("PushRemove To Home Page"),
             ),
@@ -84,6 +88,20 @@ class _SecondPageState extends State<SecondPage> {
           ],
         ),
         Section(
+          title: "Push to this Page",
+          isRow: true,
+          children: [
+            ElevatedButton(
+              onPressed: () => SkadiNavigator.push(
+                context,
+                const SecondPage(),
+                replaceIfExist: true,
+              ),
+              child: const Text("Push"),
+            ),
+          ],
+        ),
+        Section(
           title: "Pop x time",
           isRow: true,
           children: [
@@ -96,13 +114,14 @@ class _SecondPageState extends State<SecondPage> {
           ],
         ),
         Section(
-          title: "Pop And Push",
+          title: "Pop All And Push",
           subtitle:
-              "Expected to push to ThirdPage and page stack becomes [ /, /ThirdPage]",
+              "Expected to push to ThirdPage and page stack becomes [ RootPage, ThirdPage]",
           isRow: true,
           children: [
             ElevatedButton(
               onPressed: () {
+                debugLog(SkadiRouteObserver.history);
                 SkadiRouteObserver.popUntilRoute(context, "/");
                 context.push(const ThirdPage());
               },

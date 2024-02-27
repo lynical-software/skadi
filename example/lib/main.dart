@@ -42,6 +42,7 @@ class _MyAppState extends State<MyApp> {
         navigatorObservers: [
           SkadiRouteObserver(
             log: true,
+            logHistory: true,
             analyticCallBack: (route) {},
           ),
         ],

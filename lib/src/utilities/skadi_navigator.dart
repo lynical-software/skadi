@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skadi/skadi.dart';
 
 class SkadiRouteException implements Exception {
   final String message;
@@ -47,10 +48,24 @@ abstract class SkadiNavigator {
     bool fullscreenDialog = false,
     RouteSettings? settings,
     String? routeName,
+
+    ///replace current route if contain in history
+    ///Mostly push by deep link
+    bool replaceIfExist = false,
   }) async {
     if (routeName == null && settings == null) {
       routeName = page.runtimeType.toString();
     }
+    if (routeName != null && replaceIfExist) {
+      bool exist = SkadiRouteObserver.historyContains(routeName);
+      if (exist) {
+        SkadiRouteObserver.popUntilRoute(context, routeName);
+        if (Navigator.canPop(context)) {
+          Navigator.pop(context);
+        }
+      }
+    }
+
     return await Navigator.of(context).push<T>(
       MaterialPageRoute(
         builder: (context) => page,
@@ -67,9 +82,20 @@ abstract class SkadiNavigator {
     bool fullscreenDialog = false,
     RouteSettings? settings,
     String? routeName,
+
+    ///replace current route if contain in history
+    ///Mostly push by deep link
+    bool replaceIfExist = false,
   }) async {
     if (routeName == null && settings == null) {
       routeName = page.runtimeType.toString();
+    }
+
+    if (routeName != null && replaceIfExist) {
+      bool exist = SkadiRouteObserver.historyContains(routeName);
+      if (exist) {
+        SkadiRouteObserver.popUntilRoute(context, routeName);
+      }
     }
     return await Navigator.of(context).pushReplacement(
       MaterialPageRoute(
@@ -110,7 +136,9 @@ abstract class SkadiNavigator {
   ///Pop X amount of time
   static void popTime(BuildContext context, int count) {
     int total = 0;
-    Navigator.of(context).popUntil((_) => total++ >= count);
+    Navigator.of(context).popUntil((route) {
+      return total++ >= count || route.isFirst;
+    });
   }
 
   ///Just a simple pop
