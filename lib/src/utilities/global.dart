@@ -1,13 +1,17 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:skadi/src/widgets/skadi_confirmation_dialog.dart';
+import 'package:skadi/skadi.dart';
 
-catchNothing(FutureOr Function() fn) async {
+catchNothing(
+  FutureOr Function() fn, {
+  void Function(Object error, StackTrace stackTrace)? onError,
+}) async {
   try {
     return await fn();
-  } catch (e) {
+  } catch (exception, stackTrace) {
     //Do nothing
+    onError?.call(exception, stackTrace);
   }
 }
 

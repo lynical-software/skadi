@@ -1,3 +1,7 @@
+## [4.5.0] - 9 April 2024
+- add new extension
+- Improve Paginated View
+
 ## [4.4.0] - 28 February 2024
 - add route validator to `SkadiNavigator`
 

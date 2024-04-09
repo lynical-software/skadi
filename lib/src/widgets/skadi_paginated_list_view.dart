@@ -19,12 +19,16 @@ class SkadiListViewFetchOptions {
   ///Scrolling check debouncer
   final int debouncerInMs;
 
+  ///
+  final bool alwaysShowLoadingWidget;
+
   const SkadiListViewFetchOptions({
     this.fetchOffset = 0.0,
     this.autoFetchOffset = 0.0,
     this.autoFetchOnShortList = false,
     this.recursiveAutoFetch = false,
     this.debouncerInMs = 50,
+    this.alwaysShowLoadingWidget = true,
   });
 }
 
@@ -262,7 +266,8 @@ class _SkadiPaginatedListViewState extends State<SkadiPaginatedListView> {
               valueListenable: loadingState,
               child: Center(child: widget.loadingWidget),
               builder: (context, value, child) {
-                if (value == 0) return emptySizedBox;
+                if (value == 0 && !widget.fetchOptions.alwaysShowLoadingWidget)
+                  return emptySizedBox;
                 return child!;
               },
             ),

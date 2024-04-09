@@ -25,6 +25,9 @@ class SkadiIconButton extends StatelessWidget {
   ///
   final BorderSide? borderSide;
 
+  ///Provide custom shape to override [borderRadius] and [borderSide]
+  final ShapeBorder? shape;
+
   ///
   final Widget? badge;
 
@@ -40,6 +43,7 @@ class SkadiIconButton extends StatelessWidget {
     this.elevation = 0.0,
     this.borderSide,
     this.badge,
+    this.shape,
   }) : super(key: key);
 
   ///An IconButton with respectively small margin and shape that use with AppBar actionss
@@ -54,22 +58,24 @@ class SkadiIconButton extends StatelessWidget {
     this.elevation = 0.0,
     this.borderSide,
     this.badge,
+    this.shape,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final shape = RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(borderRadius),
-      side: borderSide ?? BorderSide.none,
-    );
+    final customShape = shape ??
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          side: borderSide ?? BorderSide.none,
+        );
 
     return Card(
-      shape: shape,
+      shape: customShape,
       color: backgroundColor ?? Colors.transparent,
       elevation: elevation,
       margin: margin,
       child: InkWell(
         onTap: onTap,
-        customBorder: shape,
+        customBorder: customShape,
         mouseCursor: SystemMouseCursors.click,
         child: Stack(
           children: [

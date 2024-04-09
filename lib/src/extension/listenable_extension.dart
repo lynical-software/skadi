@@ -50,3 +50,23 @@ extension SkadiBoolValueListenableExtension<bool> on ValueListenable<bool> {
     );
   }
 }
+
+extension SkadiTextEditingControllerExtension on TextEditingController {
+  String getTrimText() {
+    return text.trim();
+  }
+}
+
+extension SkadiPageControllerExtension on PageController {
+  Future<void> simpleAnimateToPage(
+    int page, {
+    Duration? duration,
+    Curve? curve,
+  }) async {
+    await animateToPage(
+      page,
+      duration: duration ?? const Duration(milliseconds: 200),
+      curve: curve ?? Curves.linear,
+    );
+  }
+}

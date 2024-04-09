@@ -85,14 +85,14 @@ extension SkadiListExtension<T> on List<T> {
   }
 }
 
-extension SkadiMapExtension<T, V> on Map<T, V> {
+extension SkadiMapExtension<K, V> on Map<K, V> {
   ///Add item into map if value isn't null
-  void addIfNotNull(T key, V value) {
+  void addIfNotNull(K key, V value) {
     if (value != null) putIfAbsent(key, () => value);
   }
 
   ///Return value or null from Map
-  V? getIfExist(T key) {
+  V? getIfExist(K key) {
     if (keys.contains(key)) {
       return this[key];
     }

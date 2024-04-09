@@ -21,7 +21,7 @@ class _PaginationExampleState extends State<PaginationExample>
   late PaginationHandler<UserResponse, UserModel> paginationHandler =
       PaginationHandler(userManager);
   int maxTimeToShowError = 0;
-  bool grid = true;
+  bool grid = false;
 
   Future fetchData([bool reload = false]) async {
     if (reload) {
@@ -125,6 +125,7 @@ class _PaginationExampleState extends State<PaginationExample>
                 autoFetchOnShortList: true,
                 recursiveAutoFetch: true,
                 fetchOffset: 550,
+                alwaysShowLoadingWidget: true,
               ),
               padding: EdgeInsets.zero,
               hasError: userManager.hasError,

@@ -4,15 +4,19 @@ import '../../skadi.dart';
 
 extension SkadiTextStyleExtension on TextStyle {
   // FontWeight
-  TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
-
   TextStyle get boldBlack => copyWith(fontWeight: FontWeight.w900);
+
+  TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
 
   TextStyle get semiBold => copyWith(fontWeight: FontWeight.w600);
 
   TextStyle get medium => copyWith(fontWeight: FontWeight.w500);
 
   TextStyle get normal => copyWith(fontWeight: FontWeight.normal);
+
+  TextStyle get light => copyWith(fontWeight: FontWeight.w300);
+
+  TextStyle get thin => copyWith(fontWeight: FontWeight.w100);
 
   // Color
   TextStyle get white => copyWith(color: Colors.white);
@@ -26,6 +30,10 @@ extension SkadiTextStyleExtension on TextStyle {
   TextStyle get grey => copyWith(color: Colors.grey);
 
   TextStyle get blue => copyWith(color: Colors.blue);
+
+  TextStyle get orange => copyWith(color: Colors.orange);
+
+  TextStyle get yellow => copyWith(color: Colors.yellow);
 
   // Decoration
 
@@ -51,6 +59,8 @@ extension SkadiTextStyleExtension on TextStyle {
   }
 
   TextStyle get lineThrough => copyWith(decoration: TextDecoration.lineThrough);
+
+  TextStyle get italic => copyWith(fontStyle: FontStyle.italic);
 
   ///Create a responsive font size from SkadiResponsive
   TextStyle get responsiveFontSize =>
