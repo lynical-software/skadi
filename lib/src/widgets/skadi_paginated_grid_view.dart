@@ -238,8 +238,10 @@ class _SkadiPaginatedGridBuilderState extends State<SkadiPaginatedGridBuilder> {
               valueListenable: loadingState,
               child: Center(child: widget.loadingWidget),
               builder: (context, value, child) {
-                if (value == 0 && !widget.fetchOptions.alwaysShowLoadingWidget)
+                if (value == 0 &&
+                    !widget.fetchOptions.alwaysShowLoadingWidget) {
                   return emptySizedBox;
+                }
                 return child!;
               },
             ),

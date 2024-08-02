@@ -99,6 +99,12 @@ extension SkadiWidgetExtension on Widget {
         child: this,
       );
 
+  ///Useful for debugging a widget
+  Widget get blue => DecoratedBox(
+        decoration: const BoxDecoration(color: Colors.blue),
+        child: this,
+      );
+
   SliverToBoxAdapter get sliverToBox => SliverToBoxAdapter(child: this);
 }
 

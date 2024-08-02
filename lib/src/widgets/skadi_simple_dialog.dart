@@ -24,7 +24,7 @@ class SkadiSimpleDialog extends StatelessWidget {
   ///
   final TextStyle? titleTextStyle;
 
-  final bool _erorr;
+  final bool _error;
 
   ///An alert dialog with title and content
   const SkadiSimpleDialog({
@@ -36,7 +36,7 @@ class SkadiSimpleDialog extends StatelessWidget {
     this.onConfirm,
     this.buttonTextStyle,
     this.titleTextStyle,
-  })  : _erorr = false,
+  })  : _error = false,
         super(key: key);
 
   const SkadiSimpleDialog.error({
@@ -48,7 +48,7 @@ class SkadiSimpleDialog extends StatelessWidget {
     this.onConfirm,
     this.buttonTextStyle,
     this.titleTextStyle,
-  })  : _erorr = true,
+  })  : _error = true,
         super(key: key);
 
   @override
@@ -68,7 +68,7 @@ class SkadiSimpleDialog extends StatelessWidget {
     return CupertinoAlertDialog(
       title: Text(
         title,
-        style: titleTextStyle ?? (_erorr ? errorStyle : null),
+        style: titleTextStyle ?? (_error ? errorStyle : null),
       ),
       content: child ??
           Padding(
@@ -77,7 +77,7 @@ class SkadiSimpleDialog extends StatelessWidget {
           ),
       actions: <Widget>[
         CupertinoDialogAction(
-          isDestructiveAction: _erorr,
+          isDestructiveAction: _error,
           onPressed: () {
             onConfirm?.call();
             Navigator.of(context).pop(true);
@@ -94,7 +94,7 @@ class SkadiSimpleDialog extends StatelessWidget {
       shape: SkadiDecoration.roundRect(16),
       title: Text(title),
       titleTextStyle: titleTextStyle ??
-          (_erorr
+          (_error
               ? Theme.of(context)
                   .textTheme
                   .titleLarge
@@ -104,7 +104,7 @@ class SkadiSimpleDialog extends StatelessWidget {
       actions: <Widget>[
         TextButton(
           style: TextButton.styleFrom(
-            foregroundColor: _erorr ? errorColor : null,
+            foregroundColor: _error ? errorColor : null,
           ),
           child: Text(confirmText),
           onPressed: () {

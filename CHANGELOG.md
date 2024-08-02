@@ -1,3 +1,6 @@
+## [4.6.0] - 2 August 2024
+- Bump intl version to 0.19.0
+
 ## [4.5.0] - 9 April 2024
 - add new extension
 - Improve Paginated View
