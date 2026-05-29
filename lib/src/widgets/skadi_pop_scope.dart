@@ -72,7 +72,7 @@ class WillPopPrompt extends StatelessWidget {
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) async {
+      onPopInvokedWithResult: (didPop, result) async {
         if (!didPop) {
           bool result = await canPop();
           if (result && context.mounted) {

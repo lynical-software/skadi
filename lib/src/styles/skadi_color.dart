@@ -30,7 +30,7 @@ class SkadiColor {
   ///Generate random color
   static Color get random {
     return Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-        .withOpacity(1.0);
+        .withAlpha(255);
   }
 
   ///Generate random color from Material Primary colors
@@ -40,12 +40,12 @@ class SkadiColor {
 
   ///Convert your color to MaterialColor
   static MaterialColor toMaterial(Color color) {
-    final r = color.red;
-    final g = color.green;
-    final b = color.blue;
+    final r = color.r.toInt();
+    final g = color.g.toInt();
+    final b = color.b.toInt();
 
     return MaterialColor(
-      color.value,
+      color.toARGB32(),
       <int, Color>{
         50: Color.fromRGBO(r, g, b, .1),
         100: Color.fromRGBO(r, g, b, .2),

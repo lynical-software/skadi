@@ -1,3 +1,7 @@
+## [4.6.1] - 29 May 2026
+- Bump intl version to 0.20.0
+- Small bug fixes and improvement
+
 ## [4.6.0] - 2 August 2024
 - Bump intl version to 0.19.0
 

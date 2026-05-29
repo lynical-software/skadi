@@ -46,7 +46,7 @@ extension SkadiListExtension<T> on List<T> {
   T? get beforeLast {
     if (isEmpty) return null;
     if (length == 1) return first;
-    return this.get(length - 2);
+    return get(length - 2);
   }
 
   ///Update list value that met the condition
